@@ -1,0 +1,10 @@
+E:\Projects\PENGRA\run\PENGRA.crsDataGridView.dll
+E:\Projects\PENGRA\run\PENGRA.crsDataGridView.pdb
+E:\Projects\PENGRA\run\PENGRA.crsDataGridView.xml
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\PENGRA.crsDataGridView.Resources.resources
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\ResGen.read.1.tlog
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\ResGen.write.1.tlog
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\PENGRA.crsDataGridView.dll
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\PENGRA.crsDataGridView.xml
+E:\Projects\PENGRA\src\crsDataGridView\crsDataGridView\obj\x86\Debug\PENGRA.crsDataGridView.pdb

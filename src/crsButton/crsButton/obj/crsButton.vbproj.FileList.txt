@@ -1,0 +1,30 @@
+bin\Release\crsButton.pdb
+bin\Release\crsButton.xml
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\crsButton.cButton.resources
+obj\Release\crsButton.Resources.resources
+obj\Release\crsButton.vbproj.GenerateResource.Cache
+obj\Release\crsButton.xml
+obj\Release\crsButton.pdb
+bin\Debug\crsButton.pdb
+bin\Debug\crsButton.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\crsButton.cButton.resources
+obj\Debug\crsButton.Resources.resources
+obj\Debug\crsButton.vbproj.GenerateResource.Cache
+obj\Debug\crsButton.xml
+obj\Debug\crsButton.pdb
+bin\Debug\Interop.BIOPLUGINACTXLib.dll
+bin\Debug\AxInterop.BIOPLUGINACTXLib.dll
+obj\Debug\Interop.BIOPLUGINACTXLib.dll
+obj\Debug\AxInterop.BIOPLUGINACTXLib.dll
+obj\Debug\crsButton.vbproj.ResolveComReference.cache
+obj\Debug\crsButton.cComboBox.resources
+obj\Debug\crsButton.Form1.resources
+bin\Debug\crsButton.exe
+obj\Debug\crsButton.exe
+bin\Release\crsButton.dll
+obj\Release\crsButton.dll
+..\..\Opal\Opal Ver 1.0\Run\crsButton.dll
+..\..\Opal\Opal Ver 1.0\Run\crsButton.pdb
+..\..\Opal\Opal Ver 1.0\Run\crsButton.xml

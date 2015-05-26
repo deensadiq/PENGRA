@@ -1,0 +1,36 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+PENGRA
+</name>
+</assembly>
+<members>
+<member name="P:PENGRA.My.Resources.Resources.ResourceManager">
+	<summary>
+  Returns the cached ResourceManager instance used by this class.
+</summary>
+</member><member name="P:PENGRA.My.Resources.Resources.Culture">
+	<summary>
+  Overrides the current thread's CurrentUICulture property for all
+  resource lookups using this strongly typed resource class.
+</summary>
+</member><member name="T:PENGRA.My.Resources.Resources">
+	<summary>
+  A strongly-typed resource class, for looking up localized strings, etc.
+</summary>
+</member><member name="P:PENGRA.Classes.Computation.CurrentOperation">
+	<summary>
+ Returns a string describing the current operation in the process.
+ </summary>
+	<remarks></remarks>
+</member><member name="M:PENGRA.Classes.Computation.addWorker(System.ComponentModel.BackgroundWorker,System.ComponentModel.DoWorkEventArgs)">
+	<summary>
+ Adds a background worker that will be used to update gui elements like the progress bar.
+ </summary>
+	<param name="BackgroundWorker">The Backgroundworker to add</param>
+	<param name="e">The DoWorkEventArgs of the background worker to add</param>
+	<remarks></remarks>
+</member>
+</members>
+</doc>

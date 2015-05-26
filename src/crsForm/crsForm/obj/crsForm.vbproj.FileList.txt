@@ -1,0 +1,13 @@
+bin\Release\crsForm.dll
+bin\Release\crsForm.pdb
+bin\Release\crsForm.xml
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\crsForm.vbproj.GenerateResource.Cache
+obj\Release\crsForm.dll
+obj\Release\crsForm.xml
+obj\Release\crsForm.pdb
+obj\Release\crsForm.Resources.resources
+obj\Release\crsForm.cForms.resources
+..\..\Opal\Opal Ver 1.0\Run\crsForm.dll
+..\..\Opal\Opal Ver 1.0\Run\crsForm.pdb
+..\..\Opal\Opal Ver 1.0\Run\crsForm.xml

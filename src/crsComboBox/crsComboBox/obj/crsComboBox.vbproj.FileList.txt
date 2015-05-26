@@ -1,0 +1,10 @@
+bin\Release\crsComboBox.dll
+bin\Release\crsComboBox.pdb
+bin\Release\crsComboBox.xml
+obj\Release\ResolveAssemblyReference.cache
+obj\Release\crsComboBox.cComboBox.resources
+obj\Release\crsComboBox.Resources.resources
+obj\Release\crsComboBox.vbproj.GenerateResource.Cache
+obj\Release\crsComboBox.dll
+obj\Release\crsComboBox.xml
+obj\Release\crsComboBox.pdb

@@ -1,0 +1,11 @@
+E:\Projects\PENGRA\run\crsButton.dll
+E:\Projects\PENGRA\run\crsButton.pdb
+E:\Projects\PENGRA\run\crsButton.xml
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\ResolveAssemblyReference.cache
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\crsButton.cButton.resources
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\crsButton.Resources.resources
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\ResGen.read.1.tlog
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\ResGen.write.1.tlog
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\crsButton.dll
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\crsButton.xml
+E:\Projects\PENGRA\src\crsButton\crsButton\obj\Release\crsButton.pdb

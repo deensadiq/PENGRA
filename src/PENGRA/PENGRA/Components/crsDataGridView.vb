@@ -1,0 +1,30 @@
+﻿Imports PENGRA.Connection.Classes
+
+Public Class crsDataGridView
+    Inherits DataGridView
+
+    Public Sub New()
+        Me.ColumnHeadersHeight = 35
+        Me.RowHeadersVisible = False
+        'Me.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(200, 200, 250)
+        Me.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(102, 153, 204)
+        Me.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.SystemColors.Window
+        Me.ColumnHeadersDefaultCellStyle.Font = New System.Drawing.Font("Calibri", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
+        '.SelectionMode = DataGridViewSelectionMode.FullRowSelect
+        Me.AllowUserToOrderColumns = False
+        Me.AllowUserToResizeColumns = False
+        Me.AllowUserToAddRows = False
+
+        Me.EnableHeadersVisualStyles = False
+        Me.BorderStyle = BorderStyle.FixedSingle
+        Me.DefaultCellStyle.BackColor = Color.WhiteSmoke
+        Me.CellBorderStyle = DataGridViewCellBorderStyle.Single
+        Me.DefaultCellStyle.Font = New System.Drawing.Font("Calibri", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DoubleBuffered = True
+        Me.RowsDefaultCellStyle.SelectionBackColor = Env.GirdSelectionBackColor
+        Me.RowsDefaultCellStyle.SelectionForeColor = Env.GirdSelectionForeColor
+        Me.CausesValidation = False
+    End Sub
+
+End Class

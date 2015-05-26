@@ -1,0 +1,11 @@
+E:\Projects\PENGRA\src\crsForm\crsForm\bin\Debug\crsForm.dll
+E:\Projects\PENGRA\src\crsForm\crsForm\bin\Debug\crsForm.pdb
+E:\Projects\PENGRA\src\crsForm\crsForm\bin\Debug\crsForm.xml
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\ResolveAssemblyReference.cache
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\crsForm.cForms.resources
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\crsForm.Resources.resources
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\ResGen.read.1.tlog
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\ResGen.write.1.tlog
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\crsForm.dll
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\crsForm.xml
+E:\Projects\PENGRA\src\crsForm\crsForm\obj\Debug\crsForm.pdb

@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2005/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+  <Description>State Share Pension Arrears Payroll</Description>
+  <Author>Cerebro Systems</Author>
+  <PageHeight>11in</PageHeight>
+  <PageWidth>8.5in</PageWidth>
+  <DataSources>
+    <DataSource Name="DS1">
+      <ConnectionProperties>
+        <DataProvider>Firebird.NET 2.0</DataProvider>
+        <ConnectString>database=pengra;useer=sysdba;password=masterkey;server=localhost</ConnectString>
+      </ConnectionProperties>
+    </DataSource>
+  </DataSources>
+  <Width>7.5in</Width>
+  <TopMargin>.25in</TopMargin>
+  <LeftMargin>.25in</LeftMargin>
+  <RightMargin>.25in</RightMargin>
+  <BottomMargin>.25in</BottomMargin>
+  <ReportParameters>
+    <ReportParameter Name="Title">
+      <DataType>String</DataType>
+      <Nullable>True</Nullable>
+      <AllowBlank>True</AllowBlank>
+    </ReportParameter>
+  </ReportParameters>
+  <DataSets>
+    <DataSet Name="Data">
+      <Query>
+        <DataSourceName>DS1</DataSourceName>
+        <CommandText>SELECT p.SN, p.ID, p.EMPLOYEENAME, p.PENSIONARREARS, p.OTHERPAYMENT, p.GROSSPAYMENT, p.UNIONDUE, p.OTHERDEDUCTION, p.NETAMOUNT
+FROM SP_REPORT_PENSIONPAYROLL(1, 2014, 12) p</CommandText>
+      </Query>
+      <Fields>
+        <Field Name="SN">
+          <DataField>SN</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="ID">
+          <DataField>ID</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="EMPLOYEENAME">
+          <DataField>EMPLOYEENAME</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="PENSIONARREARS">
+          <DataField>PENSIONARREARS</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OTHERPAYMENT">
+          <DataField>OTHERPAYMENT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="GROSSPAYMENT">
+          <DataField>GROSSPAYMENT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="UNIONDUE">
+          <DataField>UNIONDUE</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="OTHERDEDUCTION">
+          <DataField>OTHERDEDUCTION</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+        <Field Name="NETAMOUNT">
+          <DataField>NETAMOUNT</DataField>
+          <rd:TypeName>System.Decimal</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <PageHeader>
+    <Height>154.2pt</Height>
+    <ReportItems>
+      <Textbox Name="Textbox1">
+        <Top>.02in</Top>
+        <Left>.1in</Left>
+        <Width>6in</Width>
+        <Height>.25in</Height>
+        <Value>pensionpayroll</Value>
+        <Style>
+          <FontSize>15pt</FontSize>
+          <FontWeight>Bold</FontWeight>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox2">
+        <Top>.3in</Top>
+        <Left>0.0in</Left>
+        <Width>1in</Width>
+        <Height>.2in</Height>
+        <Value>SN</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox3">
+        <Top>.3in</Top>
+        <Left>1.0in</Left>
+        <Width>1in</Width>
+        <Height>.2in</Height>
+        <Value>ID</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox4">
+        <Top>.3in</Top>
+        <Left>2.0in</Left>
+        <Width>1.5in</Width>
+        <Height>.2in</Height>
+        <Value>EMPLOYEENAME</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox5">
+        <Top>.3in</Top>
+        <Left>3.5in</Left>
+        <Width>1.75in</Width>
+        <Height>.2in</Height>
+        <Value>PENSIONARREARS</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox6">
+        <Top>.3in</Top>
+        <Left>5.25in</Left>
+        <Width>1.5in</Width>
+        <Height>.2in</Height>
+        <Value>OTHERPAYMENT</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox7">
+        <Top>.3in</Top>
+        <Left>6.75in</Left>
+        <Width>1.5in</Width>
+        <Height>.2in</Height>
+        <Value>GROSSPAYMENT</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox8">
+        <Top>.3in</Top>
+        <Left>8.25in</Left>
+        <Width>1in</Width>
+        <Height>.2in</Height>
+        <Value>UNIONDUE</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox9">
+        <Top>.3in</Top>
+        <Left>9.25in</Left>
+        <Width>1.75in</Width>
+        <Height>.2in</Height>
+        <Value>OTHERDEDUCTION</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+      <Textbox Name="Textbox10">
+        <Top>.3in</Top>
+        <Left>11.00in</Left>
+        <Width>1.125in</Width>
+        <Height>.2in</Height>
+        <Value>NETAMOUNT</Value>
+        <Style>
+          <FontWeight>Bold</FontWeight>
+          <BorderStyle>
+            <Bottom>Solid</Bottom>
+          </BorderStyle>
+          <BorderWidth>
+            <Bottom>3pt</Bottom>
+          </BorderWidth>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <PrintOnFirstPage>True</PrintOnFirstPage>
+    <PrintOnLastPage>True</PrintOnLastPage>
+  </PageHeader>
+  <Body>
+    <Height>103.4pt</Height>
+    <ReportItems>
+      <List Name="List1">
+        <DataSetName>Data</DataSetName>
+        <Height>63.34pt</Height>
+        <NoRows>Query returned no rows!</NoRows>
+        <ReportItems>
+          <Textbox Name="SN">
+            <Top>0.1pt</Top>
+            <Left>0.0pt</Left>
+            <Width>35.52pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!SN.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <VerticalAlign >Middle</VerticalAlign>
+            </Style>
+          </Textbox>
+          <Textbox Name="EMPLOYEENAME">
+            <Top>0.1pt</Top>
+            <Left>35.5pt</Left>
+            <Width>141.41pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!EMPLOYEENAME.Value</Value>
+            <CanGrow>true</CanGrow>
+            <Style>
+              <PaddingLeft>2 pt</PaddingLeft>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+            </Style>
+          </Textbox>
+          <Textbox Name="PENSIONARREARS">
+            <Top>0.0pt</Top>
+            <Left>176.9pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!PENSIONARREARS.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="OTHERPAYMENT">
+            <Top>0.0pt</Top>
+            <Left>239.7pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!OTHERPAYMENT.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="GROSSPAYMENT">
+            <Top>0.0pt</Top>
+            <Left>302.4pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!GROSSPAYMENT.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="UNIONDUE">
+            <Top>0.0pt</Top>
+            <Left>365.1pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!UNIONDUE.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="OTHERDEDUCTION">
+            <Top>0.0pt</Top>
+            <Left>427.8pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!OTHERDEDUCTION.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="NETAMOUNT">
+            <Top>0.0pt</Top>
+            <Left>490.5pt</Left>
+            <Width>62.72pt</Width>
+            <Height>14.31pt</Height>
+            <Value>=Fields!NETAMOUNT.Value</Value>
+            <CanGrow>false</CanGrow>
+            <Style>
+              <PaddingRight>2 pt</PaddingRight>
+              <TextAlign>right</TextAlign>
+              <VerticalAlign >Middle</VerticalAlign>
+              <BorderStyle >
+                <Default>Solid</Default>
+                <Left>Solid</Left>
+                <Right>Solid</Right>
+                <Top>Solid</Top>
+                <Bottom>None</Bottom>
+              </BorderStyle>
+              <BorderColor  />
+              <BorderWidth  />
+              <Format >#,##0.00</Format>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox12" >
+            <Height>14.31pt</Height>
+            <Width>35.52pt</Width>
+            <Value>Text</Value>
+            <Left>0.0pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox13" >
+            <Height>14.31pt</Height>
+            <Width>141.41pt</Width>
+            <Value>Text</Value>
+            <Left>35.5pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox14" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>176.7pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>239.4pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox16" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>302.1pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox17" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>364.8pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox18" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>427.6pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox19" >
+            <Height>14.31pt</Height>
+            <Width>62.72pt</Width>
+            <Value>Text</Value>
+            <Left>490.3pt</Left>
+            <Top>16.1pt</Top>
+            <Style>
+              <BorderStyle>
+                <Top>Solid</Top>
+              </BorderStyle>
+              <BorderColor />
+              <BorderWidth />
+            </Style>
+          </Textbox>
+        </ReportItems>
+        <Width>944.30pt</Width>
+        <Left >0.00pt</Left>
+        <Top >4.80pt</Top>
+        <Style >
+          <BorderStyle />
+          <BorderColor />
+          <BorderWidth />
+        </Style>
+        <Grouping Name="fullname" >
+          <PageBreakAtStart>false</PageBreakAtStart>
+          <PageBreakAtEnd>false</PageBreakAtEnd>
+          <GroupExpressions>
+            <GroupExpression>=Fields!EMPLOYEENAME.Value</GroupExpression>
+          </GroupExpressions>
+        </Grouping>
+        <PageBreakAtEnd >false</PageBreakAtEnd>
+      </List>
+    </ReportItems>
+  </Body>
+  <PageFooter>
+    <Height>14 pt</Height>
+    <ReportItems>
+      <Textbox Name="Textbox11">
+        <Top>1 pt</Top>
+        <Left>10 pt</Left>
+        <Height>12 pt</Height>
+        <Width>3in</Width>
+        <Value>=Globals!PageNumber.Value + ' of ' + Globals!TotalPages.Value</Value>
+        <Style>
+          <FontSize>10pt</FontSize>
+          <FontWeight>Normal</FontWeight>
+        </Style>
+      </Textbox>
+    </ReportItems>
+    <PrintOnFirstPage>True</PrintOnFirstPage>
+    <PrintOnLastPage>True</PrintOnLastPage>
+  </PageFooter>
+</Report>

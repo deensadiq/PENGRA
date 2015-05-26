@@ -1,0 +1,444 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CB825AE7-5BAE-42DD-A10A-7B167A3BD8C2}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Sub Main</StartupObject>
+    <RootNamespace>PENGRA</RootNamespace>
+    <AssemblyName>PENGRA</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsFormsWithCustomSubMain</MyType>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DocumentationFile>PENGRA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\..\run\</OutputPath>
+    <DocumentationFile>PENGRA.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Resources\pengra_icon-006.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="crsButton">
+      <HintPath>..\..\..\run\crsButton.dll</HintPath>
+    </Reference>
+    <Reference Include="crsComboBox">
+      <HintPath>..\..\..\run\crsComboBox.dll</HintPath>
+    </Reference>
+    <Reference Include="crsForm">
+      <HintPath>..\..\..\run\crsForm.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient, Version=2.0.0.0, Culture=neutral, PublicKeyToken=3750abcc3150b00c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\run\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="PENGRA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null">
+      <ExecutableExtension>.exe</ExecutableExtension>
+    </Reference>
+    <Reference Include="PENGRA.Connection, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\run\PENGRA.Connection.dll</HintPath>
+    </Reference>
+    <Reference Include="PENGRA.crsDataGridView">
+      <HintPath>..\..\..\run\PENGRA.crsDataGridView.dll</HintPath>
+    </Reference>
+    <Reference Include="PENGRA.Reports">
+      <HintPath>..\..\..\run\PENGRA.Reports.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Computation.vb" />
+    <Compile Include="Classes\FindEmployee.vb" />
+    <Compile Include="Classes\Scanner.vb" />
+    <Compile Include="Components\crsCombo.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\crsDataGridView.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\crsTabControl.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Classes\Finder.vb" />
+    <Compile Include="Classes\GuiForms.vb" />
+    <Compile Include="Forms\frmPaymentDetailsAL.Designer.vb">
+      <DependentUpon>frmPaymentDetailsAL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentDetailsAL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingSummaryAL.Designer.vb">
+      <DependentUpon>frmOutstandingSummaryAL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingSummaryAL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingAL.Designer.vb">
+      <DependentUpon>frmOutstandingAL.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingAL.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLimitKnockOff.Designer.vb">
+      <DependentUpon>frmLimitKnockOff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLimitKnockOff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentLimitDetails.Designer.vb">
+      <DependentUpon>frmPaymentLimitDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentLimitDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAllocation.Designer.vb">
+      <DependentUpon>frmAllocation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAllocation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmAboveLimit.Designer.vb">
+      <DependentUpon>frmAboveLimit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmAboveLimit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOutstanding.Designer.vb">
+      <DependentUpon>frmOutstanding.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOutstanding.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmGroupKnockOff.Designer.vb">
+      <DependentUpon>frmGroupKnockOff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmGroupKnockOff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingSummary.Designer.vb">
+      <DependentUpon>frmOutstandingSummary.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmOutstandingSummary.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentDetails.Designer.vb">
+      <DependentUpon>frmPaymentDetails.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentDetails.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBenefitCalculator.designer.vb">
+      <DependentUpon>frmBenefitCalculator.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBenefitCalculator.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmFindEmployee.designer.vb">
+      <DependentUpon>frmFindEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmFindEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmLogin.Designer.vb">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmLogin.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmComputation.designer.vb">
+      <DependentUpon>frmComputation.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmComputation.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentLimit.designer.vb">
+      <DependentUpon>frmPaymentLimit.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentLimit.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.designer.vb">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmChangePassword.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmKnockOff.Designer.vb">
+      <DependentUpon>frmKnockOff.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmKnockOff.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmBudgeting.Designer.vb">
+      <DependentUpon>frmBudgeting.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmBudgeting.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentProfile.Designer.vb">
+      <DependentUpon>frmPaymentProfile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentProfile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmPaymentStatus.designer.vb">
+      <DependentUpon>frmPaymentStatus.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmPaymentStatus.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmProcess.designer.vb">
+      <DependentUpon>frmProcess.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmProcess.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmRegisterUser.designer.vb">
+      <DependentUpon>frmRegisterUser.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmRegisterUser.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSalaryTable.Designer.vb">
+      <DependentUpon>frmSalaryTable.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSalaryTable.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSettings.Designer.vb">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmEmployee.designer.vb">
+      <DependentUpon>frmEmployee.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmEmployee.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\frmSplash.designer.vb">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\frmSplash.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mdi\Connection.vb" />
+    <Compile Include="mdi\mdiControlPanel.designer.vb">
+      <DependentUpon>mdiControlPanel.vb</DependentUpon>
+    </Compile>
+    <Compile Include="mdi\mdiControlPanel.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Forms\frmPaymentDetailsAL.resx">
+      <DependentUpon>frmPaymentDetailsAL.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOutstandingSummaryAL.resx">
+      <DependentUpon>frmOutstandingSummaryAL.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOutstandingAL.resx">
+      <DependentUpon>frmOutstandingAL.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLimitKnockOff.resx">
+      <DependentUpon>frmLimitKnockOff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentLimitDetails.resx">
+      <DependentUpon>frmPaymentLimitDetails.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAllocation.resx">
+      <DependentUpon>frmAllocation.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmAboveLimit.resx">
+      <DependentUpon>frmAboveLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOutstanding.resx">
+      <DependentUpon>frmOutstanding.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmGroupKnockOff.resx">
+      <DependentUpon>frmGroupKnockOff.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmOutstandingSummary.resx">
+      <DependentUpon>frmOutstandingSummary.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentDetails.resx">
+      <DependentUpon>frmPaymentDetails.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBenefitCalculator.resx">
+      <DependentUpon>frmBenefitCalculator.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmFindEmployee.resx">
+      <DependentUpon>frmFindEmployee.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmLogin.resx">
+      <DependentUpon>frmLogin.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmComputation.resx">
+      <DependentUpon>frmComputation.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentLimit.resx">
+      <DependentUpon>frmPaymentLimit.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmChangePassword.resx">
+      <DependentUpon>frmChangePassword.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmKnockOff.resx">
+      <DependentUpon>frmKnockOff.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmBudgeting.resx">
+      <DependentUpon>frmBudgeting.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentProfile.resx">
+      <DependentUpon>frmPaymentProfile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmPaymentStatus.resx">
+      <DependentUpon>frmPaymentStatus.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmProcess.resx">
+      <DependentUpon>frmProcess.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmRegisterUser.resx">
+      <DependentUpon>frmRegisterUser.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSalaryTable.resx">
+      <DependentUpon>frmSalaryTable.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSettings.resx">
+      <DependentUpon>frmSettings.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmEmployee.resx">
+      <DependentUpon>frmEmployee.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\frmSplash.resx">
+      <DependentUpon>frmSplash.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="mdi\mdiControlPanel.resx">
+      <DependentUpon>mdiControlPanel.vb</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add_combo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bg-kspgs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bg.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pengra_icon-006.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\details.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

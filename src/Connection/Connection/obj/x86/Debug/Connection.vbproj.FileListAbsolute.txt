@@ -1,0 +1,9 @@
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\ResolveAssemblyReference.cache
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Forms.frmConnect.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Forms.frmPassword.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Forms.frmPrivilege.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Forms.frmRegisterUser.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Forms.frmServer.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\PENGRA.Connection.Resources.resources
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\ResGen.read.1.tlog
+E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Debug\ResGen.write.1.tlog

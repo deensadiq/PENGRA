@@ -1,0 +1,9 @@
+---------------------------------------------
+NOTE
+---------------------------------------------
+1. Change the database alias to PENGRANEW, in order to compere between
+   what I have corrently and what I install at Department of Pension 
+   Birnin Kebbi.
+   
+   Need to Do:
+   Remember to change the alias to PENGRA before final compilation.
