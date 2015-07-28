@@ -308,5 +308,335 @@ Namespace Classes
             Viewer.MdiParent = Parent
             If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
         End Sub
+        Public Sub BenefitPaymentReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.benefitpayment)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub PaymentDetailsReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.TDATE, p.BENEFIT, p.AMOUNT, p.TOTALPAYMENT, p.STATUS FROM SP_PAYMENT_DETAILS('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.paymentdetails)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+
+        End Sub
+
+        Public Sub PaymentSummaryReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT SUM(p.GRATUITYRETIREE) AS GRATUITYRETIREE, SUM(p.GRATUITYDECEASED) AS GRATUITYDECEASED, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALPAYMENT) AS TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.paymentsummary)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub PensionPayrollReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.PENSIONARREARS, p.OTHERPAYMENT, p.GROSSPAYMENT, p.UNIONDUE, p.OTHERDEDUCTION, p.NETAMOUNT FROM SP_REPORT_PENSIONPAYROLL('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.pensionpayroll)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub DeathPensionPayrollReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.EMPLOYEENAME, p.DEATHPENSION, p.OTHERPAYMENT, p.GROSSPAYMENT, p.OTHERDEDUCTION, p.NETAMOUNT FROM SP_REPORT_DEATHPAYROLL('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.deathpensionpayroll)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub PensionPayrollSummaryReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT SUM( p.NETAMOUNT) as NETAMOUNTPAYABLE FROM SP_REPORT_PENSIONPAYROLL('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.pensionpayrollsummay)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub DeathPensionPayrollSummary(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT SUM(p.NETAMOUNT) AS NETAMOUNTPAYABLE FROM SP_REPORT_DEATHPAYROLL('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.pensionpayrollsummay)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub OutstandingBeneficiariesReport(ByVal bolPrint As Boolean, ByVal SQL As String)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            'SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.outstanding)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub AboveLimitBeneficiariesReport(ByVal bolPrint As Boolean, ByVal SQL As String)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            'SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.outstanding)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub OutstandingSummarry(ByVal bolPrint As Boolean, ByVal SQL As String)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            'SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.outstandingsummary)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub ListofBeneficiariesReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.beneficiarylist)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub ListofRetireeBeneciarieasReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = 1 ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.beneficiarylist)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub ListofDeceasedBeneciariesReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.ID, p.EMPLOYEENAME, p.MINISTRYNAME, p.AYEAR, p.AMONTH, p.MONTHNAME || ' ' || p.AYEAR AS DATENAME, p.GRATUITY - p.GRATUITYPAID AS GRATUITY, p.PENSIONARREARS - p.PEANSIONPAID AS PENSIONARREARS, p.DEATHPENSION - p.DEATHPAID AS DEATHPENSION, p.BALANCE FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = 2 ORDER BY p.AYEAR ASC, p.AMONTH ASC, p.BTYPE, p.EMPLOYEENAME "
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.beneficiarylist)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub SummaryBreakdownofBeneficiariesReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_SUMMARYBREAKDOWN p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.summarybreakdowno)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+
+        Public Sub SummaryofBeneficiariesReport(ByVal bolPrint As Boolean)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+            'SELECT p.EMPLOYEENAME, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p
+            SQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_OSUMMARY p"
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.outstandingsummary)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                '.Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
     End Class
 End Namespace

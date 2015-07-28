@@ -47,3 +47,4 @@ F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbproj.GenerateReso
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.dll
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.xml
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.pdb
+F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbprojResolveAssemblyReference.cache
