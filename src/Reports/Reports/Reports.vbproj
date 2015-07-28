@@ -100,6 +100,12 @@
     <Compile Include="Classes\modReport.vb" />
     <Compile Include="Classes\myReport.vb" />
     <Compile Include="Classes\ReportForms.vb" />
+    <Compile Include="Form\frmReportSS.designer.vb">
+      <DependentUpon>frmReportSS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportSS.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="Form\frmReportSB.designer.vb">
       <DependentUpon>frmReportSB.vb</DependentUpon>
     </Compile>
@@ -148,10 +154,10 @@
     <Compile Include="Form\frmReportPSAPP.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmReportSS.designer.vb">
-      <DependentUpon>frmReportSS.vb</DependentUpon>
+    <Compile Include="Form\frmReportSSM.designer.vb">
+      <DependentUpon>frmReportSSM.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmReportSS.vb">
+    <Compile Include="Form\frmReportSSM.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -171,6 +177,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Form\frmReportSS.resx">
+      <DependentUpon>frmReportSS.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form\frmReportSB.resx">
       <DependentUpon>frmReportSB.vb</DependentUpon>
     </EmbeddedResource>
@@ -196,8 +205,8 @@
     <EmbeddedResource Include="Form\frmReportPSAPP.resx">
       <DependentUpon>frmReportPSAPP.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmReportSS.resx">
-      <DependentUpon>frmReportSS.vb</DependentUpon>
+    <EmbeddedResource Include="Form\frmReportSSM.resx">
+      <DependentUpon>frmReportSSM.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>

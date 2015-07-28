@@ -21,8 +21,6 @@ Namespace Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReportAYM))
-            Me.Label5 = New System.Windows.Forms.Label()
-            Me.cboSession = New System.Windows.Forms.ComboBox()
             Me.Label3 = New System.Windows.Forms.Label()
             Me.cboMonth = New System.Windows.Forms.ComboBox()
             Me.Label2 = New System.Windows.Forms.Label()
@@ -37,31 +35,11 @@ Namespace Forms
             Me.GroupBox1.SuspendLayout()
             Me.SuspendLayout()
             '
-            'Label5
-            '
-            Me.Label5.AutoSize = True
-            Me.Label5.BackColor = System.Drawing.Color.Transparent
-            Me.Label5.Location = New System.Drawing.Point(16, 107)
-            Me.Label5.Name = "Label5"
-            Me.Label5.Size = New System.Drawing.Size(49, 14)
-            Me.Label5.TabIndex = 35
-            Me.Label5.Text = "Session:"
-            Me.Label5.Visible = False
-            '
-            'cboSession
-            '
-            Me.cboSession.FormattingEnabled = True
-            Me.cboSession.Location = New System.Drawing.Point(71, 108)
-            Me.cboSession.Name = "cboSession"
-            Me.cboSession.Size = New System.Drawing.Size(214, 22)
-            Me.cboSession.TabIndex = 34
-            Me.cboSession.Visible = False
-            '
             'Label3
             '
             Me.Label3.AutoSize = True
             Me.Label3.BackColor = System.Drawing.Color.Transparent
-            Me.Label3.Location = New System.Drawing.Point(23, 77)
+            Me.Label3.Location = New System.Drawing.Point(10, 93)
             Me.Label3.Name = "Label3"
             Me.Label3.Size = New System.Drawing.Size(42, 14)
             Me.Label3.TabIndex = 31
@@ -70,7 +48,7 @@ Namespace Forms
             'cboMonth
             '
             Me.cboMonth.FormattingEnabled = True
-            Me.cboMonth.Location = New System.Drawing.Point(71, 73)
+            Me.cboMonth.Location = New System.Drawing.Point(76, 89)
             Me.cboMonth.Name = "cboMonth"
             Me.cboMonth.Size = New System.Drawing.Size(213, 22)
             Me.cboMonth.TabIndex = 30
@@ -79,7 +57,7 @@ Namespace Forms
             '
             Me.Label2.AutoSize = True
             Me.Label2.BackColor = System.Drawing.Color.Transparent
-            Me.Label2.Location = New System.Drawing.Point(5, 21)
+            Me.Label2.Location = New System.Drawing.Point(10, 21)
             Me.Label2.Name = "Label2"
             Me.Label2.Size = New System.Drawing.Size(60, 14)
             Me.Label2.TabIndex = 29
@@ -88,7 +66,7 @@ Namespace Forms
             'cboBudget
             '
             Me.cboBudget.FormattingEnabled = True
-            Me.cboBudget.Location = New System.Drawing.Point(71, 17)
+            Me.cboBudget.Location = New System.Drawing.Point(76, 17)
             Me.cboBudget.Name = "cboBudget"
             Me.cboBudget.Size = New System.Drawing.Size(213, 22)
             Me.cboBudget.TabIndex = 28
@@ -97,9 +75,9 @@ Namespace Forms
             '
             Me.GroupBox1.Controls.Add(Me.rbPreview)
             Me.GroupBox1.Controls.Add(Me.rbPrint)
-            Me.GroupBox1.Location = New System.Drawing.Point(60, 134)
+            Me.GroupBox1.Location = New System.Drawing.Point(76, 135)
             Me.GroupBox1.Name = "GroupBox1"
-            Me.GroupBox1.Size = New System.Drawing.Size(225, 50)
+            Me.GroupBox1.Size = New System.Drawing.Size(213, 50)
             Me.GroupBox1.TabIndex = 44
             Me.GroupBox1.TabStop = False
             '
@@ -129,7 +107,7 @@ Namespace Forms
             '
             Me.Label1.AutoSize = True
             Me.Label1.BackColor = System.Drawing.Color.Transparent
-            Me.Label1.Location = New System.Drawing.Point(29, 49)
+            Me.Label1.Location = New System.Drawing.Point(10, 57)
             Me.Label1.Name = "Label1"
             Me.Label1.Size = New System.Drawing.Size(36, 14)
             Me.Label1.TabIndex = 48
@@ -138,7 +116,7 @@ Namespace Forms
             'cboYear
             '
             Me.cboYear.FormattingEnabled = True
-            Me.cboYear.Location = New System.Drawing.Point(71, 45)
+            Me.cboYear.Location = New System.Drawing.Point(76, 53)
             Me.cboYear.Name = "cboYear"
             Me.cboYear.Size = New System.Drawing.Size(213, 22)
             Me.cboYear.TabIndex = 47
@@ -154,7 +132,7 @@ Namespace Forms
             Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnClose.Image = CType(resources.GetObject("btnClose.Image"), System.Drawing.Image)
-            Me.btnClose.Location = New System.Drawing.Point(199, 216)
+            Me.btnClose.Location = New System.Drawing.Point(199, 219)
             Me.btnClose.Name = "btnClose"
             Me.btnClose.Size = New System.Drawing.Size(85, 45)
             Me.btnClose.TabIndex = 46
@@ -171,7 +149,7 @@ Namespace Forms
             Me.btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnOk.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnOk.Image = CType(resources.GetObject("btnOk.Image"), System.Drawing.Image)
-            Me.btnOk.Location = New System.Drawing.Point(19, 201)
+            Me.btnOk.Location = New System.Drawing.Point(19, 204)
             Me.btnOk.Name = "btnOk"
             Me.btnOk.Size = New System.Drawing.Size(168, 60)
             Me.btnOk.TabIndex = 45
@@ -182,20 +160,17 @@ Namespace Forms
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackColor = System.Drawing.Color.NavajoWhite
-            Me.ClientSize = New System.Drawing.Size(307, 295)
+            Me.ClientSize = New System.Drawing.Size(313, 298)
             Me.Controls.Add(Me.Label1)
             Me.Controls.Add(Me.cboYear)
             Me.Controls.Add(Me.btnClose)
             Me.Controls.Add(Me.btnOk)
             Me.Controls.Add(Me.GroupBox1)
-            Me.Controls.Add(Me.Label5)
-            Me.Controls.Add(Me.cboSession)
             Me.Controls.Add(Me.Label3)
             Me.Controls.Add(Me.cboMonth)
             Me.Controls.Add(Me.Label2)
             Me.Controls.Add(Me.cboBudget)
             Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-            Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
             Me.MaximizeBox = False
             Me.MinimizeBox = False
             Me.Name = "frmReportAYM"
@@ -208,8 +183,6 @@ Namespace Forms
             Me.PerformLayout()
 
         End Sub
-        Friend WithEvents Label5 As System.Windows.Forms.Label
-        Friend WithEvents cboSession As System.Windows.Forms.ComboBox
         Friend WithEvents Label3 As System.Windows.Forms.Label
         Friend WithEvents cboMonth As System.Windows.Forms.ComboBox
         Friend WithEvents Label2 As System.Windows.Forms.Label

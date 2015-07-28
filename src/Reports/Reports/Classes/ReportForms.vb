@@ -8,6 +8,7 @@ Namespace Classes
         Private formReportSUM As frmReportSUM
         Private formReportSB As frmReportSB
         Private formReportAYM As frmReportAYM
+        Private formReportSS As frmReportSS
 
         Private Shared Guiman As ReportForms
         Private Sub New()
@@ -59,6 +60,16 @@ Namespace Classes
             formReportAYM.ReportType = rType
             formReportAYM.MdiParent = parent
             formReportAYM.Show()
+
+        End Sub
+        Public Sub setReportSS(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportSS.rType)
+
+            If formReportSS Is Nothing Then formReportSS = New frmReportSS
+            If formReportSS.IsDisposed = True Then formReportSS = New frmReportSS
+            formReportSS.Text = txt
+            formReportSS.ReportType = rType
+            formReportSS.MdiParent = parent
+            formReportSS.Show()
 
         End Sub
         'Public Sub showBankList(ByVal parent As Form)

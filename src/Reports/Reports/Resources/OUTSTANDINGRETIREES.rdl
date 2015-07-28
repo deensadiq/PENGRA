@@ -26,12 +26,12 @@
   </ReportParameters>
   <DataSets>
     <DataSet Name="Data">
-      <Query>
+      <Query >
         <DataSourceName>DS1</DataSourceName>
         <CommandText>SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE
 FROM SP_REPORT_OUTSTANDINGRETIREE(2, 2014, 12) p</CommandText>
       </Query>
-      <Fields>
+      <Fields >
         <Field Name="SN">
           <DataField>SN</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>

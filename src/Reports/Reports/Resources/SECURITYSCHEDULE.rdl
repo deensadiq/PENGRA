@@ -21,8 +21,7 @@
     <DataSet Name="Data">
       <Query>
         <DataSourceName>DS1</DataSourceName>
-        <CommandText>SELECT a.IDNO, a.FULLNAME, a.TOTALBENEFIT, a.PREVIOUSPAYMENT,  a.TOTALPAYMENT, a.BALANCE
-FROM PAYMENTDETAILS a</CommandText>
+        <CommandText>SELECT a.IDNO, a.FULLNAME, a.TOTALPAYMENT FROM PAYMENTDETAILS a</CommandText>
       </Query>
       <Fields>
         <Field Name="IDNO">
@@ -33,20 +32,8 @@ FROM PAYMENTDETAILS a</CommandText>
           <DataField>FULLNAME</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="TOTALBENEFIT">
-          <DataField>TOTALBENEFIT</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="PREVIOUSPAYMENT">
-          <DataField>PREVIOUSPAYMENT</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
         <Field Name="TOTALPAYMENT">
           <DataField>TOTALPAYMENT</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
-        </Field>
-        <Field Name="BALANCE">
-          <DataField>BALANCE</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
       </Fields>

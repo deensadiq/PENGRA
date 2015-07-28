@@ -15,8 +15,8 @@ Namespace Forms
             PensionPayrollSummary
             DeathPensionPayroll
             DeathPensionPayrollSummary
-            SecurityScheduleRetiree
-            SecurityScheduleDeceased
+            'SecurityScheduleRetiree
+            'SecurityScheduleDeceased
         End Enum
         Dim mBudgetYear As Integer
         Dim mBudgetMonth As Integer
@@ -49,6 +49,30 @@ Namespace Forms
             End Get
             Set(ByVal value As Integer)
                 mBudgetMonth = value
+            End Set
+        End Property
+        Property Limi As Integer
+            Get
+                Return mLimit
+            End Get
+            Set(ByVal value As Integer)
+                mLimit = value
+            End Set
+        End Property
+        Property BenefitType As Integer
+            Get
+                Return mBenefitType
+            End Get
+            Set(ByVal value As Integer)
+                mBenefitType = value
+            End Set
+        End Property
+        Property Ministry As Integer
+            Get
+                Return mMinistry
+            End Get
+            Set(ByVal value As Integer)
+                mMinistry = value
             End Set
         End Property
 
@@ -89,6 +113,9 @@ Namespace Forms
             Budget = CType(cboBudget.SelectedValue, Integer)
             BudgetYear = CType(cboYear.Text.Trim, Integer)
             BudgetMonth = CType(cboMonth.SelectedIndex, Integer)
+            Limi = cboLimitType.SelectedValue
+            BenefitType = cboBenefitType.SelectedValue
+            Ministry = cboMinistry.SelectedValue
 
             Dim rSQl As New myReport
 
@@ -103,9 +130,9 @@ Namespace Forms
             Try
 
                 Select Case mReportType
-                    Case rType.BenefitPayment
+                    Case rType.OutstandingBeneficiaries
                         rSQl.ReportTitle = Me.Text
-                        rSQl.BenefitPaymentReport(rbPrint.Checked, getSQL)
+                        rSQl.OustandingBeneficiariesReport(rbPrint.Checked, getOutstandingBeneficiariesSQL)
                     Case rType.BenefitPaymentSummary
                         rSQl.ReportTitle = Me.Text
                         rSQl.BenefitPaymentSummaryReport(rbPrint.Checked, getSQL)
@@ -124,12 +151,12 @@ Namespace Forms
                     Case rType.DeathPensionPayrollSummary
                         rSQl.ReportTitle = Me.Text
                         rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.SecurityScheduleRetiree
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.SecurityScheduleDeceased
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
+                        'Case rType.SecurityScheduleRetiree
+                        '    rSQl.ReportTitle = Me.Text
+                        '    rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
+                        'Case rType.SecurityScheduleDeceased
+                        '    rSQl.ReportTitle = Me.Text
+                        '    rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
                 End Select
 
             Catch ex As Exception
@@ -146,12 +173,60 @@ Namespace Forms
 
             Return getTitle
         End Function
+        Private Function getOutstandingBeneficiariesSQL() As String
+            Dim strSQL As String = ""
+
+            If cboLimitType.Text = "" And cboBenefitType.Text = "" And cboMinistry.Text = "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+
+            ElseIf cboLimitType.Text <> "" And cboBenefitType.Text = "" And cboMinistry.Text = "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.LIMITSTATUS = '" & Limi & "'"
+
+            ElseIf cboLimitType.Text = "" And cboBenefitType.Text <> "" And cboMinistry.Text = "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.BENEFITTYPE = '" & BenefitType & "'"
+
+            ElseIf cboLimitType.Text = "" And cboBenefitType.Text = "" And cboMinistry.Text <> "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.MINISTRY = '" & Ministry & "'"
+
+            ElseIf cboLimitType.Text <> "" And cboBenefitType.Text <> "" And cboMinistry.Text = "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.LIMITSTATUS = '" & Limi & "' AND p.BENEFITTYPE = '" & BenefitType & "'"
+
+            ElseIf cboLimitType.Text <> "" And cboBenefitType.Text = "" And cboMinistry.Text <> "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.LIMITSTATUS = '" & Limi & "' AND p.MINISTRY = '" & Ministry & "'"
+
+            ElseIf cboLimitType.Text = "" And cboBenefitType.Text <> "" And cboMinistry.Text <> "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.BENEFITTYPE = '" & BenefitType & "' AND p.MINISTRY = '" & Ministry & "'"
+
+            ElseIf cboLimitType.Text <> "" And cboBenefitType.Text <> "" And cboMinistry.Text <> "" Then
+
+                strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p WHERE p.LIMITSTATUS = '" & Limi & "' AND p.BENEFITTYPE = '" & BenefitType & "' AND p.MINISTRY = '" & Ministry & "'"
+
+            End If
+
+            Return strSQL
+        End Function
         Private Function getSQL() As String
             Dim strSQL As String
 
             Select Case mReportType
                 Case rType.BenefitPayment
-                    strSQL = "SELECT * FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "')"
+                    strSQL = "SELECT p.SN, p.IDNO, p.FULLNAME, p.MINISTRY, p.MINISTRYNAME, p.AYEAR, p.AMONTH, (p.AYEAR || ' ' || p.AMONTH) AS RESULT, p.DESCRIPTION, p.BENEFITTYPE, p.LIMITSTATUS, p.BUDGET, p.BYEAR, p.BMONTH, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT, p.GRATUITYPAID, p.PENSIONPAID, p.DEATHPENSIONPAID, p.TOTALBENEFITPAID, p.BALANCE "
+                    strSQL = strSQL & "FROM SP_REPORT_OUTSTANDINGRETIREE('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
                 Case rType.BenefitPaymentSummary
                     strSQL = "SELECT SUM(p.GRATUITYRETIREE) AS GRATUITYRETIREE, SUM(p.GRATUITYDECEASED) AS GRATUITYDECEASED, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALPAYMENT) AS TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
                 Case rType.RequestForFund

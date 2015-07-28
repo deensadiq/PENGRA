@@ -33,6 +33,8 @@ E:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbproj.GenerateReso
 F:\Projects\PENGRA\run\PENGRA.Reports.dll
 F:\Projects\PENGRA\run\PENGRA.Reports.pdb
 F:\Projects\PENGRA\run\PENGRA.Reports.xml
+F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbprojResolveAssemblyReference.cache
+F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportSS.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportSB.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportSUM.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportOB.resources
@@ -41,10 +43,9 @@ F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmRep
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReport.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportAYM.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportPSAPP.resources
-F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportSS.resources
+F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Forms.frmReportSSM.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.Resources.resources
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbproj.GenerateResource.Cache
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.dll
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.xml
 F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\PENGRA.Reports.pdb
-F:\Projects\PENGRA\src\Reports\Reports\obj\x86\Debug\Reports.vbprojResolveAssemblyReference.cache

@@ -86,6 +86,7 @@ Namespace Mdi
 
         Private Sub PayslipToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportOutstandingToolStripMenuItem.Click
             'GuiReport.setReportLOB(Me, "OutStanding Beneficiaries", Reports.Forms.frmReportBYM.rType.BenefitPayment)
+            GuiReport.setReportSUM(Me, "Summary of Beneficiaries [Detailed]", Reports.Forms.frmReportSUM.rType.SummaryDetails)
         End Sub
 
         Private Sub MenuStrip_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles MenuStrip.ItemClicked
@@ -321,11 +322,11 @@ Namespace Mdi
             GuiReport.setReportSB(Me, "Summary Breakdown of Beneficiaries", Reports.Forms.frmReportSB.rType.SummaryBreakdown)
         End Sub
 
-        Private Sub DetailedToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DetailedToolStripMenuItem1.Click
+        Private Sub DetailedToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
             GuiReport.setReportSUM(Me, "Summary of Beneficiaries [Detailed]", Reports.Forms.frmReportSUM.rType.SummaryDetails)
         End Sub
 
-        Private Sub GraphicalToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GraphicalToolStripMenuItem1.Click
+        Private Sub GraphicalToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
             GuiReport.setReportSUM(Me, "Summary of Beneficiaries [Graphical]", Reports.Forms.frmReportSUM.rType.SummaryGraphs)
         End Sub
 
@@ -339,6 +340,18 @@ Namespace Mdi
 
         Private Sub BackupRestoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupRestoreToolStripMenuItem.Click
             GuiMan.showBackupRestore(Me)
+        End Sub
+
+        Private Sub ToolStripMenuItem5_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem5.Click
+            GuiReport.setReportAYM(Me, "Request For Funds", Reports.Forms.frmReportAYM.rType.RequestForFund)
+        End Sub
+
+        Private Sub ReportSecuritPensionToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportSecuritPensionToolStripMenuItem.Click
+            GuiReport.setReportSS(Me, "Security Schedule [Gratuity]", Reports.Forms.frmReportSS.rType.SecurityScheduleGratuity)
+        End Sub
+
+        Private Sub ToolStripMenuItem4_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem4.Click
+            GuiReport.setReportSS(Me, "Security Schedule [Pension]", Reports.Forms.frmReportSS.rType.SecuritySchedulePension)
         End Sub
     End Class
 End Namespace

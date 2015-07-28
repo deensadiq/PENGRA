@@ -308,6 +308,44 @@ Namespace Classes
             Viewer.MdiParent = Parent
             If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
         End Sub
+        Public Sub RequestForFundsReport(ByVal bolPrint As Boolean, ByVal SQL As String)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.REQUESTFORFUND)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                .Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
+        Public Sub SecurityScheduleReport(ByVal bolPrint As Boolean, ByVal SQL As String)
+            Dim Table As New DataTable
+            Dim Viewer As New frmReport
+
+            Adapter = New FbDataAdapter(SQL, Env.ConStr)
+            Adapter.Fill(Table)
+
+            With Viewer.RdlV
+                .SourceRdl = enc.GetString(My.Resources.SECURITYSCHEDULE)
+                rpt = .Report
+                dset = rpt.DataSets("Data")
+                dset.SetData(Table)
+                .Parameters = "Title=" + Title
+                .Rebuild()
+            End With
+            Viewer.Text = ReportTitle
+            Viewer.MdiParent = Parent
+            If bolPrint = True Then PrintReport(Viewer) Else Viewer.Show()
+        End Sub
         Public Sub BenefitPaymentReport(ByVal bolPrint As Boolean)
             Dim Table As New DataTable
             Dim Viewer As New frmReport

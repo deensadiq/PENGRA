@@ -351,6 +351,7 @@ FROM PAYMENTDETAILS a</CommandText>
                         <BorderWidth />
                         <VerticalAlign>Middle</VerticalAlign>
                         <Format>#,##0.00</Format>
+                        <FontWeight >Bold</FontWeight>
                       </Style>
                     </Textbox>
                   </ReportItems>

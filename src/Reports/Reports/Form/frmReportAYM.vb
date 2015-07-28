@@ -104,7 +104,7 @@ Namespace Forms
                         rSQl.BenefitPaymentSummaryReport(rbPrint.Checked, getSQL)
                     Case rType.RequestForFund
                         rSQl.ReportTitle = Me.Text
-                        'rSQl.getClassProfileSQL(rbPrint.Checked)
+                        rSQl.RequestForFundsReport(rbPrint.Checked, getSQL)
                     Case rType.PensionPayroll
                         rSQl.ReportTitle = Me.Text
                         rSQl.PensionPayrollReport(rbPrint.Checked, getSQL)
@@ -148,7 +148,7 @@ Namespace Forms
                 Case rType.BenefitPaymentSummary
                     strSQL = "SELECT SUM(p.GRATUITYRETIREE) AS GRATUITYRETIREE, SUM(p.GRATUITYDECEASED) AS GRATUITYDECEASED, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALPAYMENT) AS TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
                 Case rType.RequestForFund
-                    strSQL = "SELECT * FROM OUTSTANDINGDETAILS WHERE BUDGET = '" & Budget & "' AND BYEAR = '" & BudgetYear & "' AND BMONTH = '" & BudgetMonth & "'"
+                    strSQL = "SELECT a.IDNO, a.FULLNAME, a.TOTALBENEFIT, a.PREVIOUSPAYMENT,  a.TOTALPAYMENT, a.BALANCE FROM PAYMENTDETAILS a WHERE a.BUDGET = '" & Budget & "' AND a.BYEAR = '" & BudgetYear & "' AND a.BMONTH = '" & BudgetMonth & "'"
                 Case rType.PensionPayroll
                     strSQL = "SELECT * FROM SP_REPORT_PENSIONPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "')"
                 Case rType.PensionPayrollSummary
@@ -157,6 +157,10 @@ Namespace Forms
                     strSQL = "SELECT p.SN, p.EMPLOYEENAME, p.DEATHPENSION, p.OTHERPAYMENT, p.GROSSPAYMENT, coalesce(p.OTHERDEDUCTION, 0) AS OTHERDEDUCTION, p.NETAMOUNT FROM SP_REPORT_DEATHPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
                 Case rType.DeathPensionPayrollSummary
                     strSQL = "SELECT SUM( p.NETAMOUNT) as NETAMOUNTPAYABLE FROM SP_REPORT_DEATHPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+                Case rType.SecurityScheduleRetiree
+                    strSQL = ""
+                Case rType.SecurityScheduleDeceased
+                    strSQL = ""
                 Case Else
                     strSQL = ""
             End Select
