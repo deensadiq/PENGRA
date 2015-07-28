@@ -46,6 +46,7 @@ Namespace Classes
         Public Shared UserRegistrationSuccessful As String = "Your account has been created. An Administrator approval is required to activate it before you can login."
         Public Shared ChangedPasswordSuccessful As String = "Your account password has been Updated."
         Public Shared ActiveAdministrator As String = "At Least One Administrator Must Be Active."
+        Public Shared NumericValue As String = "Only Numeric Value Is Allowed."
 
         Public Shared AmountOver As String = "This Transaction Cannot Be Process. Amount Is Greater Than Allocation Amount."
 

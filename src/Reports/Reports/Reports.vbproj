@@ -100,10 +100,34 @@
     <Compile Include="Classes\modReport.vb" />
     <Compile Include="Classes\myReport.vb" />
     <Compile Include="Classes\ReportForms.vb" />
-    <Compile Include="Form\frmReportLOB.designer.vb">
-      <DependentUpon>frmReportLOB.vb</DependentUpon>
+    <Compile Include="Form\frmReportSB.designer.vb">
+      <DependentUpon>frmReportSB.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmReportLOB.vb">
+    <Compile Include="Form\frmReportSB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportSUM.designer.vb">
+      <DependentUpon>frmReportSUM.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportSUM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportOB.designer.vb">
+      <DependentUpon>frmReportOB.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportOB.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportLAGH.designer.vb">
+      <DependentUpon>frmReportLAGH.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportLAGH.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportV.designer.vb">
+      <DependentUpon>frmReportV.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportV.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form\frmReport.designer.vb">
@@ -112,10 +136,22 @@
     <Compile Include="Form\frmReport.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form\frmReportBYM.designer.vb">
-      <DependentUpon>frmReportBYM.vb</DependentUpon>
+    <Compile Include="Form\frmReportAYM.designer.vb">
+      <DependentUpon>frmReportAYM.vb</DependentUpon>
     </Compile>
-    <Compile Include="Form\frmReportBYM.vb">
+    <Compile Include="Form\frmReportAYM.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportPSAPP.designer.vb">
+      <DependentUpon>frmReportPSAPP.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportPSAPP.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form\frmReportSS.designer.vb">
+      <DependentUpon>frmReportSS.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Form\frmReportSS.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -135,17 +171,33 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Form\frmReportLOB.resx">
-      <DependentUpon>frmReportLOB.vb</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Form\frmReportSB.resx">
+      <DependentUpon>frmReportSB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportSUM.resx">
+      <DependentUpon>frmReportSUM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportOB.resx">
+      <DependentUpon>frmReportOB.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportLAGH.resx">
+      <DependentUpon>frmReportLAGH.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportV.resx">
+      <DependentUpon>frmReportV.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form\frmReport.resx">
       <DependentUpon>frmReport.vb</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form\frmReportBYM.resx">
-      <DependentUpon>frmReportBYM.vb</DependentUpon>
-      <SubType>Designer</SubType>
+    <EmbeddedResource Include="Form\frmReportAYM.resx">
+      <DependentUpon>frmReportAYM.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportPSAPP.resx">
+      <DependentUpon>frmReportPSAPP.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form\frmReportSS.resx">
+      <DependentUpon>frmReportSS.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
@@ -165,15 +217,27 @@
     </None>
     <None Include="Resources\beneficiarylist.rdl" />
     <None Include="Resources\benefitpayment.rdl" />
+    <None Include="Resources\DEATHPAYROLLSUMMARY.rdl" />
     <None Include="Resources\deathpensionpayroll.rdl" />
+    <None Include="Resources\DEATHPENSIONPAYROLL2.rdl" />
     <None Include="Resources\OustandingBeneficiaries.rdl" />
     <None Include="Resources\outstanding.rdl" />
+    <None Include="Resources\OUTSTANDINGRETIREES.rdl" />
     <None Include="Resources\outstandingsummary.rdl" />
+    <None Include="Resources\PAYMENTDETAIL.rdl" />
     <None Include="Resources\paymentdetails.rdl" />
+    <None Include="Resources\PAYMENTOFBENEFIT.rdl" />
     <None Include="Resources\paymentsummary.rdl" />
+    <None Include="Resources\PAYMENTSUMMARY2.rdl" />
     <None Include="Resources\pensionpayroll.rdl" />
+    <None Include="Resources\PENSIONPAYROLL2.rdl" />
+    <None Include="Resources\PENSIONPAYROLLSUMMARY2.rdl" />
     <None Include="Resources\pensionpayrollsummay.rdl" />
+    <None Include="Resources\REQUESTFORFUND.rdl" />
+    <None Include="Resources\SECURITYSCHEDULE.rdl" />
+    <None Include="Resources\SUMMARYBREAKDOWN.rdl" />
     <None Include="Resources\summarybreakdowno.rdl" />
+    <None Include="Resources\SUMMARYDETAILED.rdl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\coa.jpg" />

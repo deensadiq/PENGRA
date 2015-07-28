@@ -72,7 +72,7 @@ Namespace Forms
                 cboBudgetMonth.SelectedIndex = 1
                 cboBudget.SelectedIndex = 1
                 txtBudgetAmount.Text = Format(tbl.Rows(0).Item("AMOUNT"), "#,##0.00")
-                txtBudgetBalance.Text = Format(Populate.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
+                txtBudgetBalance.Text = Format(Classes.Transactions.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
                 'txtMinistry.Text = GetMinistryName(tbl.Rows(0).Item("MINISTRY"))
             End If
         End Sub
@@ -227,7 +227,7 @@ Namespace Forms
 
                 Dim ibenefit As Integer = cboBenefitType.SelectedValue
                 SetBenefitDetails(txtID.Tag, ibenefit)
-                If CDbl(txtBalance.Text) > 0 Then txtTransactionNo.Text = Populate.GetTransactionNo(ibenefit)
+                If CDbl(txtBalance.Text) > 0 Then txtTransactionNo.Text = Classes.Transactions.GetTransactionNo(ibenefit)
             Catch ex As Exception
 
             End Try
@@ -281,7 +281,7 @@ Namespace Forms
 
             Try
                 'EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF(TDATE, EMPLOYEE, TNUMBER, TBENEFIT, AMOUNT, BUDGET, BYEAR, BMONTH, STATUS)
-                strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFFLIMIT('" & CType(dtpTransDate.Text, Date) & "', '" & txtID.Tag & "', '" & txtTransactionNo.Text.Trim & "', '" & cboBenefitType.SelectedValue & "', '" & CDbl(txtKnockoffAmount.Text.Trim) & "', '" & cboBudgetYear.Text & "', '" & cboBudgetMonth.SelectedValue & "', '" & Env.GetStatus & "')"
+                strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFFLIMIT('" & CType(dtpTransDate.Text, Date) & "', '" & txtID.Tag & "', '" & txtTransactionNo.Text.Trim & "', '" & cboBenefitType.SelectedValue & "', '" & CDbl(txtKnockoffAmount.Text.Trim) & "', '" & cboBudgetYear.Text & "', '" & cboBudgetMonth.SelectedValue & "', '" & Env.UserStatus & "')"
 
                 command.Connection = DB.ConnObj
 

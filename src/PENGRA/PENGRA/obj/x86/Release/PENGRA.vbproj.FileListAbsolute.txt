@@ -32,7 +32,15 @@ E:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentLimi
 E:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.vbprojResolveAssemblyReference.cache
 E:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.vbproj.GenerateResource.Cache
 E:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.cForm.frmRegisterUser.resources
+F:\Projects\PENGRA\run\PENGRA.exe.config
+F:\Projects\PENGRA\run\PENGRA.pdb
+F:\Projects\PENGRA\run\PENGRA.xml
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.vbprojResolveAssemblyReference.cache
+F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmBackupRestore.resources
+F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmMemo.resources
+F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentDetailsAL.resources
+F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmOutstandingSummaryAL.resources
+F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmOutStandingAL.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmLimitKnockOff.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentLimitDetails.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmAllocation.resources
@@ -50,7 +58,6 @@ F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmChangePassw
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmKnockOff.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmBudgeting.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentProfile.resources
-F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentStatus.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmProcess.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.cForm.frmRegisterUser.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmSalaryTable.resources
@@ -60,12 +67,6 @@ F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmSplash.reso
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Mdi.mdiControlPanel.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Resources.resources
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.vbproj.GenerateResource.Cache
-F:\Projects\PENGRA\run\PENGRA.exe.config
-F:\Projects\PENGRA\run\PENGRA.pdb
-F:\Projects\PENGRA\run\PENGRA.xml
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.exe
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.xml
 F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.pdb
-F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmOutStandingAL.resources
-F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmOutstandingSummaryAL.resources
-F:\Projects\PENGRA\src\PENGRA\PENGRA\obj\x86\Release\PENGRA.Forms.frmPaymentDetailsAL.resources

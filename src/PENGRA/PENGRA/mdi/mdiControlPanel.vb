@@ -85,7 +85,7 @@ Namespace Mdi
         End Sub
 
         Private Sub PayslipToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportOutstandingToolStripMenuItem.Click
-            GuiReport.setReportLOB(Me, "OutStanding Beneficiaries", Reports.Forms.frmReportBYM.rType.BenefitPayment)
+            'GuiReport.setReportLOB(Me, "OutStanding Beneficiaries", Reports.Forms.frmReportBYM.rType.BenefitPayment)
         End Sub
 
         Private Sub MenuStrip_ItemClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ToolStripItemClickedEventArgs) Handles MenuStrip.ItemClicked
@@ -245,27 +245,27 @@ Namespace Mdi
         End Sub
 
         Private Sub ScheduleToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportMonthlyToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Payment of Retirement Benefit", Reports.Forms.frmReportBYM.rType.BenefitPayment)
+            GuiReport.setReportAYM(Me, "Payment of Retirement Benefit", Reports.Forms.frmReportAYM.rType.BenefitPayment)
         End Sub
 
         Private Sub ToolStripMenuItem9_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportPaymentSummaryToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Payment Summary", Reports.Forms.frmReportBYM.rType.PaymentSummary)
+            GuiReport.setReportAYM(Me, "Payment Summary", Reports.Forms.frmReportAYM.rType.BenefitPaymentSummary)
         End Sub
 
         Private Sub ToolStripMenuItem10_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportPensionToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Pension Payroll Schedule", Reports.Forms.frmReportBYM.rType.PensionPayroll)
+            GuiReport.setReportAYM(Me, "Schedule of Pension Payroll", Reports.Forms.frmReportAYM.rType.PensionPayroll)
         End Sub
 
         Private Sub ToolStripMenuItem14_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportDeathToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Death Pension Payroll Schedule", Reports.Forms.frmReportBYM.rType.DeathPensionPayroll)
+            GuiReport.setReportAYM(Me, "Death Pension Payroll Schedule", Reports.Forms.frmReportAYM.rType.DeathPensionPayroll)
         End Sub
 
         Private Sub ToolStripMenuItem15_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportPensionPayrollToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Pension Payroll Summary", Reports.Forms.frmReportBYM.rType.PensionPayrollSummary)
+            GuiReport.setReportAYM(Me, "Pension Payroll Summary", Reports.Forms.frmReportAYM.rType.PensionPayrollSummary)
         End Sub
 
         Private Sub ToolStripMenuItem16_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ReportDeathPayrollToolStripMenuItem.Click
-            GuiReport.setReportBYM(Me, "Death Pension Payroll Summary", Reports.Forms.frmReportBYM.rType.DeathPensionPayrollSummary)
+            GuiReport.setReportAYM(Me, "Death Pension Payroll Summary", Reports.Forms.frmReportAYM.rType.DeathPensionPayrollSummary)
         End Sub
 
         Private Sub ToolStripMenuItem13_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OutstandingALToolStripMenuItem.Click
@@ -307,6 +307,38 @@ Namespace Mdi
 
         Private Sub SummaryOutstandingALToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SummaryOutstandingALToolStripMenuItem.Click
             GuiMan.showOutStandingSummaryAL(Me)
+        End Sub
+
+        Private Sub ToolStripMenuItem3_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem3.Click
+            GuiMan.showMemo(Me)
+        End Sub
+
+        Private Sub ToolStripMenuItem1_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem1.Click
+            GuiReport.setReportOB(Me, "Outstanding Beneficiaries", Reports.Forms.frmReportOB.rType.OutstandingBeneficiaries)
+        End Sub
+
+        Private Sub ToolStripMenuItem2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolStripMenuItem2.Click
+            GuiReport.setReportSB(Me, "Summary Breakdown of Beneficiaries", Reports.Forms.frmReportSB.rType.SummaryBreakdown)
+        End Sub
+
+        Private Sub DetailedToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DetailedToolStripMenuItem1.Click
+            GuiReport.setReportSUM(Me, "Summary of Beneficiaries [Detailed]", Reports.Forms.frmReportSUM.rType.SummaryDetails)
+        End Sub
+
+        Private Sub GraphicalToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GraphicalToolStripMenuItem1.Click
+            GuiReport.setReportSUM(Me, "Summary of Beneficiaries [Graphical]", Reports.Forms.frmReportSUM.rType.SummaryGraphs)
+        End Sub
+
+        Private Sub ToolBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ToolBarToolStripMenuItem.Click
+            Me.ToolStrip.Visible = Me.ToolBarToolStripMenuItem.Checked
+        End Sub
+
+        Private Sub StatusBarToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StatusBarToolStripMenuItem.Click
+            Me.StatusStrip.Visible = Me.StatusBarToolStripMenuItem.Checked
+        End Sub
+
+        Private Sub BackupRestoreToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BackupRestoreToolStripMenuItem.Click
+            GuiMan.showBackupRestore(Me)
         End Sub
     End Class
 End Namespace

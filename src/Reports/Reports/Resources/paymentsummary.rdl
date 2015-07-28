@@ -14,7 +14,7 @@
       <Query>
         <DataSourceName>DS1</DataSourceName>
         <CommandText>SELECT SUM(p.GRATUITYRETIREE) AS GRATUITYRETIREE, SUM(p.GRATUITYDECEASED) AS GRATUITYDECEASED, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALPAYMENT) AS TOTALPAYMENT
-FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
+FROM SP_REPORT_PAYMENTBENEFIT(2, 2014, 12) p</CommandText>
       </Query>
       <Fields>
         <Field Name="GRATUITYRETIREE">
@@ -117,7 +117,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
           <BorderStyle />
           <BorderColor />
           <BorderWidth />
-          <FontSize>10pt</FontSize>
+          <FontSize>9pt</FontSize>
           <FontWeight>500</FontWeight>
           <TextAlign>Left</TextAlign>
           <VerticalAlign>Middle</VerticalAlign>
@@ -130,7 +130,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
         <Left>148.3pt</Left>
         <Top>190.2pt</Top>
         <Style>
-          <FontSize>10pt</FontSize>
+          <FontSize>9pt</FontSize>
           <BorderStyle />
           <BorderColor />
           <BorderWidth />
@@ -149,8 +149,8 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
         <NoRows>Query returned no rows!</NoRows>
         <ReportItems>
           <Textbox Name="GRATUITYRETIREE">
-            <Top>34.9pt</Top>
-            <Left>309.8pt</Left>
+            <Top>34.90pt</Top>
+            <Left>309.80pt</Left>
             <Width>86.64pt</Width>
             <Height>15.75pt</Height>
             <Value>=Fields!GRATUITYRETIREE.Value</Value>
@@ -182,6 +182,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <FontWeight>Normal</FontWeight>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
             </Style>
           </Textbox>
           <Textbox Name="GRATUITYDECEASED">
@@ -218,6 +219,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <FontWeight>Normal</FontWeight>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
             </Style>
           </Textbox>
           <Textbox Name="PENSIONARREARS">
@@ -254,11 +256,12 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <FontWeight>Normal</FontWeight>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
             </Style>
           </Textbox>
           <Textbox Name="DEATHPENSION">
-            <Top>34.9pt</Top>
-            <Left>396.5pt</Left>
+            <Top>34.90pt</Top>
+            <Left>396.50pt</Left>
             <Width>86.64pt</Width>
             <Height>15.75pt</Height>
             <Value>=Fields!DEATHPENSION.Value</Value>
@@ -290,6 +293,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <FontWeight>Normal</FontWeight>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
             </Style>
           </Textbox>
           <Textbox Name="TOTALPAYMENT">
@@ -326,6 +330,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <FontWeight>Bold</FontWeight>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
             </Style>
           </Textbox>
           <Textbox Name="Textbox8">
@@ -689,6 +694,8 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <TextAlign>Right</TextAlign>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
+              <PaddingRight>2 pt</PaddingRight>
             </Style>
           </Textbox>
           <Textbox Name="Textbox18">
@@ -722,6 +729,9 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
                 <Top>2pt</Top>
                 <Bottom>2pt</Bottom>
               </BorderWidth>
+              <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
+              <PaddingRight>2 pt</PaddingRight>
             </Style>
           </Textbox>
           <Textbox Name="Textbox19">
@@ -756,6 +766,8 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
               <TextAlign>Right</TextAlign>
               <VerticalAlign>Middle</VerticalAlign>
               <Format>#,##0.00</Format>
+              <FontSize>9pt</FontSize>
+              <PaddingRight>2 pt</PaddingRight>
             </Style>
           </Textbox>
           <Textbox Name="Textbox20">
@@ -790,6 +802,8 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
                 <Top>2pt</Top>
                 <Bottom>2pt</Bottom>
               </BorderWidth>
+              <FontSize>9pt</FontSize>
+              <PaddingRight>2 pt</PaddingRight>
             </Style>
           </Textbox>
           <Line Name="Line2">
@@ -892,7 +906,7 @@ FROM SP_REPORT_PAYMENTBENEFIT(1, 2014, 12) p</CommandText>
     <DataSource Name="DS1">
       <ConnectionProperties>
         <DataProvider>Firebird.NET 2.0</DataProvider>
-        <ConnectString>database=pengra;useer=sysdba;password=masterkey;server=localhost</ConnectString>
+        <ConnectString>database=pengraNEW;useer=sysdba;password=masterkey;server=localhost</ConnectString>
         <IntegratedSecurity>false</IntegratedSecurity>
       </ConnectionProperties>
     </DataSource>

@@ -65,7 +65,7 @@ Namespace Forms
 
             If tbl.Rows.Count > 0 Then
                 txtID.Text = tbl.Rows(0).Item("IDNO")
-                txtID.Tag = tbl.Rows(0).Item("IDNO")
+                txtID.Tag = tbl.Rows(0).Item("UKEY")
                 txtFullName.Text = tbl.Rows(0).Item("FULLNAME")
                 txtMinistry.Text = GetMinistryName(tbl.Rows(0).Item("MINISTRY"))
             End If
@@ -97,7 +97,7 @@ Namespace Forms
                 cboBudgetMonth.SelectedIndex = 1
                 cboBudget.SelectedIndex = 1
                 txtBudgetAmount.Text = Format(tbl.Rows(0).Item("AMOUNT"), "#,##0.00")
-                txtBudgetBalance.Text = Format(Populate.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
+                txtBudgetBalance.Text = Format(Classes.Transactions.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
                 'txtMinistry.Text = GetMinistryName(tbl.Rows(0).Item("MINISTRY"))
             End If
         End Sub
@@ -247,13 +247,13 @@ Namespace Forms
 
                 Dim ibenefit As Integer = cboBenefitType.SelectedValue
                 SetBenefitDetails(txtID.Tag, ibenefit)
-                If CDbl(txtBalance.Text) > 0 Then txtTransactionNo.Text = Populate.GetTransactionNo(ibenefit)
+                If CDbl(txtBalance.Text) > 0 Then txtTransactionNo.Text = Classes.Transactions.GetTransactionNo(ibenefit)
             Catch ex As Exception
 
             End Try
         End Sub
 
-        Private Function IsValid() As Boolean
+        Private Function IsSaveValid() As Boolean
 
             If txtID.Text.Trim = "" Then
                 MessageBox.Show("Please Provide A Valid Employee ID Before You Continue.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -301,7 +301,7 @@ Namespace Forms
 
             Try
                 'EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF(TDATE, EMPLOYEE, TNUMBER, TBENEFIT, AMOUNT, BUDGET, BYEAR, BMONTH, STATUS)
-                strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & CType(dtpTransDate.Text, Date) & "', '" & txtID.Tag & "', '" & txtTransactionNo.Text.Trim & "', '" & cboBenefitType.SelectedValue & "', '" & CDbl(txtKnockoffAmount.Text.Trim) & "', '" & cboBudget.SelectedValue & "', '" & cboBudgetYear.Text & "', '" & cboBudgetMonth.SelectedValue & "', '" & Env.GetStatus & "')"
+                strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & CType(dtpTransDate.Text, Date) & "', '" & txtID.Tag & "', '" & txtTransactionNo.Text.Trim & "', '" & cboBenefitType.SelectedValue & "', '" & CDbl(txtKnockoffAmount.Text.Trim) & "', '" & cboBudget.SelectedValue & "', '" & cboBudgetYear.Text & "', '" & cboBudgetMonth.SelectedValue & "', '" & Env.UserStatus & "')"
 
                 command.Connection = DB.ConnObj
 
@@ -320,7 +320,7 @@ Namespace Forms
         Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
             If txtID.Text = "" Then Exit Sub
 
-            If IsValid() = False Then Exit Sub
+            If IsSaveValid() = False Then Exit Sub
 
             If MessageBox.Show("Are You Sure You Want To Continue With The Current Transaction?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
 

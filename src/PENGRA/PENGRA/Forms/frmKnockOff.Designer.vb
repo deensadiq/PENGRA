@@ -346,7 +346,7 @@ Namespace Forms
             Me.btnSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnSearch.Image = CType(resources.GetObject("btnSearch.Image"), System.Drawing.Image)
-            Me.btnSearch.Location = New System.Drawing.Point(550, 24)
+            Me.btnSearch.Location = New System.Drawing.Point(419, 289)
             Me.btnSearch.Name = "btnSearch"
             Me.btnSearch.Size = New System.Drawing.Size(85, 45)
             Me.btnSearch.TabIndex = 77
@@ -361,7 +361,7 @@ Namespace Forms
             Me.btnUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnUndo.Image = CType(resources.GetObject("btnUndo.Image"), System.Drawing.Image)
-            Me.btnUndo.Location = New System.Drawing.Point(236, 289)
+            Me.btnUndo.Location = New System.Drawing.Point(236, 294)
             Me.btnUndo.Name = "btnUndo"
             Me.btnUndo.Size = New System.Drawing.Size(85, 45)
             Me.btnUndo.TabIndex = 80
@@ -376,7 +376,7 @@ Namespace Forms
             Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-            Me.btnSave.Location = New System.Drawing.Point(121, 289)
+            Me.btnSave.Location = New System.Drawing.Point(121, 290)
             Me.btnSave.Name = "btnSave"
             Me.btnSave.Size = New System.Drawing.Size(85, 45)
             Me.btnSave.TabIndex = 81

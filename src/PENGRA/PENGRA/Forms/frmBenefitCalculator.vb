@@ -1,6 +1,6 @@
 Imports FirebirdSql.Data.FirebirdClient
 Imports PENGRA.Connection.Classes
-
+Imports PENGRA.Classes
 
 Namespace Forms
 
@@ -11,8 +11,8 @@ Namespace Forms
         Dim iGradeLevel As Integer
         Dim iStep As Integer
         Dim iBenefitType As Integer
-        Dim iGratuity As Double
-        Dim iPension As Double
+        Dim iGratuityPerc As Short
+        Dim iPensionPerc As Short
         Dim iAuditDate As Date
         Dim iPensionWEF As Date
 
@@ -30,13 +30,13 @@ Namespace Forms
             LoadCombo()
 
             If HasEmployeeRecord = True Then
-                lblFullName.Text = iFullName
+                'lblFullName.Text = iFullName
                 cboSalaryScale.SelectedValue = iSalaryScale
                 cboLevel.SelectedIndex = iGradeLevel
                 cboStep.SelectedIndex = iStep
                 cboBenefitType.SelectedValue = iBenefitType
-                txtGratuityPerc.Text = iGratuity
-                txtPensionPerc.Text = iPension
+                txtGratuityPerc.Text = iGratuityPerc
+                txtPensionPerc.Text = iPensionPerc
                 dtpDAA.Value = iAuditDate
                 dtpPensionWEF.Value = iPensionWEF
 
@@ -49,7 +49,7 @@ Namespace Forms
                 dtpDAA.Enabled = False
                 dtpPensionWEF.Enabled = False
 
-                btnSave.Visible = True
+                'btnSave.Visible = True
 
             End If
         End Sub
@@ -60,12 +60,12 @@ Namespace Forms
             If bolEdit = False Then
 
                 btnClose.Enabled = True
-                btnSave.Enabled = False
+                'btnSave.Enabled = False
 
             ElseIf bolEdit = True Then
 
                 btnClose.Enabled = False
-                btnSave.Enabled = True
+                'btnSave.Enabled = True
 
             End If
         End Sub
@@ -82,7 +82,6 @@ Namespace Forms
         Private Sub frmProcess_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
             Me.BackColor = Env.FormBackColor
-            Me.Icon = Nothing
             LoadRecord(bolHasEmployeeRecord)
             DisableEdit()
         End Sub
@@ -103,8 +102,8 @@ Namespace Forms
         End Function
 
 
-        Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-            If (txtGratuity.Text = "" Or (txtPensionArrears.Text = "" Or txtDeathPension.Text = "")) Then Exit Sub
+        Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+            If (txtConsolidated.Text = "" Or (txtGratuity.Text = "" Or txtPension.Text = "")) Then Exit Sub
 
             If SaveRecord() = True Then Me.Close()
 
@@ -115,14 +114,47 @@ Namespace Forms
             If cboSalaryScale.Text = "" Or cboLevel.Text = "" Or cboStep.Text = "" Or cboBenefitType.Text = "" Or _
                 txtGratuityPerc.Text.Trim = "" Or txtPensionPerc.Text.Trim = "" Then
                 MessageBox.Show(Messages.Empty, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+
                 Return False
             End If
+
+            If IsNumeric(txtGratuityPerc.Text.Trim) = False Then
+                MessageBox.Show(Messages.NumericValue, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtGratuityPerc.Focus()
+                Return False
+            End If
+
+            If IsNumeric(txtPensionPerc.Text.Trim) = False Then
+                MessageBox.Show(Messages.NumericValue, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                txtPensionPerc.Focus()
+                Return False
+            End If
+
+            If dtpDAA.Value < dtpPensionWEF.Value Then
+                MessageBox.Show("Pension w.e.f. Date Can Not Be Later Than Audit Date Of Approval.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                dtpPensionWEF.Focus()
+                Return False
+            End If
+
+            iSalaryScale = cboSalaryScale.SelectedValue
+            iGradeLevel = cboLevel.SelectedIndex
+            iStep = cboStep.SelectedIndex
+            iBenefitType = cboBenefitType.SelectedValue
+            iGratuityPerc = CShort(txtGratuityPerc.Text.Trim)
+            iPensionPerc = CShort(txtPensionPerc.Text.Trim)
 
             Return True
         End Function
 
         Private Sub Computation()
+            Dim BC As Calculator
+            BC = New Calculator(iSalaryScale, iGradeLevel, iStep, iGratuityPerc, iPensionPerc, iBenefitType, dtpDAA.Value, dtpPensionWEF.Value)
 
+            txtConsolidated.Text = Format(BC.Consolidated, "#,##0.00")
+            txtGratuity.Text = Format(BC.Gratuity, "#,##0.00")
+            txtPension.Text = Format(BC.Pension, "#,##0.00")
+            txtPensionArrears.Text = Format(BC.PensionArrears, "#,##0.00")
+            txtDeathPension.Text = Format(BC.DeathPension, "#,##0.00")
         End Sub
 
         Private Sub CButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles CButton1.Click

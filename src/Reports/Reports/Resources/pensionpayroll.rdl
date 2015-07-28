@@ -22,7 +22,7 @@
       <Query >
         <DataSourceName>DS1</DataSourceName>
         <CommandText>SELECT p.SN, p.ID, p.EMPLOYEENAME, p.PENSIONARREARS, p.OTHERPAYMENT, p.GROSSPAYMENT, p.UNIONDUE, p.OTHERDEDUCTION, p.NETAMOUNT
-FROM SP_REPORT_PENSIONPAYROLL(1, 2014, 12) p</CommandText>
+FROM SP_REPORT_PENSIONPAYROLL(2, 2014, 12) p</CommandText>
       </Query>
       <Fields >
         <Field Name="SN">

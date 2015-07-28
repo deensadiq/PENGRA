@@ -70,7 +70,7 @@ Namespace Forms
                 cboBudgetMonth.SelectedIndex = 1
                 cboBudget.SelectedIndex = 1
                 txtBudgetAmount.Text = Format(tbl.Rows(0).Item("AMOUNT"), "#,##0.00")
-                txtBudgetBalance.Text = Format(Populate.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
+                txtBudgetBalance.Text = Format(Classes.Transactions.GetBudgetBalance(iBudget, iYear, iMonth), "#,##0.00")
                 'txtMinistry.Text = GetMinistryName(tbl.Rows(0).Item("MINISTRY"))
             End If
         End Sub
@@ -207,7 +207,7 @@ Namespace Forms
             End Try
         End Sub
 
-        Private Function IsValid() As Boolean
+        Private Function IsSaveValid() As Boolean
 
             If txtMinistry.Text.Trim = "" Then
                 MessageBox.Show("Please Select A Ministry Before You Continue.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -271,7 +271,7 @@ Namespace Forms
                                     'Knock-off Gratuity Benefit
 
                                     'EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF(TDATE, EMPLOYEE, TNUMBER, TBENEFIT, AMOUNT, BUDGET, BYEAR, BMONTH, STATUS)
-                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 1 & "', '" & iGratuity & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.GetStatus & "')"
+                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 1 & "', '" & iGratuity & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.UserStatus & "')"
 
                                     Using command1 = New FbCommand(strSQLS, conn, myTransaction)
                                         command1.CommandText = strSQLS
@@ -283,7 +283,7 @@ Namespace Forms
                                 If iPension > 0 Then
                                     'Knock-off Pension Arrears Benefit
 
-                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 2 & "', '" & iPension & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.GetStatus & "')"
+                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 2 & "', '" & iPension & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.UserStatus & "')"
 
                                     Using command2 = New FbCommand(strSQLS, conn, myTransaction)
                                         command2.CommandText = strSQLS
@@ -295,7 +295,7 @@ Namespace Forms
                                 If iDeathPension > 0 Then
                                     'Knock-off Death Pension Benefit
 
-                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 3 & "', '" & iDeathPension & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.GetStatus & "')"
+                                    strSQLS = "EXECUTE PROCEDURE SP_BENEFIT_KNOCKOFF('" & iTDate & "', '" & iEmployee & "', '" & iTxn & "', '" & 3 & "', '" & iDeathPension & "', '" & iBuget & "', '" & iBYear & "', '" & iBMonth & "', '" & Env.UserStatus & "')"
 
                                     Using command3 = New FbCommand(strSQLS, conn, myTransaction)
                                         command3.CommandText = strSQLS
@@ -333,7 +333,7 @@ Namespace Forms
         Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
             If txtMinistry.Text = "" Then Exit Sub
 
-            If IsValid() = False Then Exit Sub
+            If IsSaveValid() = False Then Exit Sub
 
             If MessageBox.Show("Are You Sure You Want To Continue With The Current Transaction?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
 

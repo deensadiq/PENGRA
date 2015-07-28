@@ -29,6 +29,8 @@ Namespace Classes
         Private formAllocation As frmAllocation
         Private formLogin As frmLogin
         Private formKnockoffPayment As frmKnockOff
+        Private formMemo As frmMemo
+        Private formBackupRestore As frmBackupRestore
 
 
         Private Sub New()
@@ -63,7 +65,7 @@ Namespace Classes
 
             If formEmployee Is Nothing Then formEmployee = New frmEmployee
             If formEmployee.IsDisposed = True Then formEmployee = New frmEmployee
-            formEmployee.Text = "Ritiree Information"
+            formEmployee.Text = "Retiree Information"
             formEmployee.MdiParent = parent
             formEmployee.Show()
         End Sub
@@ -114,6 +116,24 @@ Namespace Classes
             formCalculator.Text = "Benefit Calculator"
             formCalculator.MdiParent = parent
             formCalculator.Show()
+
+        End Sub
+        Public Sub showBackupRestore(ByVal parent As Form)
+
+            If formBackupRestore Is Nothing Then formBackupRestore = New frmBackupRestore
+            If formBackupRestore.IsDisposed = True Then formBackupRestore = New frmBackupRestore
+            formBackupRestore.Text = "Backup/Restore"
+            formBackupRestore.MdiParent = parent
+            formBackupRestore.Show()
+
+        End Sub
+        Public Sub showMemo(ByVal parent As Form)
+
+            If formMemo Is Nothing Then formMemo = New frmMemo
+            If formMemo.IsDisposed = True Then formMemo = New frmMemo
+            formMemo.Text = "Prepare Memo"
+            formMemo.MdiParent = parent
+            formMemo.Show()
 
         End Sub
         Public Sub showBudgeting(ByVal parent As Form)

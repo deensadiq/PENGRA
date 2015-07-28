@@ -130,7 +130,7 @@ Namespace Forms
                 dgvGrid.Rows(I).Cells("cBenefit").Value = Table.Rows(I).Item("BENEFITTYPE")
                 dgvGrid.Rows(I).Cells("cAmount").Value = Table.Rows(I).Item("DEBIT")
                 dgvGrid.Rows(I).Cells("cStatus").Value = Table.Rows(I).Item("STATUS")
-                If Table.Rows(I).Item("STATUS") = Env.GetStatus Then dgvGrid.Rows(I).Cells("chk").Value = True Else dgvGrid.Rows(I).Cells("chk").Value = False
+                If Table.Rows(I).Item("STATUS") = Env.UserStatus Then dgvGrid.Rows(I).Cells("chk").Value = True Else dgvGrid.Rows(I).Cells("chk").Value = False
 
             Next
 
@@ -426,7 +426,7 @@ Namespace Forms
                 Dim I As Integer
                 For I = 0 To dgvGrid.RowCount - 1
                     If dgvGrid.Rows(I).Cells("chk").Value = True Or dgvGrid.Rows(I).Cells("chk").Value = 1 Then
-                        Transaction.Rows(I).Item("STATUS") = Env.GetStatus
+                        Transaction.Rows(I).Item("STATUS") = Env.UserStatus
                     Else
                         Transaction.Rows(I).Item("STATUS") = "0"
                     End If

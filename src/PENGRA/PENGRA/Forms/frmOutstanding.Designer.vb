@@ -40,6 +40,8 @@ Namespace Forms
             Me.cboMinistry = New System.Windows.Forms.ComboBox()
             Me.chkAll = New System.Windows.Forms.CheckBox()
             Me.dgvGrid = New PENGRA.crsDataGridView()
+            Me.Label5 = New System.Windows.Forms.Label()
+            Me.cboStatus = New System.Windows.Forms.ComboBox()
             CType(Me.dgvTotal, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.dgvGrid, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -111,7 +113,7 @@ Namespace Forms
             'cboMonth
             '
             Me.cboMonth.FormattingEnabled = True
-            Me.cboMonth.Location = New System.Drawing.Point(543, 39)
+            Me.cboMonth.Location = New System.Drawing.Point(394, 39)
             Me.cboMonth.Name = "cboMonth"
             Me.cboMonth.Size = New System.Drawing.Size(204, 22)
             Me.cboMonth.TabIndex = 4
@@ -119,7 +121,7 @@ Namespace Forms
             'Label3
             '
             Me.Label3.AutoSize = True
-            Me.Label3.Location = New System.Drawing.Point(466, 43)
+            Me.Label3.Location = New System.Drawing.Point(317, 43)
             Me.Label3.Name = "Label3"
             Me.Label3.Size = New System.Drawing.Size(70, 14)
             Me.Label3.TabIndex = 31
@@ -128,7 +130,7 @@ Namespace Forms
             'cboYear
             '
             Me.cboYear.FormattingEnabled = True
-            Me.cboYear.Location = New System.Drawing.Point(543, 9)
+            Me.cboYear.Location = New System.Drawing.Point(394, 9)
             Me.cboYear.Name = "cboYear"
             Me.cboYear.Size = New System.Drawing.Size(204, 22)
             Me.cboYear.TabIndex = 3
@@ -136,7 +138,7 @@ Namespace Forms
             'Label2
             '
             Me.Label2.AutoSize = True
-            Me.Label2.Location = New System.Drawing.Point(466, 13)
+            Me.Label2.Location = New System.Drawing.Point(317, 13)
             Me.Label2.Name = "Label2"
             Me.Label2.Size = New System.Drawing.Size(64, 14)
             Me.Label2.TabIndex = 32
@@ -251,6 +253,23 @@ Namespace Forms
             Me.dgvGrid.Size = New System.Drawing.Size(1111, 410)
             Me.dgvGrid.TabIndex = 0
             '
+            'Label5
+            '
+            Me.Label5.AutoSize = True
+            Me.Label5.Location = New System.Drawing.Point(618, 13)
+            Me.Label5.Name = "Label5"
+            Me.Label5.Size = New System.Drawing.Size(70, 14)
+            Me.Label5.TabIndex = 32
+            Me.Label5.Text = "Status Type :"
+            '
+            'cboStatus
+            '
+            Me.cboStatus.FormattingEnabled = True
+            Me.cboStatus.Location = New System.Drawing.Point(695, 9)
+            Me.cboStatus.Name = "cboStatus"
+            Me.cboStatus.Size = New System.Drawing.Size(204, 22)
+            Me.cboStatus.TabIndex = 3
+            '
             'frmOutStanding
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
@@ -268,6 +287,8 @@ Namespace Forms
             Me.Controls.Add(Me.btnEdit)
             Me.Controls.Add(Me.cboMonth)
             Me.Controls.Add(Me.Label3)
+            Me.Controls.Add(Me.cboStatus)
+            Me.Controls.Add(Me.Label5)
             Me.Controls.Add(Me.cboYear)
             Me.Controls.Add(Me.Label2)
             Me.Controls.Add(Me.cboMinistry)
@@ -305,5 +326,7 @@ Namespace Forms
         Friend WithEvents Label4 As System.Windows.Forms.Label
         Friend WithEvents cboMinistry As System.Windows.Forms.ComboBox
         Friend WithEvents chkAll As System.Windows.Forms.CheckBox
+        Friend WithEvents Label5 As System.Windows.Forms.Label
+        Friend WithEvents cboStatus As System.Windows.Forms.ComboBox
     End Class
 End Namespace

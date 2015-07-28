@@ -12,7 +12,20 @@ Namespace Classes
             da = New FbDataAdapter(strSQL, DB.ConnObj)
             da.Fill(tbl)
 
-            If tbl.Rows.Count > 0 Then Return True Else Return False
+            If tbl.Rows.Count = 0 Then
+                '----------------------------------------
+                'Set User Variables
+                '----------------------------------------
+                Env.UserPrivillege = Env.eUserPriv.Admin
+                Env.RoleID = 1
+                Env.UserID = 0
+                Env.UserStatus = "2"
+                Users.setUserPrivileges(Env.RoleID)
+
+                Return False
+            Else
+                Return True
+            End If
 
         End Function
 

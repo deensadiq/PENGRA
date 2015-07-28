@@ -28,10 +28,11 @@ Namespace Mdi
             Me.OperationMenu = New System.Windows.Forms.ToolStripMenuItem()
             Me.EmployeeToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator()
+            Me.AllocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItem3 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
             Me.RetireePaymentProfileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.RetirePaymentToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripSeparator6 = New System.Windows.Forms.ToolStripSeparator()
-            Me.AllocationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator()
             Me.OustandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.OutstandingALToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -44,6 +45,7 @@ Namespace Mdi
             Me.ProcessToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
             Me.PasswordToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator()
             Me.LogoutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
             Me.QuitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -73,21 +75,23 @@ Namespace Mdi
             Me.ReportMenu = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ToolStripSeparator16 = New System.Windows.Forms.ToolStripSeparator()
             Me.ReportOutstandingToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ReportOutstandingALToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.DetailedToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GraphicalToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator()
             Me.ReportMonthlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ReportPaymentSummaryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ReportPensionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ReportDeathToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ReportPensionPayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ReportDeathToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ReportDeathPayrollToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator()
             Me.ReportSecuritPensionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-            Me.ReportSecurityGratuityToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.ToolStripMenuItem4 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator()
             Me.ReportVariationToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+            Me.DetailedToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
+            Me.GraphicalToolStripMenuItem2 = New System.Windows.Forms.ToolStripMenuItem()
             Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator()
             Me.ReportMemoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
             Me.ReportGovHouseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -111,144 +115,157 @@ Namespace Mdi
             'MenuStrip
             '
             Me.MenuStrip.BackColor = System.Drawing.Color.WhiteSmoke
+            Me.MenuStrip.Font = New System.Drawing.Font("Segoe UI", 9.0!)
             Me.MenuStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OperationMenu, Me.ViewMenu, Me.SettingsMenu, Me.ExtraMenu, Me.ReportMenu, Me.HelpMenu})
             Me.MenuStrip.Location = New System.Drawing.Point(0, 0)
             Me.MenuStrip.Name = "MenuStrip"
-            Me.MenuStrip.Size = New System.Drawing.Size(725, 24)
+            Me.MenuStrip.Padding = New System.Windows.Forms.Padding(9, 3, 0, 3)
+            Me.MenuStrip.Size = New System.Drawing.Size(1088, 25)
             Me.MenuStrip.TabIndex = 5
             Me.MenuStrip.Text = "MenuStrip"
             '
             'OperationMenu
             '
-            Me.OperationMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmployeeToolStripMenuItem, Me.ToolStripSeparator13, Me.RetireePaymentProfileToolStripMenuItem, Me.RetirePaymentToolStripMenuItem, Me.ToolStripSeparator6, Me.AllocationToolStripMenuItem, Me.ToolStripSeparator3, Me.OustandingToolStripMenuItem, Me.OutstandingALToolStripMenuItem, Me.SummaryOutstandingToolStripMenuItem, Me.SummaryOutstandingALToolStripMenuItem, Me.ToolStripSeparator10, Me.PaymentDetailsToolStripMenuItem, Me.PaymentDetailsALToolStripMenuItem, Me.ToolStripSeparator11, Me.ProcessToolStripMenuItem, Me.ToolStripSeparator2, Me.PasswordToolStripMenuItem, Me.LogoutToolStripMenuItem, Me.ToolStripSeparator4, Me.QuitToolStripMenuItem})
+            Me.OperationMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.EmployeeToolStripMenuItem, Me.ToolStripSeparator13, Me.AllocationToolStripMenuItem, Me.ToolStripMenuItem3, Me.ToolStripSeparator6, Me.RetireePaymentProfileToolStripMenuItem, Me.RetirePaymentToolStripMenuItem, Me.ToolStripSeparator3, Me.OustandingToolStripMenuItem, Me.OutstandingALToolStripMenuItem, Me.SummaryOutstandingToolStripMenuItem, Me.SummaryOutstandingALToolStripMenuItem, Me.ToolStripSeparator10, Me.PaymentDetailsToolStripMenuItem, Me.PaymentDetailsALToolStripMenuItem, Me.ToolStripSeparator11, Me.ProcessToolStripMenuItem, Me.ToolStripSeparator2, Me.PasswordToolStripMenuItem, Me.ToolStripSeparator18, Me.LogoutToolStripMenuItem, Me.ToolStripSeparator4, Me.QuitToolStripMenuItem})
             Me.OperationMenu.Name = "OperationMenu"
-            Me.OperationMenu.Size = New System.Drawing.Size(72, 20)
+            Me.OperationMenu.Size = New System.Drawing.Size(72, 19)
             Me.OperationMenu.Text = "&Operation"
             '
             'EmployeeToolStripMenuItem
             '
             Me.EmployeeToolStripMenuItem.Name = "EmployeeToolStripMenuItem"
-            Me.EmployeeToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.EmployeeToolStripMenuItem.Text = "&Retiree Profile"
+            Me.EmployeeToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.EmployeeToolStripMenuItem.Text = "Pro&file"
             '
             'ToolStripSeparator13
             '
             Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-            Me.ToolStripSeparator13.Size = New System.Drawing.Size(306, 6)
-            '
-            'RetireePaymentProfileToolStripMenuItem
-            '
-            Me.RetireePaymentProfileToolStripMenuItem.Name = "RetireePaymentProfileToolStripMenuItem"
-            Me.RetireePaymentProfileToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.RetireePaymentProfileToolStripMenuItem.Text = "Retiree Paymen&t Profile"
-            '
-            'RetirePaymentToolStripMenuItem
-            '
-            Me.RetirePaymentToolStripMenuItem.Name = "RetirePaymentToolStripMenuItem"
-            Me.RetirePaymentToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.RetirePaymentToolStripMenuItem.Text = "Retiree Benefits Payment"
-            '
-            'ToolStripSeparator6
-            '
-            Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-            Me.ToolStripSeparator6.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator13.Size = New System.Drawing.Size(266, 6)
             '
             'AllocationToolStripMenuItem
             '
             Me.AllocationToolStripMenuItem.Name = "AllocationToolStripMenuItem"
-            Me.AllocationToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.AllocationToolStripMenuItem.Text = "Prepare All&ocation"
+            Me.AllocationToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.AllocationToolStripMenuItem.Text = "Prepare &Allocation"
+            '
+            'ToolStripMenuItem3
+            '
+            Me.ToolStripMenuItem3.Name = "ToolStripMenuItem3"
+            Me.ToolStripMenuItem3.Size = New System.Drawing.Size(269, 22)
+            Me.ToolStripMenuItem3.Text = "Prepare &Memo"
+            '
+            'ToolStripSeparator6
+            '
+            Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
+            Me.ToolStripSeparator6.Size = New System.Drawing.Size(266, 6)
+            '
+            'RetireePaymentProfileToolStripMenuItem
+            '
+            Me.RetireePaymentProfileToolStripMenuItem.Name = "RetireePaymentProfileToolStripMenuItem"
+            Me.RetireePaymentProfileToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.RetireePaymentProfileToolStripMenuItem.Text = "Payment P&rofile"
+            '
+            'RetirePaymentToolStripMenuItem
+            '
+            Me.RetirePaymentToolStripMenuItem.Name = "RetirePaymentToolStripMenuItem"
+            Me.RetirePaymentToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.RetirePaymentToolStripMenuItem.Text = "Benefits &Payment"
             '
             'ToolStripSeparator3
             '
             Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-            Me.ToolStripSeparator3.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator3.Size = New System.Drawing.Size(266, 6)
             '
             'OustandingToolStripMenuItem
             '
             Me.OustandingToolStripMenuItem.Name = "OustandingToolStripMenuItem"
-            Me.OustandingToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.OustandingToolStripMenuItem.Text = "Retiree &Outstanding Benefit"
+            Me.OustandingToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.OustandingToolStripMenuItem.Text = "&Outstanding Benefit"
             '
             'OutstandingALToolStripMenuItem
             '
             Me.OutstandingALToolStripMenuItem.Name = "OutstandingALToolStripMenuItem"
-            Me.OutstandingALToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.OutstandingALToolStripMenuItem.Text = "Retiree Outstanding Benefit [Above Limit]"
+            Me.OutstandingALToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.OutstandingALToolStripMenuItem.Text = "Outstanding &Benefit [Above Limit]"
             '
             'SummaryOutstandingToolStripMenuItem
             '
             Me.SummaryOutstandingToolStripMenuItem.Name = "SummaryOutstandingToolStripMenuItem"
-            Me.SummaryOutstandingToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.SummaryOutstandingToolStripMenuItem.Text = "Outstanding Benefit Summary"
+            Me.SummaryOutstandingToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.SummaryOutstandingToolStripMenuItem.Text = "Outstanding &Summary"
             '
             'SummaryOutstandingALToolStripMenuItem
             '
             Me.SummaryOutstandingALToolStripMenuItem.Name = "SummaryOutstandingALToolStripMenuItem"
-            Me.SummaryOutstandingALToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.SummaryOutstandingALToolStripMenuItem.Text = "Outstanding Benefit Summary [Above Limit]"
+            Me.SummaryOutstandingALToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.SummaryOutstandingALToolStripMenuItem.Text = "Outstanding S&ummary [Above Limit]"
             '
             'ToolStripSeparator10
             '
             Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-            Me.ToolStripSeparator10.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator10.Size = New System.Drawing.Size(266, 6)
             '
             'PaymentDetailsToolStripMenuItem
             '
             Me.PaymentDetailsToolStripMenuItem.Name = "PaymentDetailsToolStripMenuItem"
-            Me.PaymentDetailsToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.PaymentDetailsToolStripMenuItem.Text = "Retiree &Payment Details"
+            Me.PaymentDetailsToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.PaymentDetailsToolStripMenuItem.Text = "Payment S&chedule"
             '
             'PaymentDetailsALToolStripMenuItem
             '
             Me.PaymentDetailsALToolStripMenuItem.Name = "PaymentDetailsALToolStripMenuItem"
-            Me.PaymentDetailsALToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.PaymentDetailsALToolStripMenuItem.Text = "Retiree Payment Details [Above Limit]"
+            Me.PaymentDetailsALToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.PaymentDetailsALToolStripMenuItem.Text = "Payment Sche&dule [Above Limit]"
             '
             'ToolStripSeparator11
             '
             Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-            Me.ToolStripSeparator11.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator11.Size = New System.Drawing.Size(266, 6)
             '
             'ProcessToolStripMenuItem
             '
             Me.ProcessToolStripMenuItem.Name = "ProcessToolStripMenuItem"
-            Me.ProcessToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.ProcessToolStripMenuItem.Text = "&Process Payment"
+            Me.ProcessToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.ProcessToolStripMenuItem.Text = "Pro&cess Payment"
             '
             'ToolStripSeparator2
             '
             Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-            Me.ToolStripSeparator2.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator2.Size = New System.Drawing.Size(266, 6)
             '
             'PasswordToolStripMenuItem
             '
             Me.PasswordToolStripMenuItem.Name = "PasswordToolStripMenuItem"
-            Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.PasswordToolStripMenuItem.Text = "&Change Password"
+            Me.PasswordToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.PasswordToolStripMenuItem.Text = "Change Pass&word"
+            '
+            'ToolStripSeparator18
+            '
+            Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
+            Me.ToolStripSeparator18.Size = New System.Drawing.Size(266, 6)
             '
             'LogoutToolStripMenuItem
             '
             Me.LogoutToolStripMenuItem.Name = "LogoutToolStripMenuItem"
-            Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
+            Me.LogoutToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
             Me.LogoutToolStripMenuItem.Text = "&Logout"
             '
             'ToolStripSeparator4
             '
             Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-            Me.ToolStripSeparator4.Size = New System.Drawing.Size(306, 6)
+            Me.ToolStripSeparator4.Size = New System.Drawing.Size(266, 6)
             '
             'QuitToolStripMenuItem
             '
             Me.QuitToolStripMenuItem.Name = "QuitToolStripMenuItem"
-            Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(309, 22)
-            Me.QuitToolStripMenuItem.Text = "Quit"
+            Me.QuitToolStripMenuItem.Size = New System.Drawing.Size(269, 22)
+            Me.QuitToolStripMenuItem.Text = "&Quit"
             '
             'ViewMenu
             '
             Me.ViewMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolBarToolStripMenuItem, Me.StatusBarToolStripMenuItem})
             Me.ViewMenu.Name = "ViewMenu"
-            Me.ViewMenu.Size = New System.Drawing.Size(44, 20)
+            Me.ViewMenu.Size = New System.Drawing.Size(44, 19)
             Me.ViewMenu.Text = "&View"
             '
             'ToolBarToolStripMenuItem
@@ -273,7 +290,7 @@ Namespace Mdi
             '
             Me.SettingsMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AllowanceToolStripMenuItem, Me.AllocationSettingsToolStripMenuItem, Me.DeductionToolStripMenuItem, Me.MinistryToolStripMenuItem, Me.SalaryToolStripMenuItem, Me.ToolStripSeparator12, Me.PaymentTermsToolStripMenuItem, Me.SalaryTableToolStripMenuItem, Me.ToolStripSeparator14, Me.UserAccountToolStripMenuItem, Me.ToolStripSeparator5, Me.ServerToolStripMenuItem})
             Me.SettingsMenu.Name = "SettingsMenu"
-            Me.SettingsMenu.Size = New System.Drawing.Size(61, 20)
+            Me.SettingsMenu.Size = New System.Drawing.Size(61, 19)
             Me.SettingsMenu.Text = "&Settings"
             '
             'AllowanceToolStripMenuItem
@@ -362,7 +379,7 @@ Namespace Mdi
             '
             Me.ExtraMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BenefitCalToolStripMenuItem, Me.BackupRestoreToolStripMenuItem, Me.ToolStripSeparator1, Me.OptionsToolStripMenuItem})
             Me.ExtraMenu.Name = "ExtraMenu"
-            Me.ExtraMenu.Size = New System.Drawing.Size(44, 20)
+            Me.ExtraMenu.Size = New System.Drawing.Size(44, 19)
             Me.ExtraMenu.Text = "&Extra"
             '
             'BenefitCalToolStripMenuItem
@@ -392,131 +409,146 @@ Namespace Mdi
             '
             'ReportMenu
             '
-            Me.ReportMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ToolStripSeparator16, Me.ReportOutstandingToolStripMenuItem, Me.ReportOutstandingALToolStripMenuItem, Me.ToolStripSeparator7, Me.ReportMonthlyToolStripMenuItem, Me.ReportPaymentSummaryToolStripMenuItem, Me.ReportPensionToolStripMenuItem, Me.ReportDeathToolStripMenuItem, Me.ReportPensionPayrollToolStripMenuItem, Me.ReportDeathPayrollToolStripMenuItem, Me.ToolStripSeparator9, Me.ReportSecuritPensionToolStripMenuItem, Me.ReportSecurityGratuityToolStripMenuItem, Me.ToolStripSeparator15, Me.ReportVariationToolStripMenuItem, Me.ToolStripSeparator17, Me.ReportMemoToolStripMenuItem, Me.ReportGovHouseToolStripMenuItem})
+            Me.ReportMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.ToolStripMenuItem2, Me.ReportOutstandingToolStripMenuItem, Me.ToolStripSeparator7, Me.ReportMonthlyToolStripMenuItem, Me.ReportPaymentSummaryToolStripMenuItem, Me.ReportPensionToolStripMenuItem, Me.ReportPensionPayrollToolStripMenuItem, Me.ReportDeathToolStripMenuItem, Me.ReportDeathPayrollToolStripMenuItem, Me.ToolStripSeparator9, Me.ReportSecuritPensionToolStripMenuItem, Me.ToolStripMenuItem4, Me.ToolStripSeparator15, Me.ReportVariationToolStripMenuItem, Me.ToolStripSeparator17, Me.ReportMemoToolStripMenuItem, Me.ReportGovHouseToolStripMenuItem})
             Me.ReportMenu.Name = "ReportMenu"
-            Me.ReportMenu.Size = New System.Drawing.Size(54, 20)
+            Me.ReportMenu.Size = New System.Drawing.Size(54, 19)
             Me.ReportMenu.Text = "&Report"
             '
             'ToolStripMenuItem1
             '
             Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-            Me.ToolStripMenuItem1.Size = New System.Drawing.Size(338, 22)
-            Me.ToolStripMenuItem1.Text = "Outstanding Beneficiaries"
+            Me.ToolStripMenuItem1.Size = New System.Drawing.Size(270, 22)
+            Me.ToolStripMenuItem1.Text = "&Outstanding Beneficiaries"
             '
             'ToolStripMenuItem2
             '
             Me.ToolStripMenuItem2.Name = "ToolStripMenuItem2"
-            Me.ToolStripMenuItem2.Size = New System.Drawing.Size(338, 22)
-            Me.ToolStripMenuItem2.Text = "Outstanding Beneficiaries [Above Limit]"
-            '
-            'ToolStripSeparator16
-            '
-            Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
-            Me.ToolStripSeparator16.Size = New System.Drawing.Size(335, 6)
+            Me.ToolStripMenuItem2.Size = New System.Drawing.Size(270, 22)
+            Me.ToolStripMenuItem2.Text = "Summary &Breakdown of Beneficiaries"
             '
             'ReportOutstandingToolStripMenuItem
             '
+            Me.ReportOutstandingToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailedToolStripMenuItem1, Me.GraphicalToolStripMenuItem1})
             Me.ReportOutstandingToolStripMenuItem.Name = "ReportOutstandingToolStripMenuItem"
-            Me.ReportOutstandingToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
-            Me.ReportOutstandingToolStripMenuItem.Text = "Summary of Outstanding Beneficiaries"
+            Me.ReportOutstandingToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+            Me.ReportOutstandingToolStripMenuItem.Text = "&Summary of Beneficiaries"
             '
-            'ReportOutstandingALToolStripMenuItem
+            'DetailedToolStripMenuItem1
             '
-            Me.ReportOutstandingALToolStripMenuItem.Name = "ReportOutstandingALToolStripMenuItem"
-            Me.ReportOutstandingALToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
-            Me.ReportOutstandingALToolStripMenuItem.Text = "Summary Outstanding Beneficiaries [Above Limit]"
+            Me.DetailedToolStripMenuItem1.Name = "DetailedToolStripMenuItem1"
+            Me.DetailedToolStripMenuItem1.Size = New System.Drawing.Size(124, 22)
+            Me.DetailedToolStripMenuItem1.Text = "&Detailed"
+            '
+            'GraphicalToolStripMenuItem1
+            '
+            Me.GraphicalToolStripMenuItem1.Name = "GraphicalToolStripMenuItem1"
+            Me.GraphicalToolStripMenuItem1.Size = New System.Drawing.Size(124, 22)
+            Me.GraphicalToolStripMenuItem1.Text = "&Graphical"
             '
             'ToolStripSeparator7
             '
             Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-            Me.ToolStripSeparator7.Size = New System.Drawing.Size(335, 6)
+            Me.ToolStripSeparator7.Size = New System.Drawing.Size(267, 6)
             '
             'ReportMonthlyToolStripMenuItem
             '
             Me.ReportMonthlyToolStripMenuItem.Name = "ReportMonthlyToolStripMenuItem"
-            Me.ReportMonthlyToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportMonthlyToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportMonthlyToolStripMenuItem.Text = "&Monthly Payment"
             '
             'ReportPaymentSummaryToolStripMenuItem
             '
             Me.ReportPaymentSummaryToolStripMenuItem.Name = "ReportPaymentSummaryToolStripMenuItem"
-            Me.ReportPaymentSummaryToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportPaymentSummaryToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportPaymentSummaryToolStripMenuItem.Text = "Payment &Summary"
             '
             'ReportPensionToolStripMenuItem
             '
             Me.ReportPensionToolStripMenuItem.Name = "ReportPensionToolStripMenuItem"
-            Me.ReportPensionToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportPensionToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportPensionToolStripMenuItem.Text = "Pension &Allowance Payroll"
-            '
-            'ReportDeathToolStripMenuItem
-            '
-            Me.ReportDeathToolStripMenuItem.Name = "ReportDeathToolStripMenuItem"
-            Me.ReportDeathToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
-            Me.ReportDeathToolStripMenuItem.Text = "&Death Pension Allowance Payroll"
             '
             'ReportPensionPayrollToolStripMenuItem
             '
             Me.ReportPensionPayrollToolStripMenuItem.Name = "ReportPensionPayrollToolStripMenuItem"
-            Me.ReportPensionPayrollToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportPensionPayrollToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportPensionPayrollToolStripMenuItem.Text = "Pension Payroll Summary"
+            '
+            'ReportDeathToolStripMenuItem
+            '
+            Me.ReportDeathToolStripMenuItem.Name = "ReportDeathToolStripMenuItem"
+            Me.ReportDeathToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+            Me.ReportDeathToolStripMenuItem.Text = "&Death Pension Allowance Payroll"
             '
             'ReportDeathPayrollToolStripMenuItem
             '
             Me.ReportDeathPayrollToolStripMenuItem.Name = "ReportDeathPayrollToolStripMenuItem"
-            Me.ReportDeathPayrollToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportDeathPayrollToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportDeathPayrollToolStripMenuItem.Text = "Death Pension Payroll Summary"
             '
             'ToolStripSeparator9
             '
             Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-            Me.ToolStripSeparator9.Size = New System.Drawing.Size(335, 6)
+            Me.ToolStripSeparator9.Size = New System.Drawing.Size(267, 6)
             '
             'ReportSecuritPensionToolStripMenuItem
             '
             Me.ReportSecuritPensionToolStripMenuItem.Name = "ReportSecuritPensionToolStripMenuItem"
-            Me.ReportSecuritPensionToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
-            Me.ReportSecuritPensionToolStripMenuItem.Text = "Security Schedule [Pension]"
+            Me.ReportSecuritPensionToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
+            Me.ReportSecuritPensionToolStripMenuItem.Text = "Security Schedule[Retiree]"
             '
-            'ReportSecurityGratuityToolStripMenuItem
+            'ToolStripMenuItem4
             '
-            Me.ReportSecurityGratuityToolStripMenuItem.Name = "ReportSecurityGratuityToolStripMenuItem"
-            Me.ReportSecurityGratuityToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
-            Me.ReportSecurityGratuityToolStripMenuItem.Text = "Security Schedule [Gratuity]"
+            Me.ToolStripMenuItem4.Name = "ToolStripMenuItem4"
+            Me.ToolStripMenuItem4.Size = New System.Drawing.Size(270, 22)
+            Me.ToolStripMenuItem4.Text = "Security Schedule[Deceased]"
             '
             'ToolStripSeparator15
             '
             Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-            Me.ToolStripSeparator15.Size = New System.Drawing.Size(335, 6)
+            Me.ToolStripSeparator15.Size = New System.Drawing.Size(267, 6)
             '
             'ReportVariationToolStripMenuItem
             '
+            Me.ReportVariationToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.DetailedToolStripMenuItem2, Me.GraphicalToolStripMenuItem2})
             Me.ReportVariationToolStripMenuItem.Name = "ReportVariationToolStripMenuItem"
-            Me.ReportVariationToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportVariationToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportVariationToolStripMenuItem.Text = "Variation"
+            '
+            'DetailedToolStripMenuItem2
+            '
+            Me.DetailedToolStripMenuItem2.Name = "DetailedToolStripMenuItem2"
+            Me.DetailedToolStripMenuItem2.Size = New System.Drawing.Size(124, 22)
+            Me.DetailedToolStripMenuItem2.Text = "&Detailed"
+            '
+            'GraphicalToolStripMenuItem2
+            '
+            Me.GraphicalToolStripMenuItem2.Name = "GraphicalToolStripMenuItem2"
+            Me.GraphicalToolStripMenuItem2.Size = New System.Drawing.Size(124, 22)
+            Me.GraphicalToolStripMenuItem2.Text = "&Graphical"
             '
             'ToolStripSeparator17
             '
             Me.ToolStripSeparator17.Name = "ToolStripSeparator17"
-            Me.ToolStripSeparator17.Size = New System.Drawing.Size(335, 6)
+            Me.ToolStripSeparator17.Size = New System.Drawing.Size(267, 6)
             '
             'ReportMemoToolStripMenuItem
             '
             Me.ReportMemoToolStripMenuItem.Name = "ReportMemoToolStripMenuItem"
-            Me.ReportMemoToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportMemoToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportMemoToolStripMenuItem.Text = "Retiree Memo"
             '
             'ReportGovHouseToolStripMenuItem
             '
             Me.ReportGovHouseToolStripMenuItem.Name = "ReportGovHouseToolStripMenuItem"
-            Me.ReportGovHouseToolStripMenuItem.Size = New System.Drawing.Size(338, 22)
+            Me.ReportGovHouseToolStripMenuItem.Size = New System.Drawing.Size(270, 22)
             Me.ReportGovHouseToolStripMenuItem.Text = "List At Government House"
             '
             'HelpMenu
             '
             Me.HelpMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ContentsToolStripMenuItem, Me.ToolStripSeparator8, Me.AboutToolStripMenuItem})
             Me.HelpMenu.Name = "HelpMenu"
-            Me.HelpMenu.Size = New System.Drawing.Size(44, 20)
+            Me.HelpMenu.Size = New System.Drawing.Size(44, 19)
             Me.HelpMenu.Text = "&Help"
             '
             'ContentsToolStripMenuItem
@@ -541,9 +573,10 @@ Namespace Mdi
             '
             Me.StatusStrip.BackColor = System.Drawing.Color.WhiteSmoke
             Me.StatusStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripStatusLabel})
-            Me.StatusStrip.Location = New System.Drawing.Point(0, 395)
+            Me.StatusStrip.Location = New System.Drawing.Point(0, 620)
             Me.StatusStrip.Name = "StatusStrip"
-            Me.StatusStrip.Size = New System.Drawing.Size(725, 22)
+            Me.StatusStrip.Padding = New System.Windows.Forms.Padding(2, 0, 21, 0)
+            Me.StatusStrip.Size = New System.Drawing.Size(1088, 22)
             Me.StatusStrip.TabIndex = 7
             Me.StatusStrip.Text = "StatusStrip"
             '
@@ -558,10 +591,11 @@ Namespace Mdi
             Me.ToolStrip.BackColor = System.Drawing.Color.WhiteSmoke
             Me.ToolStrip.ImageScalingSize = New System.Drawing.Size(40, 40)
             Me.ToolStrip.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.ToolStripButton2, Me.ToolStripButton3, Me.ToolStripButton4})
-            Me.ToolStrip.Location = New System.Drawing.Point(0, 24)
+            Me.ToolStrip.Location = New System.Drawing.Point(0, 25)
             Me.ToolStrip.Name = "ToolStrip"
+            Me.ToolStrip.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
             Me.ToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-            Me.ToolStrip.Size = New System.Drawing.Size(725, 47)
+            Me.ToolStrip.Size = New System.Drawing.Size(1088, 47)
             Me.ToolStrip.TabIndex = 9
             Me.ToolStrip.Text = "ToolStrip1"
             '
@@ -608,14 +642,15 @@ Namespace Mdi
             '
             'mdiControlPanel
             '
-            Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+            Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackColor = System.Drawing.Color.WhiteSmoke
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-            Me.ClientSize = New System.Drawing.Size(725, 417)
+            Me.ClientSize = New System.Drawing.Size(1088, 642)
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.MenuStrip)
             Me.Controls.Add(Me.StatusStrip)
+            Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 12.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
             Me.IsMdiContainer = True
             Me.MainMenuStrip = Me.MenuStrip
@@ -701,16 +736,20 @@ Namespace Mdi
         Friend WithEvents ToolStripSeparator13 As System.Windows.Forms.ToolStripSeparator
         Friend WithEvents SummaryOutstandingALToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
         Friend WithEvents LogoutToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-        Friend WithEvents ReportOutstandingALToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
         Friend WithEvents ReportSecuritPensionToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-        Friend WithEvents ReportSecurityGratuityToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
         Friend WithEvents ToolStripSeparator15 As System.Windows.Forms.ToolStripSeparator
         Friend WithEvents ReportVariationToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
         Friend WithEvents ToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
-        Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
-        Friend WithEvents ToolStripSeparator16 As System.Windows.Forms.ToolStripSeparator
         Friend WithEvents ToolStripSeparator17 As System.Windows.Forms.ToolStripSeparator
         Friend WithEvents ReportMemoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItem3 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
+        Friend WithEvents DetailedToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents GraphicalToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents DetailedToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents GraphicalToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItem2 As System.Windows.Forms.ToolStripMenuItem
+        Friend WithEvents ToolStripMenuItem4 As System.Windows.Forms.ToolStripMenuItem
 
     End Class
 End Namespace

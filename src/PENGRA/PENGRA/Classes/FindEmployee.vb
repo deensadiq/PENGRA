@@ -8,8 +8,12 @@ Namespace Classes
 
         Dim lv As ListView
         Dim bID As Boolean
+        Dim bAL As Boolean
+        Dim bBT As Boolean
         Dim iEmployeeID As Long
         Dim iRecordCount As Integer
+        Dim iBenefit As Integer
+        Dim iLimit As String
         Dim iIDNumber As String
         Dim iEmployeeName As String
         Dim dTable As DataTable
@@ -46,12 +50,44 @@ Namespace Classes
                 Return iIDNumber
             End Get
         End Property
+        Property Benefit() As Integer
+            Get
+                Return iBenefit
+            End Get
+            Set(ByVal value As Integer)
+                iBenefit = value
+            End Set
+        End Property
+        Property Limit() As String
+            Get
+                Return iLimit
+            End Get
+            Set(ByVal value As String)
+                iLimit = value
+            End Set
+        End Property
         Property bIDNumber() As Boolean
             Get
                 Return bID
             End Get
             Set(ByVal value As Boolean)
                 bID = value
+            End Set
+        End Property
+        Property bAboveLimit() As Boolean
+            Get
+                Return bAL
+            End Get
+            Set(ByVal value As Boolean)
+                bAL = value
+            End Set
+        End Property
+        Property bBenefit() As Boolean
+            Get
+                Return bBT
+            End Get
+            Set(ByVal value As Boolean)
+                bBT = value
             End Set
         End Property
 
@@ -61,13 +97,26 @@ Namespace Classes
 
 
         Sub LoadRecord(ByVal lvStud As ListView)
-            Dim SQL As String = "SELECT UKEY,IDNO,FULLNAME FROM EMPLOYEEINFO"
+            Dim SQL As String
+
+            If bAL = True And bBT = False Then
+                SQL = "SELECT UKEY,IDNO,FULLNAME FROM EMPLOYEEINFO WHERE LIMIT = '" & iLimit & "'"
+            ElseIf bAL = False And bBT = True Then
+                SQL = "SELECT UKEY,IDNO,FULLNAME FROM EMPLOYEEINFO WHERE BENEFITTYPE = '" & iBenefit & "'"
+            ElseIf bAL = True And bBT = True Then
+                SQL = "SELECT UKEY,IDNO,FULLNAME FROM EMPLOYEEINFO WHERE LIMIT = '" & iLimit & "' AND BENEFITTYPE = '" & iBenefit & "'"
+            Else
+                SQL = "SELECT UKEY,IDNO,FULLNAME FROM EMPLOYEEINFO"
+            End If
+
             dTable = New DataTable
             dAdapter = New FbDataAdapter(SQL, Env.ConStr)
             dAdapter.Fill(dTable)
 
+
             lv = lvStud
             LoadList("")
+
         End Sub
 
         Sub ListClick(ByVal K As Integer)

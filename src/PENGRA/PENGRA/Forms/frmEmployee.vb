@@ -175,7 +175,7 @@ Namespace Forms
 
             Try
                 'EXECUTE PROCEDURE SP_WRITE_BENEFIT(TDATE, TRANSNO, TTYPE, EMPLOYEE, MINISTRY, AYEAR, AMONTH, GAMOUNT, PAMOUNT, DPAMOUNT, STATUS)
-                strSQLS = "EXECUTE PROCEDURE SP_WRITE_BENEFIT('" & CType(Date.Today, Date) & "', '" & GetTransactionNo() & "', '" & Employee.Rows(0).Item("LIMIT") & "', '" & Employee.Rows(0).Item("UKEY") & "', '" & Employee.Rows(0).Item("MINISTRY") & "', '" & dtpDOAA.Value.ToString("yyyy") & "', '" & dtpDOAA.Value.ToString("MM") & "', '" & iGratuityAmount & "', '" & iPensionAmount & "', '" & iDeatPensionAmount & "', '" & Env.GetStatus & "')"
+                strSQLS = "EXECUTE PROCEDURE SP_WRITE_BENEFIT('" & CType(Date.Today, Date) & "', '" & GetTransactionNo() & "', '" & Employee.Rows(0).Item("LIMIT") & "', '" & Employee.Rows(0).Item("UKEY") & "', '" & Employee.Rows(0).Item("MINISTRY") & "', '" & dtpDOAA.Value.ToString("yyyy") & "', '" & dtpDOAA.Value.ToString("MM") & "', '" & iGratuityAmount & "', '" & iPensionAmount & "', '" & iDeatPensionAmount & "', '" & Env.UserStatus & "')"
 
                 If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
 
@@ -186,7 +186,7 @@ Namespace Forms
             Catch ex As Exception
                 Throw ex
             End Try
-            
+
         End Sub
 
         Private Sub Clear()
@@ -293,7 +293,7 @@ Namespace Forms
                     .Rows(0).Item("LIMIT") = 1
                 End If
 
-                .Rows(0).Item("STATUS") = Env.GetStatus
+                .Rows(0).Item("STATUS") = Env.UserStatus
 
             End With
 
@@ -345,7 +345,7 @@ Namespace Forms
                 dr("LIMIT") = 1
             End If
 
-            dr("STATUS") = Env.GetStatus
+            dr("STATUS") = Env.UserStatus
 
             nEmployee.Rows.Add(dr)
 
@@ -525,28 +525,47 @@ Namespace Forms
             txtId.Focus()
             Newrec = True
         End Sub
+        Private Function IsPaymentMade(ByVal Retiree As Integer) As Boolean
+            Dim str As String = "SELECT * FROM TRANSACTIONS WHERE EMPLOYEE = '" & Retiree & "' AND DEBIT > 0"
+            Dim tbl As New DataTable
+            Dim da As FbDataAdapter
 
+            If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
+
+            da = New FbDataAdapter(str, DB.ConnObj)
+            da.Fill(tbl)
+
+            If tbl.Rows.Count = 0 Then Return False
+
+            Return True
+        End Function
+        Private Function IsEditValid(ByVal iRetiree As Integer) As Boolean
+
+            If Employee.Rows(0).Item("STATUS") <> Env.UserStatus Then
+                MessageBox.Show(Messages.AccessDenied, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                Return False
+            End If
+
+            If IsPaymentMade(Employee.Rows(0).Item("UKEY")) = True Then
+                MessageBox.Show("Payment Has Been Made To This Retiree. You Cannot Edit This Record.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
+                Return False
+            End If
+
+            Return True
+        End Function
         Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
             If Users.Privilege.EditRetireRecord = False Then
                 MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
 
-            If txtId.Text = "" Then Exit Sub
-
-
-            If Employee.Rows.Count <> 0 And Employee.Rows(0).Item("STATUS") = 3 Then
-                MessageBox.Show("This Record Cannot Be Edit, Transaction Has Been Made On This Account.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Information)
-                Exit Sub
-            End If
-
+            If txtId.Text = "" OrElse Employee.Rows.Count = 0 OrElse IsEditValid(txtId.Tag) = False Then Exit Sub
 
             Enable()
             txtId.Focus()
             Newrec = False
         End Sub
-
-        Private Function ValidateSave() As Boolean
+        Private Function IsSaveValid() As Boolean
 
 
             If txtId.Text.Trim = "" Then
@@ -663,7 +682,7 @@ Namespace Forms
 
         Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
 
-            If ValidateSave() = False Then Exit Sub
+            If IsSaveValid() = False Then Exit Sub
 
             If MessageBox.Show("Are You Sure You Want To Continue With The Current Process?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
 
@@ -722,56 +741,32 @@ Namespace Forms
 
             End Try
         End Sub
-
         Private Sub btnUndo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUndo.Click
             If Newrec = True Then Clear() Else toForm()
             Disable()
             Newrec = False
         End Sub
+        Private Function IsDeleteValid(ByVal iRetiree As Integer) As Boolean
 
-        Private Function ValidateDelete(ByVal Employee As Integer) As Boolean
-            Dim dStr As String
-            Dim dDa As FbDataAdapter
-            Dim dTable As DataTable
-            ValidateDelete = True
-
-            dStr = "SELECT SUM(a.DEBIT) AS DEBIT FROM TRANSACTIONS a WHERE a.EMPLOYEE = '" & Employee & "'"
-
-            If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
-
-            dDa = New FbDataAdapter(dStr, DB.ConnObj)
-            dTable = New DataTable
-            dDa.Fill(dTable)
-
-            If dTable.Rows(0).Item("DEBIT") > 0 Then ValidateDelete = False
-
-            dStr = "SELECT SUM(a.DEBIT) AS DEBIT FROM TRANSACTIONS a WHERE a.EMPLOYEE = '" & Employee & "'"
-
-            If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
-
-            dDa = New FbDataAdapter(dStr, DB.ConnObj)
-            dTable = New DataTable
-            dDa.Fill(dTable)
-
-            If dTable.Rows(0).Item("DEBIT") > 0 Then
+            If Employee.Rows(0).Item("STATUS") <> Env.UserStatus Then
                 MessageBox.Show(Messages.AccessDenied, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Return False
             End If
 
-            Return ValidateDelete
-        End Function
+            If IsPaymentMade(txtId.Tag) = True Then
+                MessageBox.Show("Payment Has Been Made To This Retiree. You Cannot Delete This Record.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                Return False
+            End If
 
+            Return True
+        End Function
         Private Sub btnDelete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDelete.Click
             If Users.Privilege.RemoveRetireRecord = False Then
                 MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
 
-            If txtId.Text = "" Then Exit Sub
-
-            If Not Employee.Rows.Count > 0 Then Exit Sub
-
-            If ValidateDelete(txtId.Tag) = False Then Exit Sub
+            If txtId.Text = "" OrElse Employee.Rows.Count = 0 OrElse IsDeleteValid(txtId.Tag) = False Then Exit Sub
 
             If MessageBox.Show(Messages.Delete, Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
 

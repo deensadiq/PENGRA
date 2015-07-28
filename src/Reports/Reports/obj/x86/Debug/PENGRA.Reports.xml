@@ -15,6 +15,106 @@ PENGRA.Reports
   Overrides the current thread's CurrentUICulture property for all
   resource lookups using this strongly typed resource class.
 </summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.beneficiarylist">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.benefitpayment">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.coa_96">
+	<summary>
+  Looks up a localized resource of type System.Drawing.Bitmap.
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.DEATHPAYROLLSUMMARY">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.deathpensionpayroll">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.DEATHPENSIONPAYROLL2">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.OustandingBeneficiaries">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.outstanding">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.OUTSTANDINGRETIREES">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.outstandingsummary">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.PAYMENTDETAIL">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.paymentdetails">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.PAYMENTOFBENEFIT">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.paymentsummary">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.PAYMENTSUMMARY2">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.pensionpayroll">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.PENSIONPAYROLL2">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.PENSIONPAYROLLSUMMARY2">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.pensionpayrollsummay">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.REQUESTFORFUND">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.SECURITYSCHEDULE">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.SUMMARYBREAKDOWN">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.SUMMARYBREAKDOWN1">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.summarybreakdowno">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
+</member><member name="P:PENGRA.Reports.My.Resources.Resources.SUMMARYDETAILED">
+	<summary>
+  Looks up a localized resource of type System.Byte[].
+</summary>
 </member><member name="T:PENGRA.Reports.My.Resources.Resources">
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.

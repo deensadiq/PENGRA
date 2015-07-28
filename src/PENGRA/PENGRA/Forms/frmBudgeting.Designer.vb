@@ -84,17 +84,17 @@ Namespace Forms
             'txtBalance
             '
             Me.txtBalance.BackColor = System.Drawing.Color.White
-            Me.txtBalance.Location = New System.Drawing.Point(344, 41)
+            Me.txtBalance.Location = New System.Drawing.Point(351, 41)
             Me.txtBalance.Name = "txtBalance"
             Me.txtBalance.ReadOnly = True
-            Me.txtBalance.Size = New System.Drawing.Size(185, 20)
-            Me.txtBalance.TabIndex = 6
+            Me.txtBalance.Size = New System.Drawing.Size(211, 20)
+            Me.txtBalance.TabIndex = 34
             Me.txtBalance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             '
             'Label3
             '
             Me.Label3.AutoSize = True
-            Me.Label3.Location = New System.Drawing.Point(271, 44)
+            Me.Label3.Location = New System.Drawing.Point(277, 44)
             Me.Label3.Name = "Label3"
             Me.Label3.Size = New System.Drawing.Size(52, 14)
             Me.Label3.TabIndex = 69
@@ -103,7 +103,7 @@ Namespace Forms
             'Label4
             '
             Me.Label4.AutoSize = True
-            Me.Label4.Location = New System.Drawing.Point(271, 17)
+            Me.Label4.Location = New System.Drawing.Point(277, 17)
             Me.Label4.Name = "Label4"
             Me.Label4.Size = New System.Drawing.Size(50, 14)
             Me.Label4.TabIndex = 49
@@ -112,24 +112,24 @@ Namespace Forms
             'txtAmount
             '
             Me.txtAmount.BackColor = System.Drawing.Color.White
-            Me.txtAmount.Location = New System.Drawing.Point(344, 14)
+            Me.txtAmount.Location = New System.Drawing.Point(351, 14)
             Me.txtAmount.Name = "txtAmount"
-            Me.txtAmount.Size = New System.Drawing.Size(185, 20)
+            Me.txtAmount.Size = New System.Drawing.Size(211, 20)
             Me.txtAmount.TabIndex = 5
             Me.txtAmount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
             '
             'txtDescription
             '
             Me.txtDescription.BackColor = System.Drawing.Color.White
-            Me.txtDescription.Location = New System.Drawing.Point(344, 68)
+            Me.txtDescription.Location = New System.Drawing.Point(351, 68)
             Me.txtDescription.Name = "txtDescription"
-            Me.txtDescription.Size = New System.Drawing.Size(276, 20)
-            Me.txtDescription.TabIndex = 5
+            Me.txtDescription.Size = New System.Drawing.Size(211, 20)
+            Me.txtDescription.TabIndex = 6
             '
             'Label5
             '
             Me.Label5.AutoSize = True
-            Me.Label5.Location = New System.Drawing.Point(271, 71)
+            Me.Label5.Location = New System.Drawing.Point(277, 71)
             Me.Label5.Name = "Label5"
             Me.Label5.Size = New System.Drawing.Size(67, 14)
             Me.Label5.TabIndex = 49
@@ -163,7 +163,7 @@ Namespace Forms
             Me.btnRemove.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnRemove.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnRemove.Image = CType(resources.GetObject("btnRemove.Image"), System.Drawing.Image)
-            Me.btnRemove.Location = New System.Drawing.Point(432, 370)
+            Me.btnRemove.Location = New System.Drawing.Point(442, 370)
             Me.btnRemove.Name = "btnRemove"
             Me.btnRemove.Size = New System.Drawing.Size(85, 45)
             Me.btnRemove.TabIndex = 86
@@ -178,7 +178,7 @@ Namespace Forms
             Me.btnSave.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnSave.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnSave.Image = CType(resources.GetObject("btnSave.Image"), System.Drawing.Image)
-            Me.btnSave.Location = New System.Drawing.Point(220, 370)
+            Me.btnSave.Location = New System.Drawing.Point(230, 370)
             Me.btnSave.Name = "btnSave"
             Me.btnSave.Size = New System.Drawing.Size(85, 45)
             Me.btnSave.TabIndex = 85
@@ -193,7 +193,7 @@ Namespace Forms
             Me.btnEdit.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnEdit.Image = CType(resources.GetObject("btnEdit.Image"), System.Drawing.Image)
-            Me.btnEdit.Location = New System.Drawing.Point(114, 370)
+            Me.btnEdit.Location = New System.Drawing.Point(124, 370)
             Me.btnEdit.Name = "btnEdit"
             Me.btnEdit.Size = New System.Drawing.Size(85, 45)
             Me.btnEdit.TabIndex = 84
@@ -208,7 +208,7 @@ Namespace Forms
             Me.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnCancel.Image = CType(resources.GetObject("btnCancel.Image"), System.Drawing.Image)
-            Me.btnCancel.Location = New System.Drawing.Point(326, 370)
+            Me.btnCancel.Location = New System.Drawing.Point(336, 370)
             Me.btnCancel.Name = "btnCancel"
             Me.btnCancel.Size = New System.Drawing.Size(85, 45)
             Me.btnCancel.TabIndex = 83
@@ -223,7 +223,7 @@ Namespace Forms
             Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnClose.Image = CType(resources.GetObject("btnClose.Image"), System.Drawing.Image)
-            Me.btnClose.Location = New System.Drawing.Point(538, 368)
+            Me.btnClose.Location = New System.Drawing.Point(548, 368)
             Me.btnClose.Name = "btnClose"
             Me.btnClose.Size = New System.Drawing.Size(85, 48)
             Me.btnClose.TabIndex = 82
@@ -238,7 +238,7 @@ Namespace Forms
             Me.btnAdd.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnAdd.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnAdd.Image = CType(resources.GetObject("btnAdd.Image"), System.Drawing.Image)
-            Me.btnAdd.Location = New System.Drawing.Point(8, 370)
+            Me.btnAdd.Location = New System.Drawing.Point(18, 370)
             Me.btnAdd.Name = "btnAdd"
             Me.btnAdd.Size = New System.Drawing.Size(85, 45)
             Me.btnAdd.TabIndex = 84
@@ -247,9 +247,9 @@ Namespace Forms
             'dgvGrid
             '
             Me.dgvGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-            Me.dgvGrid.Location = New System.Drawing.Point(10, 104)
+            Me.dgvGrid.Location = New System.Drawing.Point(9, 104)
             Me.dgvGrid.Name = "dgvGrid"
-            Me.dgvGrid.Size = New System.Drawing.Size(610, 246)
+            Me.dgvGrid.Size = New System.Drawing.Size(633, 246)
             Me.dgvGrid.TabIndex = 87
             '
             'frmBudgeting
@@ -258,7 +258,7 @@ Namespace Forms
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackColor = System.Drawing.Color.White
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-            Me.ClientSize = New System.Drawing.Size(631, 432)
+            Me.ClientSize = New System.Drawing.Size(650, 432)
             Me.Controls.Add(Me.txtDescription)
             Me.Controls.Add(Me.Label5)
             Me.Controls.Add(Me.dgvGrid)

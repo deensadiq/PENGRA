@@ -24,7 +24,7 @@ Namespace MCSA
 
             Dim Conn As New FbConnection
             Dim strConnectMessage As String = ""
-            Dim strMCSA As String = "PENGRANEW"
+            Dim strMCSA As String = "PENGRA"
             Dim Connected As Boolean = False
            
 
@@ -83,12 +83,6 @@ Namespace MCSA
                     Mdi.mdiControlPanel.ShowDialog()
                 End If
             Else
-                Env.UserPrivillege = Env.eUserPriv.Admin
-                Env.RoleID = 1
-                Env.UserID = 0
-                'Env.UserStatus = Users.getStatus(Env.RoleID)
-                Env.UserStatus = "0"
-                Users.setUserPrivileges(Env.RoleID)
                 frmSplash.ShowDialog()
                 Mdi.mdiControlPanel.ShowDialog()
             End If

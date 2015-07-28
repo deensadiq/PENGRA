@@ -15,6 +15,9 @@ E:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.p
 E:\Projects\PENGRA\run\PENGRA.Connection.dll
 E:\Projects\PENGRA\run\PENGRA.Connection.pdb
 E:\Projects\PENGRA\run\PENGRA.Connection.xml
+F:\Projects\PENGRA\run\PENGRA.Connection.dll
+F:\Projects\PENGRA\run\PENGRA.Connection.pdb
+F:\Projects\PENGRA\run\PENGRA.Connection.xml
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\Connection.vbprojResolveAssemblyReference.cache
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.Forms.frmChangePassword.resources
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.Forms.frmConnect.resources
@@ -26,9 +29,6 @@ F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.F
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.Forms.frmUsers.resources
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.Resources.resources
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\Connection.vbproj.GenerateResource.Cache
-F:\Projects\PENGRA\run\PENGRA.Connection.dll
-F:\Projects\PENGRA\run\PENGRA.Connection.pdb
-F:\Projects\PENGRA\run\PENGRA.Connection.xml
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.dll
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.xml
 F:\Projects\PENGRA\src\Connection\Connection\obj\x86\Release\PENGRA.Connection.pdb

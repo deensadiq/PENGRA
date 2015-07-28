@@ -13,6 +13,7 @@ Namespace Forms
         Dim iMinistry As Integer
         Dim iYear As Integer
         Dim iMonth As Integer
+        Dim iStatus As Integer
 
         Dim Employee As DataTable
         Dim daEmployee As FbDataAdapter
@@ -46,6 +47,7 @@ Namespace Forms
             Populate.comboBox(cboMinistry, "SELECT * FROM MINISTRY")
             Populate.GetYear(cboYear)
             Populate.GetMonth(cboMonth)
+            Populate.Status(cboStatus)
         End Sub
         Private Sub IsEditMode(ByVal bolEdit As Boolean)
             If bolEdit = True Then
@@ -74,7 +76,7 @@ Namespace Forms
         End Sub
 
         Private Sub CreateSQLString()
-            Dim iStatus As Char
+            Dim userStatus As Char
 
             iBenefit = 0
             iMinistry = 0
@@ -85,171 +87,337 @@ Namespace Forms
             If Not cboMinistry.Text = "" Then iMinistry = cboMinistry.SelectedValue
             If Not cboYear.Text = "" Then iYear = CInt(cboYear.Text.Trim)
             If Not cboMonth.Text = "" Then iMonth = cboMonth.SelectedIndex
+            If Not cboStatus.Text = "" Then iStatus = cboStatus.SelectedValue
 
-            iStatus = Users.getStatus(Env.RoleID)
-            If iStatus <> "0" Then iStatus = CType(CStr((CInt(Val(iStatus)) - 1)), Char)
+            userStatus = Users.getStatus(Env.RoleID)
+            If userStatus <> "0" Then userStatus = CType(CStr((CInt(Val(userStatus)) - 1)), Char)
 
-            If iBenefit = 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
-                'No Filter Attribute: Load All Data From Table
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p  WHERE p.STATUS >= '" & iStatus & "'"
-                strSQL = strSQL + " ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+            If cboStatus.Text <> "" Then
+                If iBenefit = 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
+                    'No Filter Attribute: Load All Data From Table
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p  WHERE p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+                    strSQL = strSQL + " ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.STATUS >= '" & iStatus & "'"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.STATUS >= '" & userStatus & "' AND p.STATUS = '" & iStatus & "' "
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND STATUS >= '" & iStatus & "' ORDER BY EXTRACT(YEAR FROM DOAA) DESC, EXTRACT(MONTH FROM DOAA) DESC"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND STATUS = '" & iStatus & "'  AND STATUS >= '" & userStatus & "' ORDER BY EXTRACT(YEAR FROM DOAA) DESC, EXTRACT(MONTH FROM DOAA) DESC"
 
-            ElseIf iBenefit <> 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
-                'Apply Benefit Type Filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Benefit Type Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS = '" & iStatus & "'  AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS >= '" & iStatus & "'"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS = '" & iStatus & "'  AND p.STATUS >= '" & userStatus & "'"
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND STATUS >= '" & iStatus & "'"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND STATUS = '" & iStatus & "'  AND STATUS >= '" & userStatus & "'"
 
-            ElseIf iBenefit = 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
-                'Apply Ministry Filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Ministry Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS = '" & iStatus & "'  AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & iStatus & "'"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS = '" & iStatus & "'  AND p.STATUS >= '" & userStatus & "'"
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND STATUS >= '" & iStatus & "'"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND STATUS = '" & iStatus & "'  AND STATUS >= '" & userStatus & "'"
 
-            ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
+                ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
 
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "'"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & iStatus & "'"
-
-
-            ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
-                'Apply Benefit Type and Minitry Filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND STATUS >= '" & iStatus & "'"
-
-            ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
-
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & iStatus & "'"
-
-            ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
-                'Apply Ministry and Year Filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & iStatus & "'"
-
-            ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
-
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & iStatus & "'"
-
-            ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
-                'Apply Benefit Type, Ministry and Year filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & iStatus & "'"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
 
 
-            ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Benefit Type and Minitry Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "'"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & iStatus & "'"
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS = '" & iStatus & "'  AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
+                    'Apply Ministry and Year Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
+                    'Apply Benefit Type, Ministry and Year filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
 
 
-            ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
-                'Apply Minitry, Year and Month Filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
 
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "'"
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
 
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & iStatus & "'"
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
 
-
-            ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
-                'Apply Benefit, Ministry, Year and Month filter
-                strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
-                strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
-                strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
-                strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
-
-                strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
-                strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
-                strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & iStatus & "'"
-
-                strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & iStatus & "'"
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
 
 
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
+                    'Apply Minitry, Year and Month Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
+
+
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
+                    'Apply Benefit, Ministry, Year and Month filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS = '" & iStatus & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS = '" & iStatus & "' AND STATUS >= '" & userStatus & "'"
+
+
+                End If
+            Else
+                If iBenefit = 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
+                    'No Filter Attribute: Load All Data From Table
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p  WHERE p.STATUS >= '" & userStatus & "'"
+                    strSQL = strSQL + " ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND STATUS >= '" & userStatus & "' ORDER BY EXTRACT(YEAR FROM DOAA) DESC, EXTRACT(MONTH FROM DOAA) DESC"
+
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Benefit Type Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Ministry Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & userStatus & "'"
+
+
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear = 0 And iMonth = 0 Then
+                    'Apply Benefit Type and Minitry Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth = 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
+                    'Apply Ministry and Year Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit = 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & userStatus & "'"
+
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth = 0 Then
+                    'Apply Benefit Type, Ministry and Year filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND STATUS >= '" & userStatus & "'"
+
+
+                ElseIf iBenefit <> 0 And iMinistry = 0 And iYear <> 0 And iMonth <> 0 Then
+
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & userStatus & "'"
+
+
+                ElseIf iBenefit = 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
+                    'Apply Minitry, Year and Month Filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & userStatus & "'"
+
+
+                ElseIf iBenefit <> 0 And iMinistry <> 0 And iYear <> 0 And iMonth <> 0 Then
+                    'Apply Benefit, Ministry, Year and Month filter
+                    strSQL = "SELECT p.SN, p.ID, p.EMPLOYEE, p.EMPLOYEENAME, p.MINISTRYNAME, p.BTYPE, p.TRANSTYPE, p.AYEAR, p.AMONTH, "
+                    strSQL = strSQL + " p.MONTHNAME || ' ' || P.AYEAR AS DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALBENEFIT,"
+                    strSQL = strSQL + " p.GRATUITYPAID, p.PEANSIONPAID, p.DEATHPAID, p.TOTALPAID, p.BALANCE, p.STATUS FROM SP_BENEFICIARIES_OUTSTANDING p "
+                    strSQL = strSQL + " WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "' ORDER BY p.AYEAR, p.AMONTH, p.EMPLOYEENAME"
+
+                    strSQLTotal = "SELECT SUM(p.GRATUITY) AS GRATUITY, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALBENEFIT) AS TOTALBENEFIT, "
+                    strSQLTotal = strSQLTotal + " SUM(p.GRATUITYPAID) AS GRATUITYPAID, SUM(p.PEANSIONPAID) AS PEANSIONPAID, SUM(p.DEATHPAID) AS DEATHPAID, SUM(p.TOTALPAID) AS TOTALPAID, SUM(p.BALANCE) AS BALANCE"
+                    strSQLTotal = strSQLTotal + " FROM SP_BENEFICIARIES_OUTSTANDING p WHERE p.BTYPE = '" & iBenefit & "' AND p.MINISTRY = '" & iMinistry & "' AND p.AYEAR = '" & iYear & "' AND p.AMONTH = '" & iMonth & "' AND p.STATUS >= '" & userStatus & "'"
+
+                    strEmployee = "SELECT * FROM EMPLOYEEINFO WHERE LIMIT = '1' AND ACTVE = '1' AND BENEFITTYPE = '" & iBenefit & "' AND MINISTRY = '" & iMinistry & "' AND EXTRACT(YEAR FROM DOAA) = '" & iYear & "' AND EXTRACT(MONTH FROM DOAA) = '" & iMonth & "' AND STATUS >= '" & userStatus & "'"
+
+
+                End If
             End If
 
         End Sub
@@ -403,24 +571,7 @@ Namespace Forms
             With dgvGrid
                 .Rows.Clear()
                 .Columns.Clear()
-                '.ColumnHeadersHeight = 35
                 .ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(58, 129, 207)
-                '.ColumnHeadersDefaultCellStyle.ForeColor = System.Drawing.SystemColors.Window
-                '.ColumnHeadersDefaultCellStyle.Font = New System.Drawing.Font("Calibri", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-                '.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single
-                ''.SelectionMode = DataGridViewSelectionMode.FullRowSelect
-                '.AllowUserToOrderColumns = False
-                '.AllowUserToResizeColumns = False
-                '.AllowUserToAddRows = False
-                '.RowHeadersVisible = False
-                '.CausesValidation = False
-
-                '.EnableHeadersVisualStyles = False
-                '.BorderStyle = BorderStyle.FixedSingle
-                '.DefaultCellStyle.BackColor = Color.WhiteSmoke
-                '.CellBorderStyle = DataGridViewCellBorderStyle.Single
-                '.DefaultCellStyle.Font = New System.Drawing.Font("Calibri", 9, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-
 
                 Populate.WriteSN(dgvGrid)
                 Populate.WriteColumn(dgvGrid, "cId", "PN No", 65, DataGridViewTriState.False, DataGridViewContentAlignment.MiddleLeft)
@@ -656,11 +807,10 @@ Namespace Forms
         Private Sub frmSalaryTable_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             Me.BackColor = Env.FormBackColor
 
-            'Me.Icon = Nothing
             With dgvGrid
                 .BackgroundColor = Env.GirdBackgroundColor
-                '.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent
-                '.RowsDefaultCellStyle.SelectionForeColor = Color.Transparent
+                .RowsDefaultCellStyle.SelectionBackColor = Env.GirdSelectionBackColor
+                .RowsDefaultCellStyle.SelectionForeColor = Env.GirdSelectionForeColor
             End With
 
             With dgvTotal
@@ -699,6 +849,7 @@ Namespace Forms
                 Dim Employee As Integer = Table.Rows(e.RowIndex).Item("EMPLOYEE")
                 Dim form As New frmKnockOff
                 form.btnSearch.Visible = False
+                form.txtID.ReadOnly = True
                 form.LoadData(Employee)
                 form.ShowDialog(Me)
                 InitGrid()
@@ -719,6 +870,7 @@ Namespace Forms
                 Dim Employee As Integer = Table.Rows(e.RowIndex).Item("EMPLOYEE")
                 Dim form As New frmPaymentProfile
                 form.btnSearch.Visible = False
+                form.txtID.ReadOnly = True
                 form.LoadRecord(Employee)
                 form.ShowDialog(Me)
             End If
@@ -791,7 +943,7 @@ Namespace Forms
             End Try
         End Sub
 
-        Private Sub cboYear_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboYear.SelectedValueChanged
+        Private Sub cboYear_SelectedValueChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles cboYear.SelectedValueChanged, cboStatus.SelectedValueChanged
 
             'If Table.Rows.Count = 0 Then Exit Sub
             'If Table.Rows.Count = 0 Then Exit Sub
@@ -843,7 +995,7 @@ Namespace Forms
                 Dim k As Integer
                 For I = 0 To dgvGrid.RowCount - 1
                     If dgvGrid.Rows(I).Cells("chk").Value = True Or dgvGrid.Rows(I).Cells("chk").Value = 1 Then
-                        'Employee.Rows(I).Item("STATUS") = Env.GetStatus
+                        'Employee.Rows(I).Item("STATUS") = Env.UserStatus
                         For k = 0 To Employee.Rows.Count - 1
                             If (Employee.Rows(k).Item("UKEY") = Table.Rows(I).Item("Employee")) Then
                                 If Employee.Rows(k).Item("STATUS") <= iStatus Then Employee.Rows(k).Item("STATUS") = iStatus

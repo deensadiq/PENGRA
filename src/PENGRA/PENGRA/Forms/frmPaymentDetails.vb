@@ -146,7 +146,7 @@ Namespace Forms
                 dgvGrid.Rows(I).Cells("cBenefit").Value = Table.Rows(I).Item("BENEFITTYPE")
                 dgvGrid.Rows(I).Cells("cAmount").Value = Table.Rows(I).Item("DEBIT")
                 dgvGrid.Rows(I).Cells("cStatus").Value = Table.Rows(I).Item("STATUS")
-                If Table.Rows(I).Item("STATUS") = Env.GetStatus Then dgvGrid.Rows(I).Cells("chk").Value = True Else dgvGrid.Rows(I).Cells("chk").Value = False
+                If Table.Rows(I).Item("STATUS") = Env.UserStatus Then dgvGrid.Rows(I).Cells("chk").Value = True Else dgvGrid.Rows(I).Cells("chk").Value = False
 
             Next
 
@@ -288,12 +288,6 @@ Namespace Forms
                 .Columns(7).SortMode = DataGridViewColumnSortMode.NotSortable
                 .Columns(8).SortMode = DataGridViewColumnSortMode.NotSortable
                 .Columns(9).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(10).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(11).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(12).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(13).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(14).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(15).SortMode = DataGridViewColumnSortMode.NotSortable
 
             End With
 
@@ -338,19 +332,6 @@ Namespace Forms
                 .Columns(0).SortMode = DataGridViewColumnSortMode.NotSortable
                 .Columns(1).SortMode = DataGridViewColumnSortMode.NotSortable
                 .Columns(2).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(3).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(4).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(5).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(6).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(7).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(8).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(9).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(10).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(11).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(12).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(13).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(14).SortMode = DataGridViewColumnSortMode.NotSortable
-                '.Columns(15).SortMode = DataGridViewColumnSortMode.NotSortable
 
             End With
 
@@ -386,11 +367,6 @@ Namespace Forms
                 Next
             End If
         End Sub
-        Public Sub displayInfo(ByVal struc As String, ByVal allow As String)
-            'txtPaygroup.Text = struc
-            'txtType.Text = allow
-            'txtAppt.Text = appt
-        End Sub
         Private Sub setPrivilege()
             If Users.Privilege.EditPaymentStatus = False Then
                 btnEdit.Visible = False
@@ -415,11 +391,11 @@ Namespace Forms
                 .RowsDefaultCellStyle.SelectionForeColor = Env.GirdSelectionForeColor
             End With
 
-            'With dgvTotal
-            '    .BackgroundColor = Env.GirdBackgroundColor
-            '    .RowsDefaultCellStyle.SelectionBackColor = Color.Transparent
-            '    .RowsDefaultCellStyle.SelectionForeColor = Color.Transparent
-            'End With
+            With dgvTotal
+                .BackgroundColor = Env.GirdBackgroundColor
+                .RowsDefaultCellStyle.SelectionBackColor = Color.Transparent
+                .RowsDefaultCellStyle.SelectionForeColor = Color.Transparent
+            End With
 
             InitComponent()
             IsEditMode(False)
@@ -506,7 +482,7 @@ Namespace Forms
             End Try
         End Sub
         Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
-            If Users.Privilege.EditPaymentStatus = False Or (Env.UserStatus >= Table.Rows(dgvGrid.CurrentRow.Index).Item("STATUS").ToString) Then
+            If Users.Privilege.EditPaymentStatus = False Or (Env.UserStatus <= Table.Rows(dgvGrid.CurrentRow.Index).Item("STATUS").ToString) Then
                 MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
@@ -523,7 +499,7 @@ Namespace Forms
                 Exit Sub
             End If
 
-            If dgvGrid.RowCount = 0 Then Exit Sub
+            If dgvGrid.RowCount = 0 Or dgvGrid.CurrentRow.Index < 0 Then Exit Sub
 
             If Not Table.Rows.Count > 0 Then Exit Sub
 
@@ -532,13 +508,8 @@ Namespace Forms
 
             Try
 
-                If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
-
-                Dim strSql As String = "EXECUTE PROCEDURE SP_DELETE_TRANSACTION('" + CStr(Table.Rows(dgvGrid.CurrentRow.Index).Item("UKEY")) + "')"
-                Dim cmd As New FirebirdSql.Data.FirebirdClient.FbCommand(strSql, DB.ConnObj)
-
-                cmd.CommandType = CommandType.Text
-                cmd.ExecuteNonQuery()
+                Transaction.Rows(dgvGrid.CurrentRow.Index).Delete()
+                daTransaction.Update(Transaction)
 
                 InitComponent()
                 IsEditMode(False)

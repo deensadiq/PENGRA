@@ -58,7 +58,7 @@ Namespace Classes
 
             Dim strConnection As String
 
-            strConnection = "Database = " & strDatabase & "; User = " & strUser & " ; Password = " & strPassword & "; Server =localhost; MaxPoolSize = 1000"
+            strConnection = "Database = " & strDatabase & "; User = " & strUser & " ; Password = " & strPassword & "; Server =localhost"
             Return strConnection
 
         End Function
@@ -67,7 +67,7 @@ Namespace Classes
 
             Dim strConnection As String
 
-            strConnection = "Database = " & Database & "; User = " & User & " ; Password = " & Password & "; Server =" & Host & "; MaxPoolSize = 1000"
+            strConnection = "Database = " & Database & "; User = " & User & " ; Password = " & Password & "; Server =" & Host
 
             Return strConnection
 

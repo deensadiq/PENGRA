@@ -76,7 +76,7 @@ Namespace Forms
             Me.rbEmployeeName.AutoSize = True
             Me.rbEmployeeName.Location = New System.Drawing.Point(90, 51)
             Me.rbEmployeeName.Name = "rbEmployeeName"
-            Me.rbEmployeeName.Size = New System.Drawing.Size(109, 17)
+            Me.rbEmployeeName.Size = New System.Drawing.Size(109, 18)
             Me.rbEmployeeName.TabIndex = 1
             Me.rbEmployeeName.Text = "Employee's Name"
             Me.rbEmployeeName.UseVisualStyleBackColor = True
@@ -87,7 +87,7 @@ Namespace Forms
             Me.rbIDNumber.Checked = True
             Me.rbIDNumber.Location = New System.Drawing.Point(6, 51)
             Me.rbIDNumber.Name = "rbIDNumber"
-            Me.rbIDNumber.Size = New System.Drawing.Size(76, 17)
+            Me.rbIDNumber.Size = New System.Drawing.Size(74, 18)
             Me.rbIDNumber.TabIndex = 0
             Me.rbIDNumber.TabStop = True
             Me.rbIDNumber.Text = "ID Number"
@@ -163,7 +163,7 @@ Namespace Forms
             Me.Name = "frmFindEmployee"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
-            Me.Text = "Find Student"
+            Me.Text = "Find Retiree"
             Me.GroupBox1.ResumeLayout(False)
             Me.GroupBox1.PerformLayout()
             Me.ResumeLayout(False)

@@ -190,7 +190,7 @@ Namespace Forms
                     Grid.Rows(I).Cells("cPAID").Value = .Item("TOTALPAID")
                     Grid.Rows(I).Cells("cBalance").Value = .Item("BALANCE")
                     Grid.Rows(I).Cells("cStatus").Value = .Item("STATUS")
-                    If .Item("STATUS") = Env.GetStatus Then Grid.Rows(I).Cells("chk").Value = True Else Grid.Rows(I).Cells("chk").Value = False
+                    If .Item("STATUS") = Env.UserStatus Then Grid.Rows(I).Cells("chk").Value = True Else Grid.Rows(I).Cells("chk").Value = False
 
                 End With
             Next
@@ -542,7 +542,6 @@ Namespace Forms
         Private Sub frmSalaryTable_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             Me.BackColor = Env.FormBackColor
 
-            'Me.Icon = Nothing
             With dgvGrid
                 .BackgroundColor = Env.GirdBackgroundColor
                 '.RowsDefaultCellStyle.SelectionBackColor = Color.Transparent
@@ -711,10 +710,10 @@ Namespace Forms
                 Dim k As Integer
                 For I = 0 To dgvGrid.RowCount - 1
                     If dgvGrid.Rows(I).Cells("chk").Value = True Or dgvGrid.Rows(I).Cells("chk").Value = 1 Then
-                        'Employee.Rows(I).Item("STATUS") = Env.GetStatus
+                        'Employee.Rows(I).Item("STATUS") = Env.UserStatus
                         For k = 0 To Employee.Rows.Count - 1
                             If (Employee.Rows(k).Item("UKEY") = Table.Rows(I).Item("Employee")) Then
-                                Employee.Rows(k).Item("STATUS") = Env.GetStatus
+                                Employee.Rows(k).Item("STATUS") = Env.UserStatus
                                 Exit For
                             End If
                         Next

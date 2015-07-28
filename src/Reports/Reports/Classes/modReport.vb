@@ -12,7 +12,6 @@
         cbo.Text = cbo.Items(0)
 
     End Sub
-
     Public Sub GetMonth(ByVal cbo As ComboBox)
 
         cbo.Items.Clear()

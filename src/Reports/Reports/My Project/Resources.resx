@@ -151,8 +151,47 @@
   <data name="summarybreakdowno" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\summarybreakdowno.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="outstanding" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\outstanding.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="OUTSTANDINGRETIREES" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\OUTSTANDINGRETIREES.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SUMMARYDETAILED" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SUMMARYDETAILED.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SUMMARYBREAKDOWN" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SUMMARYBREAKDOWN.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="DEATHPENSIONPAYROLL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DEATHPENSIONPAYROLL2.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PAYMENTDETAIL" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PAYMENTDETAIL.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PAYMENTOFBENEFIT" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PAYMENTOFBENEFIT.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PENSIONPAYROLL2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PENSIONPAYROLL2.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PENSIONPAYROLLSUMMARY2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PENSIONPAYROLLSUMMARY2.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="REQUESTFORFUND" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\REQUESTFORFUND.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SECURITYSCHEDULE" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SECURITYSCHEDULE.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="SUMMARYBREAKDOWN1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\SUMMARYBREAKDOWN.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="DEATHPAYROLLSUMMARY" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\DEATHPAYROLLSUMMARY.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="PAYMENTSUMMARY2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\PAYMENTSUMMARY2.rdl;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>

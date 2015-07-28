@@ -35,6 +35,7 @@ Namespace Forms
             Me.btnClose = New crsButton.cButton()
             Me.btnStop = New crsButton.cButton()
             Me.btnStart = New crsButton.cButton()
+            Me.chkOverwrite = New System.Windows.Forms.CheckBox()
             Me.GroupBox4.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -74,7 +75,7 @@ Namespace Forms
             Me.cboBudget.FlatStyle = System.Windows.Forms.FlatStyle.System
             Me.cboBudget.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.cboBudget.FormattingEnabled = True
-            Me.cboBudget.Location = New System.Drawing.Point(103, 75)
+            Me.cboBudget.Location = New System.Drawing.Point(84, 75)
             Me.cboBudget.Name = "cboBudget"
             Me.cboBudget.Size = New System.Drawing.Size(179, 21)
             Me.cboBudget.TabIndex = 2
@@ -82,27 +83,29 @@ Namespace Forms
             'Label2
             '
             Me.Label2.AutoSize = True
-            Me.Label2.Location = New System.Drawing.Point(9, 46)
+            Me.Label2.Location = New System.Drawing.Point(14, 49)
             Me.Label2.Name = "Label2"
-            Me.Label2.Size = New System.Drawing.Size(92, 14)
+            Me.Label2.Size = New System.Drawing.Size(42, 14)
             Me.Label2.TabIndex = 6
-            Me.Label2.Text = "Allocation Month :"
+            Me.Label2.Text = "Month :"
+            Me.Label2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'Label3
             '
             Me.Label3.AutoSize = True
-            Me.Label3.Location = New System.Drawing.Point(9, 17)
+            Me.Label3.Location = New System.Drawing.Point(14, 20)
             Me.Label3.Name = "Label3"
-            Me.Label3.Size = New System.Drawing.Size(86, 14)
+            Me.Label3.Size = New System.Drawing.Size(36, 14)
             Me.Label3.TabIndex = 8
-            Me.Label3.Text = "Allocation Year :"
+            Me.Label3.Text = "Year :"
+            Me.Label3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'cboMonth
             '
             Me.cboMonth.FlatStyle = System.Windows.Forms.FlatStyle.System
             Me.cboMonth.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.cboMonth.FormattingEnabled = True
-            Me.cboMonth.Location = New System.Drawing.Point(103, 46)
+            Me.cboMonth.Location = New System.Drawing.Point(84, 46)
             Me.cboMonth.Name = "cboMonth"
             Me.cboMonth.Size = New System.Drawing.Size(179, 21)
             Me.cboMonth.TabIndex = 0
@@ -112,7 +115,7 @@ Namespace Forms
             Me.cboYear.FlatStyle = System.Windows.Forms.FlatStyle.System
             Me.cboYear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
             Me.cboYear.FormattingEnabled = True
-            Me.cboYear.Location = New System.Drawing.Point(103, 17)
+            Me.cboYear.Location = New System.Drawing.Point(84, 17)
             Me.cboYear.Name = "cboYear"
             Me.cboYear.Size = New System.Drawing.Size(179, 21)
             Me.cboYear.TabIndex = 0
@@ -120,11 +123,12 @@ Namespace Forms
             'Label1
             '
             Me.Label1.AutoSize = True
-            Me.Label1.Location = New System.Drawing.Point(9, 78)
+            Me.Label1.Location = New System.Drawing.Point(14, 78)
             Me.Label1.Name = "Label1"
             Me.Label1.Size = New System.Drawing.Size(60, 14)
             Me.Label1.TabIndex = 8
             Me.Label1.Text = "Allocation :"
+            Me.Label1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
             '
             'BackgroundWorker
             '
@@ -139,7 +143,7 @@ Namespace Forms
             Me.btnClose.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnClose.Image = CType(resources.GetObject("btnClose.Image"), System.Drawing.Image)
-            Me.btnClose.Location = New System.Drawing.Point(478, 219)
+            Me.btnClose.Location = New System.Drawing.Point(478, 250)
             Me.btnClose.Name = "btnClose"
             Me.btnClose.Size = New System.Drawing.Size(85, 45)
             Me.btnClose.TabIndex = 11
@@ -154,7 +158,7 @@ Namespace Forms
             Me.btnStop.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnStop.Image = CType(resources.GetObject("btnStop.Image"), System.Drawing.Image)
-            Me.btnStop.Location = New System.Drawing.Point(237, 202)
+            Me.btnStop.Location = New System.Drawing.Point(237, 233)
             Me.btnStop.Name = "btnStop"
             Me.btnStop.Size = New System.Drawing.Size(168, 65)
             Me.btnStop.TabIndex = 10
@@ -169,11 +173,21 @@ Namespace Forms
             Me.btnStart.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent
             Me.btnStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat
             Me.btnStart.Image = CType(resources.GetObject("btnStart.Image"), System.Drawing.Image)
-            Me.btnStart.Location = New System.Drawing.Point(11, 205)
+            Me.btnStart.Location = New System.Drawing.Point(11, 236)
             Me.btnStart.Name = "btnStart"
             Me.btnStart.Size = New System.Drawing.Size(168, 65)
             Me.btnStart.TabIndex = 9
             Me.btnStart.UseVisualStyleBackColor = False
+            '
+            'chkOverwrite
+            '
+            Me.chkOverwrite.AutoSize = True
+            Me.chkOverwrite.Location = New System.Drawing.Point(27, 196)
+            Me.chkOverwrite.Name = "chkOverwrite"
+            Me.chkOverwrite.Size = New System.Drawing.Size(174, 18)
+            Me.chkOverwrite.TabIndex = 12
+            Me.chkOverwrite.Text = "Overwrite Processed Records"
+            Me.chkOverwrite.UseVisualStyleBackColor = True
             '
             'frmProcess
             '
@@ -181,7 +195,8 @@ Namespace Forms
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackColor = System.Drawing.Color.White
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-            Me.ClientSize = New System.Drawing.Size(581, 294)
+            Me.ClientSize = New System.Drawing.Size(581, 312)
+            Me.Controls.Add(Me.chkOverwrite)
             Me.Controls.Add(Me.btnClose)
             Me.Controls.Add(Me.btnStop)
             Me.Controls.Add(Me.btnStart)
@@ -218,5 +233,6 @@ Namespace Forms
         Friend WithEvents btnClose As crsButton.cButton
         Friend WithEvents btnStop As crsButton.cButton
         Friend WithEvents btnStart As crsButton.cButton
+        Friend WithEvents chkOverwrite As System.Windows.Forms.CheckBox
     End Class
 End Namespace

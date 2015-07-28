@@ -3,53 +3,64 @@ Imports PENGRA.Reports.Forms
 
 Namespace Classes
     Public Class ReportForms
-        'Private formBankList As frmBanklist
-        'Private formEmployeeList As frmEmployeeList
-        'Private formJournal As frmJournal
-        'Private formPaySheet As frmPaysheet
-        'Private formPaySlip As frmPayslip
-        'Private formSchedule As frmSchedule
-        'Private formSummary As frmSummary
-        'Private formVariation As frmVariation
-        'Private formEmail As frmEmail
-        Private formReportBYM As frmReportBYM
-        Private formReportLOB As frmReportLOB
+        'Private formReportLOB As frmReportLOB
+        Private formReportOB As frmReportOB
+        Private formReportSUM As frmReportSUM
+        Private formReportSB As frmReportSB
+        Private formReportAYM As frmReportAYM
 
         Private Shared Guiman As ReportForms
-
         Private Sub New()
             'Private constructor to avoid directly creating an instance of this class
             'Use the getGuiManager function to get an instance
             'This is important to avoid creating multiple copies of this class in memory (Singleton Pattern)
         End Sub
-
         Public Shared Function getGuiManager() As ReportForms
 
             If Guiman Is Nothing Then Guiman = New ReportForms
             Return Guiman
 
         End Function
+        Public Sub setReportOB(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportOB.rType)
 
-        Public Sub setReportBYM(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportBYM.rType)
-
-            formReportBYM = New frmReportBYM
-            formReportBYM.Text = txt
-            formReportBYM.ReportType = rType
-            formReportBYM.MdiParent = parent
-            formReportBYM.Show()
-
-        End Sub
-
-        Public Sub setReportLOB(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportBYM.rType)
-
-            formReportLOB = New frmReportLOB
-            formReportLOB.Text = txt
-            formReportLOB.ReportType = rType
-            formReportLOB.MdiParent = parent
-            formReportLOB.Show()
+            If formReportOB Is Nothing Then formReportOB = New frmReportOB
+            If formReportOB.IsDisposed = True Then formReportOB = New frmReportOB
+            formReportOB.Text = txt
+            formReportOB.ReportType = rType
+            formReportOB.MdiParent = parent
+            formReportOB.Show()
 
         End Sub
+        Public Sub setReportSUM(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportSUM.rType)
 
+            If formReportSUM Is Nothing Then formReportSUM = New frmReportSUM
+            If formReportSUM.IsDisposed = True Then formReportSUM = New frmReportSUM
+            formReportSUM.Text = txt
+            formReportSUM.ReportType = rType
+            formReportSUM.MdiParent = parent
+            formReportSUM.Show()
+
+        End Sub
+        Public Sub setReportSB(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportSB.rType)
+
+            If formReportSB Is Nothing Then formReportSB = New frmReportSB
+            If formReportSB.IsDisposed = True Then formReportSB = New frmReportSB
+            formReportSB.Text = txt
+            formReportSB.ReportType = rType
+            formReportSB.MdiParent = parent
+            formReportSB.Show()
+
+        End Sub
+        Public Sub setReportAYM(ByVal parent As Form, ByVal txt As String, ByVal rType As frmReportAYM.rType)
+
+            If formReportAYM Is Nothing Then formReportAYM = New frmReportAYM
+            If formReportAYM.IsDisposed = True Then formReportAYM = New frmReportAYM
+            formReportAYM.Text = txt
+            formReportAYM.ReportType = rType
+            formReportAYM.MdiParent = parent
+            formReportAYM.Show()
+
+        End Sub
         'Public Sub showBankList(ByVal parent As Form)
         '    formBankList = New frmBanklist
         '    formBankList.Text = "Bank List"
