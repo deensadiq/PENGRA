@@ -16,6 +16,7 @@ Namespace Forms
         Dim mBudget As Integer
         Dim mBenefitType As Integer
         Dim mSummaryType As Integer
+        Dim mLimit As Integer
 
         Private mReportType As rType
 
@@ -59,6 +60,14 @@ Namespace Forms
                 mSummaryType = value
             End Set
         End Property
+        Property Limit As Integer
+            Get
+                Return mLimit
+            End Get
+            Set(ByVal value As Integer)
+                mLimit = value
+            End Set
+        End Property
 
         Property ReportType() As rType
             Get
@@ -74,6 +83,7 @@ Namespace Forms
             Populate.GetYear(cboYear)
             Populate.GetMonth(cboMonth)
             Populate.SummaryCombo(cboSummaryType)
+            Populate.LimitCombo(cboLimitType)
             Populate.comboBox(cboBenefitType, "SELECT * FROM BENEFIT")
         End Sub
         Private Sub frmReportSCCSS_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -98,6 +108,7 @@ Namespace Forms
             BudgetMonth = CType(cboMonth.SelectedIndex, Integer)
             BenefitType = cboBenefitType.SelectedValue
             SummaryType = CInt(cboSummaryType.SelectedValue)
+            Limit = CInt(cboLimitType.SelectedValue)
 
             Dim rSQl As New myReport
 
@@ -114,10 +125,10 @@ Namespace Forms
                 Select Case mReportType
                     Case rType.SummaryDetails
                         rSQl.ReportTitle = Me.Text
-                        rSQl.BenefitPaymentReport(rbPrint.Checked, getSQL)
+                        rSQl.SummaryDetailedReport(rbPrint.Checked, getSummaryDetailedSQL)
                     Case rType.SummaryGraphs
                         rSQl.ReportTitle = Me.Text
-                        rSQl.BenefitPaymentSummaryReport(rbPrint.Checked, getSQL)
+                        rSQl.SummaryDetailedReport(rbPrint.Checked, getSummaryGraphSQL)
                 End Select
 
             Catch ex As Exception
@@ -134,7 +145,57 @@ Namespace Forms
 
             Return getTitle
         End Function
-        Private Function getSQL() As String
+        Private Function getSummaryDetailedSQL() As String
+            Dim strSQL As String
+
+            If SummaryType = 1 Then
+                'If cboBenefitType.Text = "" Then
+                '    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+                'Else
+                '    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+                'End If
+                If cboLimitType.Text = "" And cboBenefitType.Text = "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+
+                ElseIf cboLimitType.Text <> "" And cboBenefitType.Text = "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY_LIMIT('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "','" & Limit & "') p"
+
+                ElseIf cboLimitType.Text = "" And cboBenefitType.Text <> "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY_BENEFIT('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "','" & BenefitType & "') p"
+
+                Else
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_SUMMARY_BL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "','" & BenefitType & "','" & Limit & "') p"
+
+                End If
+            Else
+                If cboLimitType.Text = "" And cboBenefitType.Text = "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_MINISTRYSUMMARY('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+
+                ElseIf cboLimitType.Text <> "" And cboBenefitType.Text = "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_MINISTRYSUMMARY_L('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "', '" & Limit & "') p"
+
+                ElseIf cboLimitType.Text = "" And cboBenefitType.Text <> "" Then
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_MINISTRYSUMMARY_B('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "','" & BenefitType & "') p"
+
+                Else
+
+                    strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITY, p.PENSIONARREARS, p.DEATHPENSION, p.BALANCE FROM SP_REPORT_MINISTRYSUMMARY_BL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "','" & BenefitType & "','" & Limit & "') p"
+
+                End If
+                'strSQL = ""
+            End If
+
+
+            Return strSQL
+        End Function
+        Private Function getSummaryGraphSQL() As String
             Dim strSQL As String
 
             Select Case mReportType

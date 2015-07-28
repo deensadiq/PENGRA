@@ -8,15 +8,7 @@ Namespace Forms
 
         Public Enum rType
             SummaryBreakdown
-            BenefitPayment
-            BenefitPaymentSummary
-            RequestForFund
-            PensionPayroll
-            PensionPayrollSummary
-            DeathPensionPayroll
-            DeathPensionPayrollSummary
-            SecurityScheduleRetiree
-            SecurityScheduleDeceased
+            
         End Enum
         Dim mBudgetYear As Integer
         Dim mBudgetMonth As Integer
@@ -51,6 +43,30 @@ Namespace Forms
                 mBudgetMonth = value
             End Set
         End Property
+        Property Limit As Integer
+            Get
+                Return mLimit
+            End Get
+            Set(ByVal value As Integer)
+                mLimit = value
+            End Set
+        End Property
+        Property BenefitType As Integer
+            Get
+                Return mBenefitType
+            End Get
+            Set(ByVal value As Integer)
+                mBenefitType = value
+            End Set
+        End Property
+        Property Ministry As Integer
+            Get
+                Return mMinistry
+            End Get
+            Set(ByVal value As Integer)
+                mMinistry = value
+            End Set
+        End Property
 
         Property ReportType() As rType
             Get
@@ -66,8 +82,8 @@ Namespace Forms
             Populate.GetYear(cboYear)
             Populate.GetMonth(cboMonth)
             Populate.LimitCombo(cboLimitType)
-            Populate.comboBox(cboBenefitType, "Select * from benefit")
-            Populate.comboBox(cboMinistry, "SELECT * FROM MINISTRY")
+            'Populate.comboBox(cboBenefitType, "Select * from benefit")
+            'Populate.comboBox(cboMinistry, "SELECT * FROM MINISTRY")
         End Sub
         Private Sub frmReportSCCSS_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
             Me.BackColor = Env.FormBackColor
@@ -81,7 +97,7 @@ Namespace Forms
 
         Private Sub btnOk_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnOk.Click
             If cboBudget.Text = "" Or _
-                cboYear.Text = "" Or cboMonth.Text = "" Then
+                cboYear.Text = "" Or cboMonth.Text = "" Or cboLimitType.Text = "" Then
                 MessageBox.Show(Messages.NoSelection, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
@@ -89,6 +105,10 @@ Namespace Forms
             Budget = CType(cboBudget.SelectedValue, Integer)
             BudgetYear = CType(cboYear.Text.Trim, Integer)
             BudgetMonth = CType(cboMonth.SelectedIndex, Integer)
+            Limit = cboLimitType.SelectedValue
+            'BenefitType = cboBenefitType.SelectedValue
+            'Ministry = cboMinistry.SelectedValue
+
 
             Dim rSQl As New myReport
 
@@ -103,33 +123,10 @@ Namespace Forms
             Try
 
                 Select Case mReportType
-                    Case rType.BenefitPayment
+                    Case rType.SummaryBreakdown
                         rSQl.ReportTitle = Me.Text
-                        rSQl.BenefitPaymentReport(rbPrint.Checked, getSQL)
-                    Case rType.BenefitPaymentSummary
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.BenefitPaymentSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.RequestForFund
-                        rSQl.ReportTitle = Me.Text
-                        'rSQl.getClassProfileSQL(rbPrint.Checked)
-                    Case rType.PensionPayroll
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.PensionPayrollReport(rbPrint.Checked, getSQL)
-                    Case rType.PensionPayrollSummary
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.PensionPayrollSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.DeathPensionPayroll
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPensionPayrollReport(rbPrint.Checked, getSQL)
-                    Case rType.DeathPensionPayrollSummary
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.SecurityScheduleRetiree
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
-                    Case rType.SecurityScheduleDeceased
-                        rSQl.ReportTitle = Me.Text
-                        rSQl.DeathPayrollSummaryReport(rbPrint.Checked, getSQL)
+                        rSQl.SummaryBreakdownReport(rbPrint.Checked, getSQL)
+
                 End Select
 
             Catch ex As Exception
@@ -149,24 +146,17 @@ Namespace Forms
         Private Function getSQL() As String
             Dim strSQL As String
 
-            Select Case mReportType
-                Case rType.BenefitPayment
-                    strSQL = "SELECT * FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "')"
-                Case rType.BenefitPaymentSummary
-                    strSQL = "SELECT SUM(p.GRATUITYRETIREE) AS GRATUITYRETIREE, SUM(p.GRATUITYDECEASED) AS GRATUITYDECEASED, SUM(p.PENSIONARREARS) AS PENSIONARREARS, SUM(p.DEATHPENSION) AS DEATHPENSION, SUM(p.TOTALPAYMENT) AS TOTALPAYMENT FROM SP_REPORT_PAYMENTBENEFIT('" & Budget & "', '" & BudgetYear & "', '" & BudgetMonth & "') p"
-                Case rType.RequestForFund
-                    strSQL = "SELECT * FROM OUTSTANDINGDETAILS WHERE BUDGET = '" & Budget & "' AND BYEAR = '" & BudgetYear & "' AND BMONTH = '" & BudgetMonth & "'"
-                Case rType.PensionPayroll
-                    strSQL = "SELECT * FROM SP_REPORT_PENSIONPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "')"
-                Case rType.PensionPayrollSummary
-                    strSQL = "SELECT SUM( p.NETAMOUNT) as NETAMOUNTPAYABLE FROM SP_REPORT_PENSIONPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
-                Case rType.DeathPensionPayroll
-                    strSQL = "SELECT p.SN, p.EMPLOYEENAME, p.DEATHPENSION, p.OTHERPAYMENT, p.GROSSPAYMENT, coalesce(p.OTHERDEDUCTION, 0) AS OTHERDEDUCTION, p.NETAMOUNT FROM SP_REPORT_DEATHPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
-                Case rType.DeathPensionPayrollSummary
-                    strSQL = "SELECT SUM( p.NETAMOUNT) as NETAMOUNTPAYABLE FROM SP_REPORT_DEATHPAYROLL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
-                Case Else
-                    strSQL = ""
-            End Select
+            If cboLimitType.Text = "Below Limit" Then
+
+                strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_SUMMARYBREAKDOWN('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+
+            ElseIf cboLimitType.Text = "Above Limit" Then
+
+                strSQL = "SELECT p.SN, p.DESCRIPTION, p.GRATUITYRETIREE, p.GRATUITYDECEASED, p.PENSIONARREARS, p.DEATHPENSION, p.TOTALPAYMENT FROM SP_REPORT_SUMMARYBREAKDOWN_AL('" & Budget & "','" & BudgetYear & "','" & BudgetMonth & "') p"
+
+            Else
+                strSQL = ""
+            End If
 
             Return strSQL
         End Function
