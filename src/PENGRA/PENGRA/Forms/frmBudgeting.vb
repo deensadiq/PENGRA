@@ -438,10 +438,10 @@ Namespace Forms
             'da = New FbDataAdapter(str, DB.ConnObj)
             'da.Fill(tbl)
 
-            'If tbl.Rows.Count > 0 Then
-            '    MessageBox.Show("Transactions Has Been Made On This Budget. To Edit/Delete You Most Remove All Transactions.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
-            '    Return False
-            'End If
+            If tblAllocation.Rows.Count < 0 Or dgvGrid.CurrentRow.Index > tblAllocation.Rows.Count Then
+                'MessageBox.Show("Transactions Has Been Made On This Budget. To Edit/Delete You Most Remove All Transactions.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                Return False
+            End If
 
             'Check if Row Is Selected
             If cboBudget.Text = "" Or cboYear.Text = "" Or cboMonth.Text = "" Then
@@ -452,6 +452,11 @@ Namespace Forms
             'Check if Row Is Selected
             If dgvGrid.CurrentRow.Index < 0 Then
                 'MessageBox.Show("Please Select An Allocation Before You Delete.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                Return False
+            End If
+
+            If tblAllocation.Rows(dgvGrid.CurrentRow.Index).Item("ACTVE") = "0" Then
+                MessageBox.Show("This Allocation Has Been Processed. You Cannot Edit It.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Return False
             End If
 
@@ -547,6 +552,13 @@ Namespace Forms
 
             If IsValid() = False Then Exit Sub
 
+            Dim intYear As Integer
+            Dim intMonth As Integer
+            Dim intBudget As Integer
+            Dim intRowIndex As Integer = dgvGrid.CurrentRow.Index
+            Dim str As String
+            Dim Comm As FbCommand
+
             If MessageBox.Show("Are You Sure You Want To Continue With The Current Transaction?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
 
             Try
@@ -559,13 +571,24 @@ Namespace Forms
                     toTable(dr)
                     tblAllocation.Rows.Add(dr)
                 Else
-                    toTable(tblAllocation.Rows(dgvGrid.CurrentRow.Index))
+                    intBudget = tblAllocation.Rows(intRowIndex).Item("BUDGET")
+                    intYear = tblAllocation.Rows(intRowIndex).Item("BYEAR")
+                    intMonth = tblAllocation.Rows(intRowIndex).Item("BMONTH")
+                    toTable(tblAllocation.Rows(intRowIndex))
                 End If
 
                 'Budget.AcceptChanges()
-
+                Dim RoIndex As Integer = dgvGrid.CurrentRow.Index
                 daAllocation.Update(tblAllocation)
+
+                str = "UPDATE TRANSACTIONS a SET a.BUDGET = '" & cboBudget.SelectedValue & "', a.BYEAR = '" & cboYear.Text & "', a.BMONTH = '" & cboMonth.SelectedIndex & "' WHERE a.BUDGET = '" & intBudget & "' AND a.BYEAR = '" & intYear & "' AND a.BMONTH = '" & intMonth & "'"
+                Comm = New FbCommand
+                Comm.Connection = DB.ConnObj
+                Comm.CommandText = str
+                Comm.ExecuteNonQuery()
+
                 LoadGrid(dgvGrid)
+                toForm(RoIndex)
                 Disable()
 
                 bolNewRec = False

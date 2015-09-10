@@ -615,7 +615,8 @@ Namespace Mdi
             Me.AutoScaleDimensions = New System.Drawing.SizeF(9.0!, 20.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.BackColor = System.Drawing.Color.WhiteSmoke
-            Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+            Me.BackgroundImage = Global.PENGRA.My.Resources.Resources.Kebbi_FaceX
+            Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
             Me.ClientSize = New System.Drawing.Size(1088, 642)
             Me.Controls.Add(Me.ToolStrip)
             Me.Controls.Add(Me.MenuStrip)

@@ -4,6 +4,7 @@ Namespace Classes
     Public Class Messages
 
         ' This class serves messages that are displayed in messageboxes
+        Public Shared FatalError As String = "It Seems A Fatal Error Has Occured. Please Contact Cerebro Information Systems Limited."
         Public Shared Proceed As String = "Are You Sure You Want To Continue With The Current Process?"
         Public Shared Delete As String = "Are You Sure You Want To Delete ?."
         Public Shared Duplicate As String = "Cannot Continue, Saving This Record Will Create Duplicate."
@@ -13,7 +14,7 @@ Namespace Classes
         Public Shared Connected As String = "Connection Successfull."
         Public Shared NotConnected As String = "Connection Failed."
         Public Shared MustRestart As String = Application.ProductName + " Will Restart To Continue."
-        Public Shared AccessDenied As String = "Wrong Username Or Password."
+        Public Shared AccessDenied As String = "Dont Have The Privilege To Edit This Record. Check With Your Superior Officer."
         Public Shared Completed As String = "Processing Completed Successfully."
         Public Shared Cancelled As String = "Processing Has Been Cancelled."
         Public Shared Aborted As String = "Processing Aborted."

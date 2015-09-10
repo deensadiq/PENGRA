@@ -199,7 +199,7 @@ Namespace Forms
             Me.rbPreview.Checked = True
             Me.rbPreview.Location = New System.Drawing.Point(141, 22)
             Me.rbPreview.Name = "rbPreview"
-            Me.rbPreview.Size = New System.Drawing.Size(63, 17)
+            Me.rbPreview.Size = New System.Drawing.Size(65, 18)
             Me.rbPreview.TabIndex = 1
             Me.rbPreview.TabStop = True
             Me.rbPreview.Text = "Preview"
@@ -210,12 +210,12 @@ Namespace Forms
             Me.rbPrint.AutoSize = True
             Me.rbPrint.Location = New System.Drawing.Point(21, 22)
             Me.rbPrint.Name = "rbPrint"
-            Me.rbPrint.Size = New System.Drawing.Size(46, 17)
+            Me.rbPrint.Size = New System.Drawing.Size(46, 18)
             Me.rbPrint.TabIndex = 0
             Me.rbPrint.Text = "Print"
             Me.rbPrint.UseVisualStyleBackColor = True
             '
-            'frmReportSCCSSA
+            'frmReportLAGH
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -237,10 +237,9 @@ Namespace Forms
             Me.Controls.Add(Me.Label1)
             Me.Controls.Add(Me.cboYeargroup)
             Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
-            Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
             Me.MaximizeBox = False
             Me.MinimizeBox = False
-            Me.Name = "frmReportSCCSSA"
+            Me.Name = "frmReportLAGH"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
             Me.Text = "Report SCCSSA"

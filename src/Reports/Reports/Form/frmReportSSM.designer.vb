@@ -21,25 +21,25 @@ Namespace Forms
         <System.Diagnostics.DebuggerStepThrough()> _
         Private Sub InitializeComponent()
             Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmReportSSM))
-            Me.Label4 = New System.Windows.Forms.Label
-            Me.cboAssessment = New System.Windows.Forms.ComboBox
-            Me.Label5 = New System.Windows.Forms.Label
-            Me.cboSession = New System.Windows.Forms.ComboBox
-            Me.Label6 = New System.Windows.Forms.Label
-            Me.cboSemester = New System.Windows.Forms.ComboBox
-            Me.Label3 = New System.Windows.Forms.Label
-            Me.cboClass = New System.Windows.Forms.ComboBox
-            Me.Label2 = New System.Windows.Forms.Label
-            Me.cboCategory = New System.Windows.Forms.ComboBox
-            Me.Label1 = New System.Windows.Forms.Label
-            Me.cboYeargroup = New System.Windows.Forms.ComboBox
-            Me.GroupBox1 = New System.Windows.Forms.GroupBox
-            Me.rbPreview = New System.Windows.Forms.RadioButton
-            Me.rbPrint = New System.Windows.Forms.RadioButton
-            Me.btnClose = New crsButton.cButton
-            Me.btnOk = New crsButton.cButton
-            Me.Label7 = New System.Windows.Forms.Label
-            Me.cboSubject = New System.Windows.Forms.ComboBox
+            Me.Label4 = New System.Windows.Forms.Label()
+            Me.cboAssessment = New System.Windows.Forms.ComboBox()
+            Me.Label5 = New System.Windows.Forms.Label()
+            Me.cboSession = New System.Windows.Forms.ComboBox()
+            Me.Label6 = New System.Windows.Forms.Label()
+            Me.cboSemester = New System.Windows.Forms.ComboBox()
+            Me.Label3 = New System.Windows.Forms.Label()
+            Me.cboClass = New System.Windows.Forms.ComboBox()
+            Me.Label2 = New System.Windows.Forms.Label()
+            Me.cboCategory = New System.Windows.Forms.ComboBox()
+            Me.Label1 = New System.Windows.Forms.Label()
+            Me.cboYeargroup = New System.Windows.Forms.ComboBox()
+            Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+            Me.rbPreview = New System.Windows.Forms.RadioButton()
+            Me.rbPrint = New System.Windows.Forms.RadioButton()
+            Me.btnClose = New crsButton.cButton()
+            Me.btnOk = New crsButton.cButton()
+            Me.Label7 = New System.Windows.Forms.Label()
+            Me.cboSubject = New System.Windows.Forms.ComboBox()
             Me.GroupBox1.SuspendLayout()
             Me.SuspendLayout()
             '
@@ -85,7 +85,7 @@ Namespace Forms
             Me.Label6.BackColor = System.Drawing.Color.Transparent
             Me.Label6.Location = New System.Drawing.Point(63, 136)
             Me.Label6.Name = "Label6"
-            Me.Label6.Size = New System.Drawing.Size(34, 14)
+            Me.Label6.Size = New System.Drawing.Size(33, 14)
             Me.Label6.TabIndex = 33
             Me.Label6.Text = "Term:"
             '
@@ -139,7 +139,7 @@ Namespace Forms
             Me.Label1.BackColor = System.Drawing.Color.Transparent
             Me.Label1.Location = New System.Drawing.Point(35, 48)
             Me.Label1.Name = "Label1"
-            Me.Label1.Size = New System.Drawing.Size(67, 14)
+            Me.Label1.Size = New System.Drawing.Size(66, 14)
             Me.Label1.TabIndex = 27
             Me.Label1.Text = "Year Group:"
             '
@@ -235,7 +235,7 @@ Namespace Forms
             Me.cboSubject.Size = New System.Drawing.Size(214, 22)
             Me.cboSubject.TabIndex = 41
             '
-            'frmReportSCCSSSA
+            'frmReportSSM
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 14.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
@@ -262,7 +262,7 @@ Namespace Forms
             Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
             Me.MaximizeBox = False
             Me.MinimizeBox = False
-            Me.Name = "frmReportSCCSSSA"
+            Me.Name = "frmReportSSM"
             Me.ShowInTaskbar = False
             Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
             Me.Text = "Report SCCSSSA"

@@ -40,7 +40,7 @@ Namespace Forms
             Me.PictureBox1.BackColor = System.Drawing.Color.Transparent
             Me.PictureBox1.BackgroundImage = CType(resources.GetObject("PictureBox1.BackgroundImage"), System.Drawing.Image)
             Me.PictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
-            Me.PictureBox1.Location = New System.Drawing.Point(5, 279)
+            Me.PictureBox1.Location = New System.Drawing.Point(9, 5)
             Me.PictureBox1.Name = "PictureBox1"
             Me.PictureBox1.Size = New System.Drawing.Size(98, 30)
             Me.PictureBox1.TabIndex = 0
@@ -50,7 +50,7 @@ Namespace Forms
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-            Me.BackgroundImage = CType(resources.GetObject("$this.BackgroundImage"), System.Drawing.Image)
+            Me.BackgroundImage = Global.PENGRA.My.Resources.Resources.splash
             Me.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
             Me.ClientSize = New System.Drawing.Size(662, 312)
             Me.ControlBox = False

@@ -120,7 +120,11 @@ Namespace Forms
         End Sub
 
 #End Region
-
+        Private Sub InitComp()
+            GetLimitValue()
+            loadCombos()
+            loadData("-1")
+        End Sub
         Private Function GetStatus() As String
             GetStatus = "2"
             Return GetStatus
@@ -162,7 +166,7 @@ Namespace Forms
             Return GetTransactionNo
         End Function
 
-        Private Sub WriteBenefits()
+        Private Function WriteBenefits() As Boolean
             Dim iGratuityAmount As Double = 0
             Dim iPensionAmount As Double = 0
             Dim iDeatPensionAmount As Double = 0
@@ -175,7 +179,7 @@ Namespace Forms
 
             Try
                 'EXECUTE PROCEDURE SP_WRITE_BENEFIT(TDATE, TRANSNO, TTYPE, EMPLOYEE, MINISTRY, AYEAR, AMONTH, GAMOUNT, PAMOUNT, DPAMOUNT, STATUS)
-                strSQLS = "EXECUTE PROCEDURE SP_WRITE_BENEFIT('" & CType(Date.Today, Date) & "', '" & GetTransactionNo() & "', '" & Employee.Rows(0).Item("LIMIT") & "', '" & Employee.Rows(0).Item("UKEY") & "', '" & Employee.Rows(0).Item("MINISTRY") & "', '" & dtpDOAA.Value.ToString("yyyy") & "', '" & dtpDOAA.Value.ToString("MM") & "', '" & iGratuityAmount & "', '" & iPensionAmount & "', '" & iDeatPensionAmount & "', '" & Env.UserStatus & "')"
+                strSQLS = "EXECUTE PROCEDURE SP_WRITE_BENEFIT('" & Format(Date.Today, "dd/MMM/yyyy") & "', '" & GetTransactionNo() & "', '" & Employee.Rows(0).Item("LIMIT") & "', '" & Employee.Rows(0).Item("UKEY") & "', '" & Employee.Rows(0).Item("MINISTRY") & "', '" & dtpDOAA.Value.ToString("yyyy") & "', '" & dtpDOAA.Value.ToString("MM") & "', '" & iGratuityAmount & "', '" & iPensionAmount & "', '" & iDeatPensionAmount & "', '" & Env.UserStatus & "')"
 
                 If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
 
@@ -184,10 +188,11 @@ Namespace Forms
                 command.CommandText = strSQLS
                 command.ExecuteScalar()
             Catch ex As Exception
-                Throw ex
+                Return False
             End Try
 
-        End Sub
+            Return True
+        End Function
 
         Private Sub Clear()
 
@@ -249,51 +254,51 @@ Namespace Forms
 
         End Sub
 
-        Private Sub toTable()
+        Private Sub toTable(ByRef Ro As DataRow)
 
-            With Employee
+            With Ro
 
                 If Newrec = True Then
-                    .Rows(0).Item("ACTVE") = 1
-                    .Rows(0).Item("LOGTIME") = Date.Now
+                    .Item("ACTVE") = 1
+                    .Item("LOGTIME") = Date.Now
                 End If
 
-                .Rows(0).Item("IDNO") = txtId.Text.Trim
-                .Rows(0).Item("FULLNAME") = txtFullName.Text.Trim
+                .Item("IDNO") = txtId.Text.Trim
+                .Item("FULLNAME") = txtFullName.Text.Trim
 
 
-                If Not cboLevel.SelectedIndex = 0 Then .Rows(0).Item("GL") = cboLevel.SelectedIndex
-                If Not cboStep.SelectedIndex = 0 Then .Rows(0).Item("STEP") = cboStep.SelectedIndex
-                If Not cboMinistry.SelectedValue = 0 Then .Rows(0).Item("MINISTRY") = cboMinistry.SelectedValue
-                If Not cboBenefitType.SelectedValue = 0 Then .Rows(0).Item("BENEFITTYPE") = cboBenefitType.SelectedValue
-                If Not cboSalary.SelectedValue = 0 Then .Rows(0).Item("STRUCTURE") = cboSalary.SelectedValue
-                .Rows(0).Item("DATEOFBIRTH") = CType(dtpDOB.Text, Date)
-                .Rows(0).Item("DOA") = CType(dtpDOA.Text, Date)
-                .Rows(0).Item("DOR") = CType(dtpDOR.Text, Date)
-                .Rows(0).Item("DEATHDATE") = CType(dtpDOD.Text, Date)
+                If Not cboLevel.SelectedIndex = 0 Then .Item("GL") = cboLevel.SelectedIndex
+                If Not cboStep.SelectedIndex = 0 Then .Item("STEP") = cboStep.SelectedIndex
+                If Not cboMinistry.SelectedValue = 0 Then .Item("MINISTRY") = cboMinistry.SelectedValue
+                If Not cboBenefitType.SelectedValue = 0 Then .Item("BENEFITTYPE") = cboBenefitType.SelectedValue
+                If Not cboSalary.SelectedValue = 0 Then .Item("STRUCTURE") = cboSalary.SelectedValue
+                .Item("DATEOFBIRTH") = CType(dtpDOB.Text, Date)
+                .Item("DOA") = CType(dtpDOA.Text, Date)
+                .Item("DOR") = CType(dtpDOR.Text, Date)
+                .Item("DEATHDATE") = CType(dtpDOD.Text, Date)
 
-                If txtRefNo.Text <> "" Then .Rows(0).Item("REFNO") = txtRefNo.Text.Trim
-                If txtGratuityPerc.Text <> "" Then .Rows(0).Item("GRATUITY") = txtGratuityPerc.Text.Trim
-                If txtPensionPerc.Text <> "" Then .Rows(0).Item("PENSION") = txtPensionPerc.Text.Trim
-                If txtPayThrough.Text <> "" Then .Rows(0).Item("PAYTHROUGH") = txtPayThrough.Text.Trim
-                If txtGratuity.Text <> "" Then .Rows(0).Item("GAMOUNT") = txtGratuity.Text.Trim
+                If txtRefNo.Text <> "" Then .Item("REFNO") = txtRefNo.Text.Trim
+                If txtGratuityPerc.Text <> "" Then .Item("GRATUITY") = txtGratuityPerc.Text.Trim
+                If txtPensionPerc.Text <> "" Then .Item("PENSION") = txtPensionPerc.Text.Trim
+                If txtPayThrough.Text <> "" Then .Item("PAYTHROUGH") = txtPayThrough.Text.Trim
+                If txtGratuity.Text <> "" Then .Item("GAMOUNT") = txtGratuity.Text.Trim
                 If cboBenefitType.SelectedValue = 1 Then
-                    If txtPensionArrears.Text <> "" Then .Rows(0).Item("PAMOUNT") = txtPensionArrears.Text.Trim
-                    .Rows(0).Item("DAMOUNT") = DBNull.Value
+                    If txtPensionArrears.Text <> "" Then .Item("PAMOUNT") = txtPensionArrears.Text.Trim
+                    .Item("DAMOUNT") = DBNull.Value
                 ElseIf cboBenefitType.SelectedValue = 2 Then
-                    If txtDeathPension.Text <> "" Then .Rows(0).Item("DAMOUNT") = txtDeathPension.Text.Trim
-                    .Rows(0).Item("PAMOUNT") = DBNull.Value
+                    If txtDeathPension.Text <> "" Then .Item("DAMOUNT") = txtDeathPension.Text.Trim
+                    .Item("PAMOUNT") = DBNull.Value
                 End If
-                .Rows(0).Item("DOAA") = CType(dtpDOAA.Text, Date)
-                .Rows(0).Item("WEFDATE") = CType(dtpPensionWEF.Text, Date)
+                .Item("DOAA") = CType(dtpDOAA.Text, Date)
+                .Item("WEFDATE") = CType(dtpPensionWEF.Text, Date)
 
                 If GetTotalBenefit() >= nLimitValue Then
-                    .Rows(0).Item("LIMIT") = 0
+                    .Item("LIMIT") = 0
                 Else
-                    .Rows(0).Item("LIMIT") = 1
+                    .Item("LIMIT") = 1
                 End If
 
-                .Rows(0).Item("STATUS") = Env.UserStatus
+                .Item("STATUS") = Env.UserStatus
 
             End With
 
@@ -304,7 +309,7 @@ Namespace Forms
 
             If Newrec = True Then
                 dr("ACTVE") = 1
-                dr("LOGTIME") = Date.Now
+                dr("LOGTIME") = Format(Date.Now, "dd/MMM/yyyy HH:mm:ss")
             End If
 
             dr("IDNO") = txtId.Text.Trim
@@ -465,7 +470,7 @@ Namespace Forms
 
             If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
 
-            Dim str As String = "SELECT * FROM EMPLOYEEINFO WHERE UKEY = " + ID.ToString
+            Dim str As String = "SELECT * FROM EMPLOYEEINFO WHERE UKEY = '" + ID + "'"
             Adapter = New FbDataAdapter(str, DB.ConnObj)
             Builder = New FbCommandBuilder(Adapter)
             Adapter.UpdateCommand = Builder.GetUpdateCommand
@@ -500,8 +505,9 @@ Namespace Forms
             Me.BackColor = Env.FormBackColor
             Me.BackColor = Color.FromArgb(225, 228, 233)
 
-            GetLimitValue()
-            loadCombos()
+            'GetLimitValue()
+            'loadCombos()
+            InitComp()
             Disable()
 
             'If Env.Edit_Records = False Then btnEdit.Visible = False
@@ -554,8 +560,12 @@ Namespace Forms
             Return True
         End Function
         Private Sub btnEdit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEdit.Click
+            'If Users.Privilege.EditRetireRecord = False Then
+            '    MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+            '    Exit Sub
+            'End If
             If Users.Privilege.EditRetireRecord = False Then
-                MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
+                MessageBox.Show("You Dont Have The Privilege To Edit This Record. Check With Your Superior Officer.", Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
 
@@ -681,7 +691,7 @@ Namespace Forms
         End Function
 
         Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
-
+            Dim Ro As DataRow
             If IsSaveValid() = False Then Exit Sub
 
             If MessageBox.Show("Are You Sure You Want To Continue With The Current Process?", Application.ProductName, MessageBoxButtons.YesNo, MessageBoxIcon.Question) = Windows.Forms.DialogResult.No Then Exit Sub
@@ -691,33 +701,40 @@ Namespace Forms
                 If DB.ConnObj.State = ConnectionState.Closed Then DB.ConnObj.Open()
 
                 If Newrec = True Then
-                    str = "SELECT * FROM EMPLOYEEINFO"
+                    'str = "SELECT * FROM EMPLOYEEINFO"
 
-                    nAdapter = New FbDataAdapter(str, DB.ConnObj)
-                    nBuilder = New FbCommandBuilder(nAdapter)
-                    nEmployee = New DataTable
+                    'nAdapter = New FbDataAdapter(str, DB.ConnObj)
+                    'nBuilder = New FbCommandBuilder(nAdapter)
+                    'nEmployee = New DataTable
 
-                    nAdapter.InsertCommand = nBuilder.GetInsertCommand
-                    nAdapter.Fill(nEmployee)
-                    ntoTable()
-                    nAdapter.Update(nEmployee)
+                    'nAdapter.InsertCommand = nBuilder.GetInsertCommand
+                    'nAdapter.Fill(nEmployee)
+                    'ntoTable()
+                    'nAdapter.Update(nEmployee)
+                    Ro = Employee.NewRow
+                    toTable(Ro)
+                    Employee.Rows.Add(Ro)
+                    Adapter.Update(Employee)
                 Else
-                    toTable()
+                    toTable(Employee.Rows(0))
                     Adapter.Update(Employee)
                 End If
 
 
 
-                str = "SELECT * FROM EMPLOYEEINFO WHERE IDNO = '" + txtId.Text.Trim + "'"
-                Em = New DataTable
-                sAdapter = New FbDataAdapter(str, DB.ConnObj)
-                sAdapter.Fill(Em)
+                'str = "SELECT * FROM EMPLOYEEINFO WHERE IDNO = '" + txtId.Text.Trim + "'"
+                'Em = New DataTable
+                'sAdapter = New FbDataAdapter(str, DB.ConnObj)
+                'sAdapter.Fill(Em)
 
                 'SavePhoto(Em.Rows(0).Item("UKEY").ToString)
 
                 ' to reload the student after saving to get the UKEY
                 loadFromNo(txtId.Text.Trim)
-                WriteBenefits()
+                If WriteBenefits() = False Then
+                    MessageBox.Show(Messages.FatalError, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Error)
+                    Exit Sub
+                End If
                 Disable()
                 Newrec = False
             Catch ex As Exception
@@ -742,7 +759,9 @@ Namespace Forms
             End Try
         End Sub
         Private Sub btnUndo_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnUndo.Click
-            If Newrec = True Then Clear() Else toForm()
+            Clear()
+            If Employee.Rows.Count > 0 Then toForm()
+
             Disable()
             Newrec = False
         End Sub

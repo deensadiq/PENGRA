@@ -24,7 +24,7 @@ Namespace MCSA
 
             Dim Conn As New FbConnection
             Dim strConnectMessage As String = ""
-            Dim strMCSA As String = "PENGRANEW"
+            Dim strMCSA As String = "PENGRA"
             Dim Connected As Boolean = False
            
 

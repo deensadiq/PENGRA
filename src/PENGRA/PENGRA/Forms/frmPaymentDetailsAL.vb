@@ -139,6 +139,7 @@ Namespace Forms
             For I = 0 To Table.Rows.Count - 1
 
                 dgvGrid.Rows(I).Cells("cId").Value = Table.Rows(I).Item("IDNO")
+                dgvGrid.Rows(I).Cells("cId").Tag = Table.Rows(I).Item("UKEY")
                 dgvGrid.Rows(I).Cells("cName").Value = Table.Rows(I).Item("FULLNAME")
                 dgvGrid.Rows(I).Cells("cMinistry").Value = Table.Rows(I).Item("MINISTRYNAME")
                 dgvGrid.Rows(I).Cells("cBudget").Value = Table.Rows(I).Item("BUDGETNAME")
@@ -500,6 +501,8 @@ Namespace Forms
                 MessageBox.Show(Messages.NoPrivilege, Application.ProductName, MessageBoxButtons.OK, MessageBoxIcon.Stop)
                 Exit Sub
             End If
+            Dim str As String
+            Dim command As FbCommand
 
             If dgvGrid.RowCount = 0 Or dgvGrid.CurrentRow.Index < 0 Then Exit Sub
 
@@ -509,9 +512,15 @@ Namespace Forms
 
 
             Try
+                str = "DELETE FROM TRANSACTIONS a WHERE a.UKEY = '" & dgvGrid.Rows(dgvGrid.CurrentRow.Index).Cells("cID").Tag & "'"
 
-                Transaction.Rows(dgvGrid.CurrentRow.Index).Delete()
-                daTransaction.Update(Transaction)
+                command = New FbCommand
+                command.Connection = DB.ConnObj
+                command.CommandText = str
+                command.ExecuteScalar()
+
+                'Transaction.Rows(dgvGrid.CurrentRow.Index).Delete()
+                'daTransaction.Update(Transaction)
 
                 InitComponent()
                 IsEditMode(False)
